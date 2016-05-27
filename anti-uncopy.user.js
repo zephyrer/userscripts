@@ -28,8 +28,8 @@
 // @exclude        http://*.wikipedia.org/*
 // @exclude        https://*.wikipedia.org/*
 // @exclude        http://www.jjwxc.net/*
-// @downloadURL    https://userscripts.org/scripts/source/30096.user.js
-// @updateURL      https://userscripts.org/scripts/source/30096.meta.js
+// @downloadURL    https://github.com/zephyrer/userscripts/raw/master/anti-uncopy.user.js
+// @updateURL      https://github.com/zephyrer/userscripts/raw/master/anti-uncopy.meta.js
 // @require        https://raw.githubusercontent.com/joesimmons/jsl/master/versions/jsl-1.3.1.js
 // @copyright      Efisio Zephyr
 // @version        0.1.0
@@ -76,13 +76,22 @@
     win = unwrap(window);
 
     // don't let blacklisted events get added by addEventListener
-    win.rEventBlacklist = rEventBlacklist;
-    win.oldAEL = win.Element.prototype.addEventListener; // store a reference to the original addEventListener
-    win.Element.prototype.addEventListener = function (name) {
-        if ( !window.rEventBlacklist.test(name) ) {
-            return window.oldAEL.apply(this, arguments);
-        }
-    };
+    if (win.rEventBlacklist) {
+        var restr = win.rEventBlacklist.toString();
+        restr = restr.substr(1, restr.lastIndexOf("/") - 1);
+        restr += '|' + handlers_blacklist.join('|').replace(/^on/, '').replace(/\|on/g, '|');
+        restr = [...new Set(restr.split('|'))].join('|'); // remove duplicates
+        win.rEventBlacklist = new RegExp( restr, 'ig');
+    } else 
+        win.rEventBlacklist = rEventBlacklist;
+    if (!win.oldAEL) {
+        win.oldAEL = win.Element.prototype.addEventListener; // store a reference to the original addEventListener
+        win.Element.prototype.addEventListener = function (name) {
+            if ( !window.rEventBlacklist.test(name) ) {
+                return window.oldAEL.apply(this, arguments);
+            }
+        };
+    }
 
     function antiDisabler(event) {
         var all = document.getElementsByTagName('*'),

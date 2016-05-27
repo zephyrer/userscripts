@@ -27,8 +27,8 @@
 // @exclude        https://jsfiddle.net/*
 // @exclude        http://*.wikipedia.org/*
 // @exclude        https://*.wikipedia.org/*
-// @downloadURL    https://userscripts.org/scripts/source/30096.user.js
-// @updateURL      https://userscripts.org/scripts/source/30096.meta.js
+// @downloadURL    https://github.com/zephyrer/userscripts/raw/master/anti-disabler2.user.js
+// @updateURL      https://github.com/zephyrer/userscripts/raw/master/anti-disabler2.meta.js
 // @require        https://raw.githubusercontent.com/joesimmons/jsl/master/versions/jsl-1.3.1.js
 // @copyright      Efisio Zephyr
 // @version        0.2.0

@@ -4,8 +4,8 @@
 // @description    Restore context menus on sites that try to disable them
 // @include        http://vipreader.qidian.com/BookReader/*
 // @include        http://read.qidian.com/BookReader/*
-// @downloadURL    https://userscripts.org/scripts/source/30096.user.js
-// @updateURL      https://userscripts.org/scripts/source/30096.meta.js
+// @downloadURL    https://github.com/zephyrer/userscripts/raw/master/anti-decontext.user.js
+// @updateURL      https://github.com/zephyrer/userscripts/raw/master/anti-decontext.meta.js
 // @require        https://raw.githubusercontent.com/joesimmons/jsl/master/versions/jsl-1.3.1.js
 // @copyright      Efisio Zephyr
 // @version        0.1.0
@@ -25,34 +25,8 @@
 
     'use strict';
 
-    // Anti-Disabler modified by Joe Simmons
-    /*
-    Other mild credit:
-        absurdlyobfuscated
-        Jeroenz0r
-        rinopo_d
-    */
-
     var handlers_blacklist = [
             'oncontextmenu',
-            'onbeforecopy',
-            'oncopy',
-            'oncut',
-            'ondrag',
-            'ondragend',
-            'ondragenter',
-            'ondragleave',
-            'ondragover',
-            'ondragstart',
-            'ondrop',
-            'onmousedown',
-            'onmouseup',
-            //'onmouseover',
-            //'onmouseout',
-            //'onmouseenter',
-            //'onmouseleave',
-            'onselect',
-            'onselectstart'
         ],
         //rEventBlacklist = new RegExp( handlers_blacklist.join('|').replace(/^on/g, ''), 'i' ),
         rEventBlacklist = new RegExp( handlers_blacklist.join('|').replace(/^on/, '').replace(/\|on/g, '|'), 'ig' ),
@@ -74,13 +48,22 @@
     win = unwrap(window);
 
     // don't let blacklisted events get added by addEventListener
-    win.rEventBlacklist = rEventBlacklist;
-    win.oldAEL = win.Element.prototype.addEventListener; // store a reference to the original addEventListener
-    win.Element.prototype.addEventListener = function (name) {
-        if ( !window.rEventBlacklist.test(name) ) {
-            return window.oldAEL.apply(this, arguments);
-        }
-    };
+    if (win.rEventBlacklist) {
+        var restr = win.rEventBlacklist.toString();
+        restr = restr.substr(1, restr.lastIndexOf("/") - 1);
+        restr += '|' + handlers_blacklist.join('|').replace(/^on/, '').replace(/\|on/g, '|');
+        restr = [...new Set(restr.split('|'))].join('|'); // remove duplicates
+        win.rEventBlacklist = new RegExp( restr, 'ig');
+    } else 
+        win.rEventBlacklist = rEventBlacklist;
+    if (!win.oldAEL) {
+        win.oldAEL = win.Element.prototype.addEventListener; // store a reference to the original addEventListener
+        win.Element.prototype.addEventListener = function (name) {
+            if ( !window.rEventBlacklist.test(name) ) {
+                return window.oldAEL.apply(this, arguments);
+            }
+        };
+    }
 
     function antiDisabler(event) {
         var all = document.getElementsByTagName('*'),
