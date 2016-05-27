@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name           Anti-Disabler 2
-// @namespace      zephyrer@msn.com
+// @namespace      https://github.com/zephyrer
 // @description    Restore copy, selection and context menus on sites that try to disable them, reissued from "Anti-Disabler" of JoeSimmons & Mark Pilgrim.
 // @include        http://*
 // @include        https://*
@@ -31,7 +31,7 @@
 // @updateURL      https://github.com/zephyrer/userscripts/raw/master/anti-disabler2.meta.js
 // @require        https://raw.githubusercontent.com/joesimmons/jsl/master/versions/jsl-1.3.1.js
 // @copyright      Efisio Zephyr
-// @version        0.2.1
+// @version        0.2.2
 // @grant          none
 // @run-at         document-start
 // ==/UserScript==

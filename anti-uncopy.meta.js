@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name           Anti-Uncopy
-// @namespace      zephyrer@msn.com
+// @namespace      https://github.com/zephyrer
 // @description    Restore selections and copy function on sites that try to disable them
 // @include        http://*
 // @include        https://*
@@ -32,7 +32,7 @@
 // @updateURL      https://github.com/zephyrer/userscripts/raw/master/anti-uncopy.meta.js
 // @require        https://raw.githubusercontent.com/joesimmons/jsl/master/versions/jsl-1.3.1.js
 // @copyright      Efisio Zephyr
-// @version        0.1.1
+// @version        0.1.2
 // @grant          none
 // @run-at         document-start
 // ==/UserScript==
