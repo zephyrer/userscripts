@@ -67,6 +67,7 @@
 		for (var key in prefs) {
 			reg = prefs[key][1] || common_reg;
 		//添加支持文本状态的网盘地址
+		//这段代码将导致 click 等通过脚本附加到文本按钮等元素上的事件处理器失效。如果觉得副作用太大，可以注释掉接下来的这两行
         var textPanLink = new RegExp(prefs[key][0].replace(/\./g,'\\.')+'\\w+(?=\\s|[^\\x00-\\xff])','g');
         if (textPanLink.test(document.body.innerHTML)) document.body.innerHTML = document.body.innerHTML.replace(textPanLink, '$&'.link('$&'));
 			panlinks = document.querySelectorAll('a[href^="'+prefs[key][0]+'"]'),i=0;
