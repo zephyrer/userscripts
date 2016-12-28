@@ -28,11 +28,13 @@
 // @exclude        http://*.wikipedia.org/*
 // @exclude        https://*.wikipedia.org/*
 // @exclude        http://www.jjwxc.net/*
+// @exclude        http://*.trevoreyre.com/*
+// @exclude        http://trevoreyre.com/*
 // @downloadURL    https://github.com/zephyrer/userscripts/raw/master/anti-uncopy.user.js
 // @updateURL      https://github.com/zephyrer/userscripts/raw/master/anti-uncopy.meta.js
 // @require        https://raw.githubusercontent.com/joesimmons/jsl/master/versions/jsl-1.3.1.js
 // @copyright      Efisio Zephyr
-// @version        0.1.2
+// @version        0.1.2.1
 // @grant          none
 // @run-at         document-start
 // ==/UserScript==
