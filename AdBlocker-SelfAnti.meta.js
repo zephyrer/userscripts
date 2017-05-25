@@ -8,7 +8,7 @@
 // @include     http://www.qingguox.com/*
 // @downloadURL https://github.com/zephyrer/userscripts/raw/master/AdBlocker-SelfAnti.user.js
 // @updateURL   https://github.com/zephyrer/userscripts/raw/master/AdBlocker-SelfAnti.meta.js
-/// @version     0.1.1
+// @version     0.1.1
 // @grant       none
 // @run-at      document-start
 // ==/UserScript==
