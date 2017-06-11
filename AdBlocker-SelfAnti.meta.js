@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Anti-AdBlocker Selfly
 // @namespace   zephyrer@msn.com
-// @description  阻止网站反广告检测
+// @description 阻止网站反广告检测
 // @include     http://www.hdmee.com/*
 // @include     http://bbs.zzznan.com/*
 // @include     http://*.tt1069.com/*
