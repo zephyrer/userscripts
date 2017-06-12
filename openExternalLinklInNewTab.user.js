@@ -39,23 +39,9 @@ document.addEventListener("click", function(e){
 	var anchor = getAnchor(e.target);
 	if (!anchor) return;
 	if (anchor.target || anchor.protocol == "javascript:" || anchor.protocol == "magnet:"|| e.isTrusted === false || !anchor.offsetParent || (e.isTrusted == null && !e.detail)) {
-		/*
-		let msg = !anchor ? "Target" : anchor.href;
-		msg += " isn't normal link.";
-		GM_log(msg)
-		*/
 		return;
 	}
 	
-	/*
-	{
-		let msg = GetDomain(anchor.hostname) + " is an ";
-		msg += (GetDomain(anchor.hostname) != GetDomain(location.hostname)) ? "external" : "internal";
-		msg += " link.";
-		GM_log(msg);
-	}
-	*/
-
 	if (getHost(anchor.hostname) != getHost(location.hostname)) {
 		anchor.target = "_blank";
 	}
