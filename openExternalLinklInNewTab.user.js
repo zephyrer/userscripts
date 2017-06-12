@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Open External Link in NewTab
-// @version      0.3
+// @version      0.3.2
 // @namespace    EfisioZephyr
 // @contributor  DandyClubs
 // @description  This script will open any external link in new tab. Support dynamic content. Support subdomain aaa.test.co.kr = bbb.test.co.kr (controlled by bStrict)
@@ -28,8 +28,30 @@ function getAnchor(element) {
 function getDomain(url) {
     if (url.indexOf('/') !== -1) url = url.split('/')[0];
     url = url.split('.');
-    if (url[url.length - 1].length == 2 && url[url.length - 2].length == 2) url = url.slice(-3).join('.');
-    else url = url.slice(-2).join('.');
+    let level = 0;
+    if (url[url.length - 1].length == 2 && (url[url.length - 2].length == 2 || url[url.length - 2].length == 3)) {
+      // co.kr, co.jp
+      // com.cn, edu.cn
+      // 163, jd, qq
+      level = -3;
+    }
+    else if (url.includes("mozilla") ||
+             url.includes("microsoft") ||
+             url.includes("google") ||
+             url.includes("apple") ||
+             url.includes("sohu") ||
+             url.includes("taobao") ||
+             url.includes("tmall")
+            ) {
+      level = -3;
+    }
+    else if (url.includes("sina")) {
+      level = -4;
+    }
+    else {
+      level = -2;
+    }
+    url = url.slice(level).join('.');
     return url;
 }
 
