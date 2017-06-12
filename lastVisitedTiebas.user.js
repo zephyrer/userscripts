@@ -1,15 +1,19 @@
 ﻿// ==UserScript==
 // @name        Tiebas Last Visited
-// @namespace   zephyrer@msn.com
+// @namespace   EfisioZephyr
 // @description 针对百度贴吧，添加关于最近逛过的贴吧的支持
 // @include     http://tieba.baidu.com/f?*
 // @include     http://tieba.baidu.com/p/*
-// @version     1.2.1
+// @include     https://tieba.baidu.com/f?*
+// @include     https://tieba.baidu.com/p/*
+// @version     1.2.1.1
 // @grant       GM_addStyle
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @grant       GM_log
 // @grant       GM_registerMenuCommand
+// @downloadURL https://github.com/zephyrer/userscripts/raw/master/lastVisitedTiebas.user.js
+// @updateURL   https://github.com/zephyrer/userscripts/raw/master/lastVisitedTiebas.meta.js
 //
 // @note        2015/01/14 1.2.1  修正"常逛的吧"按钮背景色在面板开启时恢复原色的问题
 // @note        2015/01/14 1.2    添加 excludeFavorites 支持
@@ -49,7 +53,12 @@
     div.addEventListener("click", toggleList, false);
     ph.parentNode.insertBefore(div, ph.nextSibling);
 
-var aFavoriteTiebas = ["B1A4", "Bii", "朴海镇", "MRMR", "剑的旋律", "MIC男团", "acfun邀请码", "bilibili邀请码"];
+
+///////////////////////////////////////////////////////////////////////////////
+//
+var aFavoriteTiebas = ["azw3", "B1A4", "Bii", "朴海镇", "MRMR", "剑的旋律", "MIC男团", "bilibili邀请码"];
+//
+///////////////////////////////////////////////////////////////////////////////
 var regFavoriteTiebas = new RegExp(aFavoriteTiebas.join('|'), "ig");
     //读取并更新贴吧访问记录
     var sLastVisitedTiebas = GM_getValue("lastVisitedTiebas", "");
