@@ -6,7 +6,7 @@
 // @include     http://tieba.baidu.com/p/*
 // @include     https://tieba.baidu.com/f?*
 // @include     https://tieba.baidu.com/p/*
-// @version     1.2.2
+// @version     1.2.3
 // @grant       GM_addStyle
 // @grant       GM_getValue
 // @grant       GM_setValue
@@ -15,6 +15,7 @@
 // @downloadURL https://github.com/zephyrer/userscripts/raw/master/lastVisitedTiebas.user.js
 // @updateURL   https://github.com/zephyrer/userscripts/raw/master/lastVisitedTiebas.meta.js
 //
+// @note        2017/06/13 1.2.3  百度数据结构改版，forum_name 变成 name
 // @note        2017/06/13 1.2.2  美化排版
 // @note        2015/01/14 1.2.1  修正"常逛的吧"按钮背景色在面板开启时恢复原色的问题
 // @note        2015/01/14 1.2    添加 excludeFavorites 支持
@@ -77,7 +78,7 @@ var regFavoriteTiebas = new RegExp(aFavoriteTiebas.join('|'), "ig");
     var bExcludeFavorites = GM_getValue("excludeFavorites", false);
     //alert(sLastVisitedTiebas);
     var aLastVisitedTiebas = sLastVisitedTiebas.split(',').filter(function(e){return e!="";});
-    var currentTieba = unsafeWindow.PageData.forum.forum_name;
+    var currentTieba = unsafeWindow.PageData.forum.name;
     if (aLastVisitedTiebas.indexOf(currentTieba) > -1) {
         aLastVisitedTiebas.splice(aLastVisitedTiebas.indexOf(currentTieba), 1);
     }
