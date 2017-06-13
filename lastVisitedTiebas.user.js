@@ -6,7 +6,7 @@
 // @include     http://tieba.baidu.com/p/*
 // @include     https://tieba.baidu.com/f?*
 // @include     https://tieba.baidu.com/p/*
-// @version     1.2.1.1
+// @version     1.2.2
 // @grant       GM_addStyle
 // @grant       GM_getValue
 // @grant       GM_setValue
@@ -15,6 +15,7 @@
 // @downloadURL https://github.com/zephyrer/userscripts/raw/master/lastVisitedTiebas.user.js
 // @updateURL   https://github.com/zephyrer/userscripts/raw/master/lastVisitedTiebas.meta.js
 //
+// @note        2017/06/13 1.2.2  美化排版
 // @note        2015/01/14 1.2.1  修正"常逛的吧"按钮背景色在面板开启时恢复原色的问题
 // @note        2015/01/14 1.2    添加 excludeFavorites 支持
 // @note        2015/01/11 1.1    添加 GM 命令菜单项
@@ -33,6 +34,9 @@
     //添加按钮
     var ph = document.getElementById("wd2");//placeholder
     if (!ph) return;
+    //修正样式
+    GM_addStyle(".search_form {margin-left: auto !important;margin-right: auto !important;}");
+    GM_addStyle("#tb_header_search_form {width: 90% !important;min-width: 1000px !important;}");
 
     GM_addStyle("#oftenVisitedWrapper:hover #oftenVisitedAnchor,#oftenVisitedWrapper:hover #oftenVisitedAnchorArrow {background-position: 0px -35px;color: #000;}");
     GM_addStyle("#oftenVisitedAnchorArrowWrapper {background-image: url('http://tb2.bdstatic.com/tb/static-common/img/search_sp_06cf7d9.png');background-position: -202px -33px;background-repeat: no-repeat;float: left;height: 34px;display: inline-block;margin-left:-1px;}");
@@ -52,6 +56,14 @@
     div.addEventListener("mouseover", displayList, false);
     div.addEventListener("click", toggleList, false);
     ph.parentNode.insertBefore(div, ph.nextSibling);
+
+    {//美化排版
+    let spans = document.getElementById("tb_header_search_form").getElementsByClassName("search_btn_wrap");
+    let target = spans[spans.length-1];
+    let left = target.offsetLeft + target.offsetWidth + 10;
+    target = document.getElementsByClassName("senior-search-link")[0];
+    target.style.left = left + "px";
+    }
 
 
 ///////////////////////////////////////////////////////////////////////////////
