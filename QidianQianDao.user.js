@@ -13,7 +13,7 @@
 (function() {
   function autoscore() {
     var btns = document.getElementsByClassName('elGetExp');
-    GM_log("elGetExp: " + btns.length)
+    GM_log("elGetExp: " + btns.length);
     if (btns && btns.length > 0) {
       btns[0].click();
       //setTimeout("location.reload(true);", 1000);
