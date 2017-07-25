@@ -1,9 +1,9 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        Auto-scoreing on Qidian
 // @namespace   EfisioZephyr
 // @description 自动获取起点经验值
 // @include     http://my.qidian.com/level
-// @version     0.3.2.1
+// @version     0.3.2.3
 // @copyright   Efisio Zephyr
 // @downloadURL https://github.com/zephyrer/userscripts/raw/master/QidianQianDao.user.js
 // @updateURL   https://github.com/zephyrer/userscripts/raw/master/QidianQianDao.meta.js
@@ -18,9 +18,9 @@
       btns[0].click();
       //setTimeout("location.reload(true);", 1000);
     } else if (document.getElementsByClassName('elIsCurrent')) {
-      setTimeout(autoscore, 300000);
+      setTimeout(autoscore, 10000);
     }
   }
-  setTimeout(autoscore, 5000);
+  setTimeout(autoscore, 1);
 })();
 
