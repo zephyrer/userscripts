@@ -14,7 +14,7 @@
 // @updateURL      https://github.com/zephyrer/userscripts/raw/master/anti-decontext.meta.js
 // @require        https://raw.githubusercontent.com/joesimmons/jsl/master/versions/jsl-1.3.1.js
 // @copyright      Efisio Zephyr
-// @version        0.1.4.1
+// @version        0.1.4.3
 // @grant          none
 // @run-at         document-start
 // ==/UserScript==
