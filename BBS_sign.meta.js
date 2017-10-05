@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.5.6
+// @version      1.6.0
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -25,6 +25,7 @@
 // @include      http*://www.tiexue.net/*
 // @include      http*://bbs.zol.com.cn/*
 // @include      http*://bbs.cnmo.com/*
+// @include      http://www.banyungong.org/daysign.html
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
@@ -37,4 +38,3 @@
 // @grant        GM_log
 // @run-at       document-end
 // ==/UserScript==
-

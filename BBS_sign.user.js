@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.5.6
+// @version      1.6.0
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -25,6 +25,7 @@
 // @include      http*://www.tiexue.net/*
 // @include      http*://bbs.zol.com.cn/*
 // @include      http*://bbs.cnmo.com/*
+// @include      http://www.banyungong.org/daysign.html
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
@@ -142,7 +143,8 @@
       //华为
     document.getElementsByClassName('sign-btn btn_rs')[0].click();
   } else if(location.href.indexOf("plugin.php?id=dsu_paulsign:sign") != -1){
-    qd2();
+    if (!qd())
+      qd2();
   }
 
   if (isURL("http://bbs.gfan.com/")) { //机锋
@@ -222,6 +224,12 @@
       el.click();
     }
     return;
+  }
+
+  if (isURL("http://www.banyungong.org/daysign.html")) {
+    el = _id("btnSign");
+    if (el)
+      el.click();
   }
 
   if (0) {
@@ -318,7 +326,11 @@
   }
 
   function qd() {
-      if (window.find("今天签到了吗") && window.find("请选择您此刻的心情图片并写下今天最想说的话")) {
+      if (window.find("今天签到了吗") &&
+          (window.find("请选择您此刻的心情图片并写下今天最想说的话") ||
+           window.find("请选择您此刻的心情图片并点击开始签到按钮签个到吧")
+          )
+         ) {
           //var text = document.getElementById("ch_s");
           let smileList = _class("qdsmile") ? (_class("qdsmile"))[0] : null;
           if (smileList) {
@@ -326,27 +338,37 @@
             let i = randomNum(smiles.length);
             smiles[i].click();
           } else {
-            return;
+            return false;
           }
-          var text2 = document.getElementById("todaysay");
+          let text2 = document.getElementById("todaysay");
           /*
           if (text == null) {
               return;
           }
           text.setAttribute('checked', true);
           */
-          text2.value = "今天签到来了，各位安好";//全自动签到,就是爽~
-          var button = document.getElementById("qiandao");
-          button.submit();
-          return;
+          if (text2)
+            text2.value = "今天签到来了，各位安好";//全自动签到,就是爽~
+          let button = document.getElementById("qiandao");
+          if (button) {
+            button.submit();
+            return true;
+          }
+          button = _name("qiandao");
+          if (button) {
+            button[0].submit();
+            return true;
+          }
+          return false;
       }
   }
 
   function qd2() {
     if (!document.getElementById("kx"))
-      return;
+      return false;
     document.getElementById("kx").click();
     unsafeWindow.showWindow('qwindow', 'qiandao', 'post', '0');
+    return true;
   }
 
   function qd3() {
