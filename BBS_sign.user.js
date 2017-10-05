@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
 // @version      1.5.6
@@ -26,14 +26,16 @@
 // @include      http*://bbs.zol.com.cn/*
 // @include      http*://bbs.cnmo.com/*
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
-// @grant        GM_xmlhttpRequest
-// @grant        unsafeWindow
-// @grant        GM_log
-// @run-at       document-end
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
 // @copyright    2016+, wycaca
 // @copyright    2017+, zephyrer
+// @downloadURL   https://github.com/zephyrer/userscripts/raw/master/BBS_sign.user.js
+// @updateURL     https://github.com/zephyrer/userscripts/raw/master/BBS_sign.meta.js
+// @grant        GM_xmlhttpRequest
+// @grant        unsafeWindow
+// @grant        GM_log
+// @run-at       document-end
 // ==/UserScript==
 
 (function(){
