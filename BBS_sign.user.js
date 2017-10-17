@@ -1,17 +1,18 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.0
+// @version      1.6.5
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
 // @include      http*://*/plugin.php?id=mpage_sign:sign*
 // @include      http*://*/home.php?mod=task&do=view*
-// @include      http*://*/task.php?action=view*
+// @include      http*://*/*action=view*
+// @include      http*://*/*action=applied*
 // @include      http*://*/plugin.php?id=dc_signin:sign
 // @include      http*://*/forum.php
 // @include      http*://*/u.php*
-// @include      http*://*/hack.php?H_name=xqqiandao
+// @include      http*://*/*qiandao
 // @include      http*://bbs.kafan.cn/*
 // @include      http*://bbs.wstx.com/*
 // @include      http*://bbs.gfan.com/*
@@ -65,6 +66,14 @@
     }
   }
 
+  if (isURL("=applied")) {
+    el = _id("gain_5");
+    if (el) {
+      el.click();
+      return;
+    }
+  }
+
   if (isURL("=xqqiandao")) {
     els = _name("qdxq");
     el = _name("form1");
@@ -83,6 +92,14 @@
   els = document.getElementsByName("qdmode");
   if (els.length > 0) {
     els[els.length-1].click();
+  }
+
+  if (isURL("k_misign:sign")) {
+    el = _id("JD_sign");
+    if (el) {
+      el.click();
+      return;
+    }
   }
 
   if (isURL("dc_signin:sign")) {
@@ -326,10 +343,11 @@
   }
 
   function qd() {
-      if (window.find("今天签到了吗") &&
+      if ((window.find("今天签到了吗") &&
           (window.find("请选择您此刻的心情图片并写下今天最想说的话") ||
            window.find("请选择您此刻的心情图片并点击开始签到按钮签个到吧")
-          )
+          )) ||
+          window.find("今天簽到了嗎？請選擇您此刻的心情圖片並寫下今天最想說的話")
          ) {
           //var text = document.getElementById("ch_s");
           let smileList = _class("qdsmile") ? (_class("qdsmile"))[0] : null;

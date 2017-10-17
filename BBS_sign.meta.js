@@ -1,17 +1,18 @@
 // ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.0
+// @version      1.6.5
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
 // @include      http*://*/plugin.php?id=mpage_sign:sign*
 // @include      http*://*/home.php?mod=task&do=view*
-// @include      http*://*/task.php?action=view*
+// @include      http*://*/*action=view*
+// @include      http*://*/*action=applied*
 // @include      http*://*/plugin.php?id=dc_signin:sign
 // @include      http*://*/forum.php
 // @include      http*://*/u.php*
-// @include      http*://*/hack.php?H_name=xqqiandao
+// @include      http*://*/*qiandao
 // @include      http*://bbs.kafan.cn/*
 // @include      http*://bbs.wstx.com/*
 // @include      http*://bbs.gfan.com/*
