@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.5
+// @version      1.6.6
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -153,6 +153,28 @@
           imgs.click();
           return;
       }
+  }
+
+  if (isURL("bbs.pinggu.org")) {
+    let smileList = _class("qdsmile") ? (_class("qdsmile"))[0] : null;
+    if (smileList) {
+      let smiles = childs(smileList, "tagName", "LI");
+      let i = randomNum(smiles.length);
+      smiles[i].click();
+    }
+    els = _name("qdsubject");
+    if (els) {
+      els[0].value = "每日一签";
+    }
+    el = _id("todaysay");
+    if (el) {
+      el.value = "今天签到来了，各位安好";
+    }
+    el = _id("qiandao");
+    if (el) {
+      el.submit();
+    }
+    return;
   }
 
   if (isURL("cn.club.vmall.com/plugin.php?id=dsu_paulsign:sign")
