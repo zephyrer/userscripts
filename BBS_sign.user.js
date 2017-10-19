@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.6
+// @version      1.6.7
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -366,8 +366,8 @@
 
   function qd() {
       if ((window.find("今天签到了吗") &&
-          (window.find("请选择您此刻的心情图片并写下今天最想说的话") ||
-           window.find("请选择您此刻的心情图片并点击开始签到按钮签个到吧")
+          (window.find("请选择您此刻的心情图片") || //请选择您此刻的心情图片并写下今天最想说的话
+           window.find("请选择你此刻的心情图片") //请选择您此刻的心情图片并点击开始签到按钮签个到吧
           )) ||
           window.find("今天簽到了嗎？請選擇您此刻的心情圖片並寫下今天最想說的話")
          ) {
