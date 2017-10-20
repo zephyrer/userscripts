@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.7.1
+// @version      1.6.8
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -67,11 +67,19 @@
   }
 
   if (isURL("=applied")) {
-    el = _id("gain_5");
-    if (el) {
-      el.click();
-      return;
-    }
+    let count = 0;
+    let iid = setInterval(function() {
+        let el = _id("gain_5");
+        if (el) {
+          clearInterval(iid);
+          el.click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
   }
 
   if (isURL("=xqqiandao")) {
@@ -190,9 +198,11 @@
     || isURL("cn.club.vmall.com/dsu_paulsign-sign")) {
       //华为
     document.getElementsByClassName('sign-btn btn_rs')[0].click();
+    return;
   } else if(location.href.indexOf("plugin.php?id=dsu_paulsign:sign") != -1){
     if (!qd())
       qd2();
+    return;
   }
 
   if (isURL("http://bbs.gfan.com/")) { //机锋
