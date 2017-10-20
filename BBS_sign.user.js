@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.8
+// @version      1.6.8.1
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -27,6 +27,7 @@
 // @include      http*://bbs.zol.com.cn/*
 // @include      http*://bbs.cnmo.com/*
 // @include      http://www.banyungong.org/daysign.html
+// @include      http://passport.eepw.com.cn/user/index
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
@@ -118,6 +119,13 @@
       lis[i].click();
       el = _id("signform");
       el.submit();
+    }
+  }
+
+  if (isURL("passport.eepw.com.cn/user/index")) {
+    el = _id("signs");
+    if (el) {
+      el.click();
     }
   }
 
