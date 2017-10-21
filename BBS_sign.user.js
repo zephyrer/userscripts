@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.8.1
+// @version      1.6.8.2
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -28,6 +28,7 @@
 // @include      http*://bbs.cnmo.com/*
 // @include      http://www.banyungong.org/daysign.html
 // @include      http://passport.eepw.com.cn/user/index
+// @exclude      http*://bbs.realqwh.cn/*
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
@@ -83,7 +84,20 @@
       }, 500);
   }
 
+xqqiandao: {
   if (isURL("=xqqiandao")) {
+    // 检测是否已经签过到
+    els = _class("pd15");
+    if (!els)
+      break xqqiandao;
+    el = els[0];
+    els = Array.from(el.getElementsByClassName("tac"))
+            .filter((x) => {return x.tagName == "TD";})
+            .filter((x) => {return x.textContent.includes("您本月已累计签到");});
+    el = els[0];
+    if (el.includes("您已于"))
+      break xqqiandao;
+    // 开始签到
     els = _name("qdxq");
     el = _name("form1");
     if (els && el) {
@@ -92,6 +106,7 @@
       el[0].submit();
     }
   }
+}
 
   // 保险处理
   el = document.getElementById("todaysay");
@@ -124,8 +139,8 @@
 
   if (isURL("passport.eepw.com.cn/user/index")) {
     el = _id("signs");
-    if (el) {
-      el.click();
+    if (el && !el.textContent.includes("已签到")) {
+      setTimeout(el.click(), 500);
     }
   }
 
@@ -301,8 +316,8 @@
   if (0) {
   } else {
     //其他论坛
-    qd();
-    qd2();
+    if (!qd())
+      qd2();
   }
 
   function isURL(x){
@@ -392,42 +407,42 @@
   }
 
   function qd() {
-      if ((window.find("今天签到了吗") &&
-          (window.find("请选择您此刻的心情图片") || //请选择您此刻的心情图片并写下今天最想说的话
-           window.find("请选择你此刻的心情图片") //请选择您此刻的心情图片并点击开始签到按钮签个到吧
-          )) ||
-          window.find("今天簽到了嗎？請選擇您此刻的心情圖片並寫下今天最想說的話")
-         ) {
-          //var text = document.getElementById("ch_s");
-          let smileList = _class("qdsmile") ? (_class("qdsmile"))[0] : null;
-          if (smileList) {
-            let smiles = childs(smileList, "tagName", "LI");
-            let i = randomNum(smiles.length);
-            smiles[i].click();
-          } else {
-            return false;
-          }
-          let text2 = document.getElementById("todaysay");
-          /*
-          if (text == null) {
-              return;
-          }
-          text.setAttribute('checked', true);
-          */
-          if (text2)
-            text2.value = "今天签到来了，各位安好";//全自动签到,就是爽~
-          let button = document.getElementById("qiandao");
-          if (button) {
-            button.submit();
-            return true;
-          }
-          button = _name("qiandao");
-          if (button) {
-            button[0].submit();
-            return true;
-          }
-          return false;
+    if ((window.find("今天签到了吗") &&
+        (window.find("请选择您此刻的心情图片") || //请选择您此刻的心情图片并写下今天最想说的话
+         window.find("请选择你此刻的心情图片"))) || //请选择您此刻的心情图片并点击开始签到按钮签个到吧
+        window.find("今天簽到了嗎？請選擇您此刻的心情圖片並寫下今天最想說的話")
+       ) {
+      //var text = document.getElementById("ch_s");
+      let smileList = _class("qdsmile") ? (_class("qdsmile"))[0] : null;
+      if (smileList) {
+        let smiles = childs(smileList, "tagName", "LI");
+        let i = randomNum(smiles.length);
+        smiles[i].click();
+      } else {
+        return false;
       }
+      let text2 = document.getElementById("todaysay");
+      /*
+      if (text == null) {
+          return;
+      }
+      text.setAttribute('checked', true);
+      */
+      if (text2)
+        text2.value = "今天签到来了，各位安好";//全自动签到,就是爽~
+      let button = document.getElementById("qiandao");
+      if (button) {
+        button.submit();
+        return true;
+      }
+      button = _name("qiandao");
+      if (button) {
+        button[0].submit();
+        return true;
+      }
+      return false;
+    }
+    return false;
   }
 
   function qd2() {
