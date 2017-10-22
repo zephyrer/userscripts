@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.8.2
+// @version      1.6.8.3
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -95,8 +95,10 @@ xqqiandao: {
             .filter((x) => {return x.tagName == "TD";})
             .filter((x) => {return x.textContent.includes("您本月已累计签到");});
     el = els[0];
-    if (el.includes("您已于"))
+    if (el.textContent.includes("您已于")) {
+      GM_log("BBS_sign.user.js: 您已签到");
       break xqqiandao;
+    }
     // 开始签到
     els = _name("qdxq");
     el = _name("form1");
@@ -104,6 +106,7 @@ xqqiandao: {
       idx = randomNum(els.length);
       els[idx].checked = true;
       el[0].submit();
+      return;
     }
   }
 }
@@ -158,6 +161,10 @@ xqqiandao: {
   if (isURL("wenku.baidu.com")) {
     //百度文库
     let n = setInterval(function() {
+      els = _class("g-btn-pass");
+      if (els) {
+        els[0].click();
+      }
       var qzones = Array.from(document.getElementsByClassName("qzone"));
       if (qzones.length > 0 && qzones[0].href.includes("sns.qzone.qq.com")) {
         clearInterval(n);
