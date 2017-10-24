@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.8.3
+// @version      1.6.8.4
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -26,6 +26,9 @@
 // @include      http*://www.tiexue.net/*
 // @include      http*://bbs.zol.com.cn/*
 // @include      http*://bbs.cnmo.com/*
+// @include      http*://*.51cto.com/*
+// @include      http*://*/*tab=credit
+// @include      http*://usr.005.tv/
 // @include      http://www.banyungong.org/daysign.html
 // @include      http://passport.eepw.com.cn/user/index
 // @exclude      http*://bbs.realqwh.cn/*
@@ -161,10 +164,12 @@ xqqiandao: {
   if (isURL("wenku.baidu.com")) {
     //百度文库
     let n = setInterval(function() {
+    /*
       els = _class("g-btn-pass");
       if (els) {
         els[0].click();
       }
+    */
       var qzones = Array.from(document.getElementsByClassName("qzone"));
       if (qzones.length > 0 && qzones[0].href.includes("sns.qzone.qq.com")) {
         clearInterval(n);
@@ -318,6 +323,63 @@ xqqiandao: {
     el = _id("btnSign");
     if (el)
       el.click();
+  }
+  
+  if (isURL("tab=credit")) {
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      el = _id("daily_sign");
+      if (el) {
+        clearInterval(n);
+        el.click();
+        return;
+      }
+    }, 500);
+    return;
+  }
+
+  if (isURL("usr.005.tv")) {
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      el = _id("btn-sign-user");
+      if (el) {
+        clearInterval(n);
+        el.click();
+        return;
+      }
+    }, 500);
+    return;
+  }
+
+  if (isURL("51cto.com")) {
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      el = _id("jsSignGetCredits");
+      if (el) {
+        clearInterval(n);
+        el.click();
+        return;
+      }
+      el = _id("jsCreditsSpan");
+      if (el) {
+        clearInterval(n);
+        el.click();
+        return;
+      }
+    }, 500);
+    return;
   }
 
   if (0) {
