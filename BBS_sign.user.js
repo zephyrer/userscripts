@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.8.4
+// @version      1.6.8.5
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -143,11 +143,16 @@ xqqiandao: {
     }
   }
 
-  if (isURL("passport.eepw.com.cn/user/index")) {
-    el = _id("signs");
-    if (el && !el.textContent.includes("已签到")) {
-      setTimeout(el.click(), 500);
-    }
+  if (isURL("passport.eepw.com.cn")) {
+    let n = setInterval(function() {
+      el = _id("signs");
+      if (el.textContent.includes("已签到")) {
+        clearInterval(n);
+      } else {
+        el.click();
+        location.reload();
+      }
+    }, 100);
   }
 
   if (isURL("book.sfacg.com")) {
@@ -324,7 +329,7 @@ xqqiandao: {
     if (el)
       el.click();
   }
-  
+
   if (isURL("tab=credit")) {
     let cnt = 0;
     let n = setInterval(function() {
