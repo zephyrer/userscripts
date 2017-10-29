@@ -150,9 +150,8 @@ xqqiandao: {
         clearInterval(n);
       } else {
         el.click();
-        location.reload();
       }
-    }, 100);
+    }, 1000);
   }
 
   if (isURL("book.sfacg.com")) {
