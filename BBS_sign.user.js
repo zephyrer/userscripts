@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.8.4
+// @version      1.6.8.5
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -282,6 +282,7 @@ xqqiandao: {
         clearInterval(n);
         return;
       }
+      cnt++;
       els = _class("mood_list");
       if (els) {
         clearInterval(n);
@@ -296,32 +297,60 @@ xqqiandao: {
   }
 
   if (isURL("www.tiexue.net")) {
-    els = _class("signBtn");
-    if (els) {
-      els[0].click();
-    }
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      els = _class("signBtn");
+      if (els) {
+        clearInterval(n);
+        els[0].click();
+      }
+    }, 500);
     return;
   }
 
   if (isURL("bbs.zol.com.cn")) {
-    el = _id("signInBtn");
-    if (el) {
-      el.click();
-    }
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      el = _id("signInBtn");
+      if (el) {
+        clearInterval(n);
+        el.click();
+      }
+    }, 500);
     return;
   }
 
   if (isURL("bbs.cnmo.com")) {
-    el = _id("sign_click");
-    if (el) {
-      el.click();
-    }
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      el = _id("sign_click");
+      if (el) {
+        clearInterval(n);
+        el.click();
+      }
+    }, 500);
     return;
   }
 
   if (isURL("http://www.banyungong.org/daysign.html")) {
     el = _id("btnSign");
     if (el)
+      clearInterval(n);
       el.click();
   }
   
@@ -332,6 +361,7 @@ xqqiandao: {
         clearInterval(n);
         return;
       }
+      cnt++;
       el = _id("daily_sign");
       if (el) {
         clearInterval(n);
@@ -349,6 +379,7 @@ xqqiandao: {
         clearInterval(n);
         return;
       }
+      cnt++;
       el = _id("btn-sign-user");
       if (el) {
         clearInterval(n);
@@ -366,6 +397,7 @@ xqqiandao: {
         clearInterval(n);
         return;
       }
+      cnt++;
       el = _id("jsSignGetCredits");
       if (el) {
         clearInterval(n);
