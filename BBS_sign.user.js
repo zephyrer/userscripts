@@ -143,11 +143,15 @@ xqqiandao: {
     }
   }
 
-  if (isURL("passport.eepw.com.cn/user/index")) {
-    el = _id("signs");
-    if (el && !el.textContent.includes("已签到")) {
-      setTimeout(el.click(), 500);
-    }
+  if (isURL("passport.eepw.com.cn")) {
+    let n = setInterval(function() {
+      el = _id("signs");
+      if (el.textContent.includes("已签到")) {
+        clearInterval(n);
+      } else {
+        el.click();
+      }
+    }, 1000);
   }
 
   if (isURL("book.sfacg.com")) {
@@ -353,7 +357,7 @@ xqqiandao: {
       clearInterval(n);
       el.click();
   }
-  
+
   if (isURL("tab=credit")) {
     let cnt = 0;
     let n = setInterval(function() {
