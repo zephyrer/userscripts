@@ -6,6 +6,8 @@
 // @include        https://*
 // @exclude        http://*.google.com/*
 // @exclude        https://*.google.com/*
+// @exclude        http://*.live.com/*
+// @exclude        https://*.live.com/*
 // @exclude        http://*.youtube.com/*
 // @exclude        http://youtube.com/*
 // @exclude        https://*.youtube.com/*
@@ -34,7 +36,7 @@
 // @updateURL      https://github.com/zephyrer/userscripts/raw/master/anti-uncopy.meta.js
 // @require        https://raw.githubusercontent.com/joesimmons/jsl/master/versions/jsl-1.3.1.js
 // @copyright      Efisio Zephyr
-// @version        0.1.2.2
+// @version        0.1.2.3
 // @grant          none
 // @run-at         document-start
 // ==/UserScript==
