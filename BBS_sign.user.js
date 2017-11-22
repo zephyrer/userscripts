@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    EfisioZephyr
-// @version      1.6.8.5
+// @version      1.6.8.6
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -352,10 +352,19 @@ xqqiandao: {
   }
 
   if (isURL("http://www.banyungong.org/daysign.html")) {
-    el = _id("btnSign");
-    if (el)
-      clearInterval(n);
-      el.click();
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      el = _id("btnSign");
+      if (el)
+        clearInterval(n);
+        el.click();
+    }, 500);
+    return;
   }
 
   if (isURL("tab=credit")) {
