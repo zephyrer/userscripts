@@ -2,8 +2,8 @@
 // @name         AppendPanLinkPw
 // @author       zephyrer
 // @contributor  jasonshaw, jasake
-// @namespace    EfisioZephyr
-// @version      0.6.5.1
+// @namespace    https://github.com/zephyrer/
+// @version      0.6.5.2
 // @description  配合网盘密码自动提取，自动处理网盘链接及其提取码，融合链接与提取码变成支持自动填充密码的方式的链接（百度云、360pan等）
 // @include      *
 // @exclude      http://*/forum.php

@@ -1,12 +1,12 @@
 ﻿// ==UserScript==
 // @name        Tiebas Last Visited
-// @namespace   EfisioZephyr
+// @namespace   https://github.com/zephyrer/
 // @description 针对百度贴吧，添加关于最近逛过的贴吧的支持
 // @include     http://tieba.baidu.com/f?*
 // @include     http://tieba.baidu.com/p/*
 // @include     https://tieba.baidu.com/f?*
 // @include     https://tieba.baidu.com/p/*
-// @version     1.2.3
+// @version     1.2.4
 // @grant       GM_addStyle
 // @grant       GM_getValue
 // @grant       GM_setValue

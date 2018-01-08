@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Open External Link in NewTab
-// @version      0.3.3.1
-// @namespace    EfisioZephyr
+// @version      0.3.3.2
+// @namespace    https://github.com/zephyrer/
 // @contributor  DandyClubs
 // @description  This script will open any external link in new tab. Support dynamic content. Support subdomain aaa.test.co.kr = bbb.test.co.kr (controlled by bStrict)
 // @include      *
