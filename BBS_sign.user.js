@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.7
+// @version      1.6.8.8
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -168,17 +168,17 @@ xqqiandao: {
   if (isURL("wenku.baidu.com")) {
     //百度文库
     let n = setInterval(function() {
-    /*
       els = _class("g-btn-pass");
       if (els) {
         els[0].click();
       }
-    */
+    /*
       var qzones = Array.from(document.getElementsByClassName("qzone"));
       if (qzones.length > 0 && qzones[0].href.includes("sns.qzone.qq.com")) {
         clearInterval(n);
         qzones.forEach((e) => e.click());
       }
+    */
     }, 100);
     return;
   }
