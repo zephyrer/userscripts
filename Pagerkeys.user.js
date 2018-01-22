@@ -3,7 +3,7 @@
 // @author       zephyrer
 // @namespace    https://github.com/zephyrer/
 // @description  Add ArrowLeft and ArrowRight for generic next/previous page. It will click the last found link whose text starts/ends with e.g. "Next", "Prev", or "Previous".
-// @version      2.0.15
+// @version      2.0.16
 // @match        *://*/*
 // @downloadURL  https://github.com/zephyrer/userscripts/raw/master/Pagerkeys.user.js
 // @updateURL    https://github.com/zephyrer/userscripts/raw/master/Pagerkeys.meta.js
@@ -101,16 +101,23 @@ GM_log("Pager keys *** regexp ***, TO LOAD " + links[i].href);
       if (!ev.ctrlKey && !ev.altKey && !ev.shiftKey) {
         if (document.activeElement && (
             (/^(INPUT|TEXTAREA)$/).test(document.activeElement.tagName) ||
-            document.activeElement.isContentEditable)) return;
+             document.activeElement.isContentEditable ||
+             document.activeElement.contentEditable
+            )
+           )
+           return;
         switch (ev.key) {
           case "ArrowLeft": //previous
-            if (pager(PREV, PREV_KEYWORDS)) return;
+            if (pager(PREV, PREV_KEYWORDS))
+              return;
             break;
           case "ArrowRight": //next
-            if (pager(NEXT, NEXT_KEYWORDS)) return;
+            if (pager(NEXT, NEXT_KEYWORDS))
+              return;
             break;
           case "Enter": //content
-            if (pager('', CONTENT_KEYWORDS)) return;
+            if (pager('', CONTENT_KEYWORDS))
+              return;
             break;
         }
       }
