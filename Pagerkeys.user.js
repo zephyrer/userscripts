@@ -3,7 +3,7 @@
 // @author       zephyrer
 // @namespace    https://github.com/zephyrer/
 // @description  Add ArrowLeft and ArrowRight for generic next/previous page. It will click the last found link whose text starts/ends with e.g. "Next", "Prev", or "Previous".
-// @version      2.0.20
+// @version      2.0.20.1
 // @match        *://*/*
 // @downloadURL  https://github.com/zephyrer/userscripts/raw/master/Pagerkeys.user.js
 // @updateURL    https://github.com/zephyrer/userscripts/raw/master/Pagerkeys.meta.js
@@ -15,7 +15,7 @@
   const PREV_KEYWORDS = ['^prev(ious)?\\b', '\\bprev(ious)?$', '上一(页|章|节)', '<', '<<', '«'];
   const NEXT = 'next';
   const NEXT_KEYWORDS = ['^next(\\b|$)', '下一(页|章|节)', '>', '>>', '»'];
-  const CONTENT_KEYWORDS = ['content', '^目录$', '返回目录', '返回书页', 'index'];
+  const CONTENT_KEYWORDS = ['content', '^目录$', '返回目录', 'index'];
   const INVALID_URL = 'javascript:';
 
   function loadURI(url){
