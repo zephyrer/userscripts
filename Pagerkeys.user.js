@@ -3,7 +3,7 @@
 // @author       zephyrer
 // @namespace    https://github.com/zephyrer/
 // @description  Add ArrowLeft and ArrowRight for generic next/previous page. It will click the last found link whose text starts/ends with e.g. "Next", "Prev", or "Previous".
-// @version      2.0.20.1
+// @version      2.0.20.5
 // @match        *://*/*
 // @downloadURL  https://github.com/zephyrer/userscripts/raw/master/Pagerkeys.user.js
 // @updateURL    https://github.com/zephyrer/userscripts/raw/master/Pagerkeys.meta.js
@@ -23,13 +23,16 @@ GM_log("Pager keys LOADing " + url);
     location.href = url;
   }
 
-  function incrementURL() {
+  function incrementURL(PREV_NEXT) {
     var url = location.href;
     if (!url.match(/(.*:\/\/.*\/.*)(\d+)(\D*)$/))
       return false;
     var num = RegExp.$2;
     var digit = (num.charAt(0) == '0') ? num.length : null;
-    num = parseInt(num, 10) + 1;
+    if (PREV_NEXT && PREV_NEXT === 'prev')
+      num = parseInt(num, 10) - 1;
+    else
+      num = parseInt(num, 10) + 1;
     if (num < 0)
       return false;
     num = num.toString();
@@ -93,7 +96,7 @@ GM_log("Pager keys *** regexp ***, TO LOAD " + links[i].href);
         */
       }
     }
-    return incrementURL();
+    return incrementURL(PREV_NEXT);
   }
 
   function installHandler() {
