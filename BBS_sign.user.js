@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.9
+// @version      1.6.8.20
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -33,6 +33,12 @@
 // @include      http://www.banyungong.org/daysign.html
 // @include      http://passport.eepw.com.cn/user/index
 // @exclude      http*://bbs.realqwh.cn/*
+// @include      http://*/task?ttype*
+// @include      http*://lkong.cn/*
+// @include      http*://*.iskytree.net/*
+// @include      http*://*.gongzicp.com/*
+// @include      http*://kindleren.com/*
+// @include      http://www.horou.com/home.php?mod=task&item=new
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
@@ -50,6 +56,119 @@
   GM_log("BBSsign.user.js executing...");
 
   let aBtnApply = el = els = imgs = null, idx = 0;
+
+    if (isURL("gsignin")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let els = _class("right");
+        if (els) {
+          clearInterval(iid);
+          els[0].click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
+  }
+
+  if (isURL("kindleren.com")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let el = _id("k_misign_topb");
+        if (el) {
+          clearInterval(iid);
+          els = el.getElementsByTagName("a");
+          if (els) els[0].click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
+  }
+
+  if (isURL("gongzicp.com")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let el = _id("signBtn");
+        if (el) {
+          clearInterval(iid);
+          if (el.textContent.indexOf("已") !== -1) el.click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
+  }
+
+  if (isURL("lkong.cn")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let el = _id("punch");
+        if (el) {
+          clearInterval(iid);
+          el.click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
+  }
+
+  if (isURL("horou.com")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let el = _id("fx_checkin_b");
+        if (el) {
+          clearInterval(iid);
+          if (el.textContent.indexOf("已") !== -1) el.click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 10)
+          clearInterval(iid);
+      }, 500);
+  }
+
+  if (isURL("iskytree.net")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let el = _id("fx_checkin_b");
+        if (el) {
+          clearInterval(iid);
+          el.click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
+  }
+
+  if (isURL("lkong.cn")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let el = _id("punch");
+        if (el) {
+          clearInterval(iid);
+          el.click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
+  }
 
   if (isURL("/u.php")) {
     aBtnApply = _id("punch");
@@ -426,6 +545,13 @@ xqqiandao: {
       }
     }, 500);
     return;
+  }
+
+  if (isURL("task?")) {
+    el = _id("profilego");
+    if (el) {
+      el.click();
+    }
   }
 
   if (0) {
