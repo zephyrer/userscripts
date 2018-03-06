@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Tumblr Download
-// @version      0.3.1
+// @version      0.3.2
 // @description  Download tumblr photos by typing 'dl' when viewing them
 // @author       zephyrer
 // @namespace    https://github.com/zephyrer/
