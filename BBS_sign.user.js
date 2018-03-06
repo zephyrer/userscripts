@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.20
+// @version      1.6.8.22
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -223,14 +223,16 @@ xqqiandao: {
       break xqqiandao;
     }
     // 开始签到
-    els = _name("qdxq");
-    el = _name("form1");
-    if (els && el) {
-      idx = randomNum(els.length);
-      els[idx].checked = true;
-      el[0].submit();
-      return;
-    }
+    setTimeout(function() {
+      els = _name("qdxq");
+      el = _name("form1");
+      if (els && el) {
+        idx = randomNum(els.length);
+        els[idx].checked = true;
+        el[0].submit();
+        return;
+      }
+    }, 3500);
   }
 }
 
