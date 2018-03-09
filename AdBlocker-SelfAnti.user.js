@@ -10,7 +10,7 @@
 // @include     https://*.cnbeta.com/*
 // @downloadURL https://github.com/zephyrer/userscripts/raw/master/AdBlocker-SelfAnti.user.js
 // @updateURL   https://github.com/zephyrer/userscripts/raw/master/AdBlocker-SelfAnti.meta.js
-// @version     0.2.0.1
+// @version     0.2.0.2
 // @grant       none
 // @run-at      document-start
 // ==/UserScript==
@@ -36,7 +36,11 @@ function antis() {
       document.body.appendChild(adLayer);
     }
   else if (location.host.indexOf("cnbeta.com") !== -1) {
-    let iid = setInterval(cnbeta_callback, 10);
+    let count = 0;
+    let REPEATED = 15;
+    let INTERVAL = 500;//ms
+
+    let iid = setInterval(cnbeta_callback, INTERVAL);
     function cnbeta_callback() {
       if (document.body) {
         console.log("Anti-AdBlocker Selfly executing...");
@@ -49,6 +53,11 @@ function antis() {
         }
       }
       console.log("Anti-AdBlocker Selfly looping...");
+      if (count > REPEATED)
+        clearInterval(iid);
+      else
+        count++;
+      
     }
   }
 }

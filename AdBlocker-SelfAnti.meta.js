@@ -10,7 +10,7 @@
 // @include     https://*.cnbeta.com/*
 // @downloadURL https://github.com/zephyrer/userscripts/raw/master/AdBlocker-SelfAnti.user.js
 // @updateURL   https://github.com/zephyrer/userscripts/raw/master/AdBlocker-SelfAnti.meta.js
-// @version     0.2.0.1
+// @version     0.2.0.2
 // @grant       none
 // @run-at      document-start
 // ==/UserScript==
