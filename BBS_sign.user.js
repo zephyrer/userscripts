@@ -1,15 +1,18 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.23
+// @version      1.6.8.43
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
 // @include      http*://*/plugin.php?id=mpage_sign:sign*
+// @include      http*://*/plugin.php?id=ljdaka:daka*
+// @include      http*://*/plugin.php?id=yinxingfei_zzza:yinxingfei_zzza_hall*
 // @include      http*://*/home.php?mod=task&do=view*
 // @include      http*://*/*action=view*
 // @include      http*://*/*action=applied*
 // @include      http*://*/plugin.php?id=dc_signin:sign
+// @include      http*/*/zsj_moneychange*
 // @include      http*://*/forum.php
 // @include      http*://*/u.php*
 // @include      http*://*/*qiandao
@@ -21,6 +24,8 @@
 // @include      http*://www.92jh.cn/*
 // @include      http*://bbs.ntrqq.net/*
 // @include      http*://www.gn00.com/*
+// @include      http://588ku.com/
+// @include      http*://*.58pic.com/*
 // @include      http*://bbs.qidian.com/signeveryday.aspx*
 // @include      http*://book.sfacg.com/signin*
 // @include      http*://wenku.baidu.com/task/browse/daily
@@ -38,7 +43,12 @@
 // @include      http*://*.iskytree.net/*
 // @include      http*://*.gongzicp.com/*
 // @include      http*://kindleren.com/*
+// @include      http*://www.huihui.cn/*
+// @include      http*://*.21ic.com/*
+// @include      http*://*/torrents.php
+// @include      http://in.zasv.net/home.php?mod=task&item=done
 // @include      http://www.horou.com/home.php?mod=task&item=new
+// @include      http://ishare.iask.sina.com.cn/checkin
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
@@ -57,7 +67,7 @@
 
   let aBtnApply = el = els = imgs = null, idx = 0;
 
-    if (isURL("gsignin")) {
+  if (isURL("gsignin")) {
     let count = 0;
     let iid = setInterval(function() {
         let els = _class("right");
@@ -71,6 +81,105 @@
         if (count > 50)
           clearInterval(iid);
       }, 500);
+  }
+
+  if (isURL("zsj_moneychange")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let els = _class("ft-btn");
+        if (els) {
+          clearInterval(iid);
+          if (els[0].textContent.includes("已签到"))
+            return;
+          els[0].click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
+  }
+
+  if (isURL("588ku.com")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let els = _class("already-sign-but");
+        if (els) {
+          clearInterval(iid);
+          if (els[0].textContent.includes("已签到"))
+            return;
+          els[0].click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
+  }
+
+  if (isURL("58pic.com")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let els = _class("sign-but");
+        if (els) {
+          clearInterval(iid);
+          if (els[0].textContent.includes("已签到"))
+            return;
+          els[0].click();
+          setTimeout(function() {
+            let el = document.querySelector(".everySign .integral-btn");
+            if (el) el.click();
+          }, 2000);
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
+  }
+
+  if (isURL("huihui.cn")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let els = _class("signup");
+        if (els) {
+          clearInterval(iid);
+          if (els[0].textContent.includes('已抽奖'))
+            return;
+          els[0].click();
+          els = document.querySelectorAll(".lottery-btn a");
+          if (els.length > 0) els[0].click();
+          return;
+        }
+        count++;
+        if (count > 50)
+          clearInterval(iid);
+      }, 500);
+  }
+
+  if (isURL("21ic.com")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let el = _id("qiandao");
+        if (el) {
+          clearInterval(iid);
+          el.click();
+          let els = document.querySelectorAll("#qiandao_message_menu ul li");
+          if (els.length > 0) {
+            idx = randomNum(els.length);
+            els[idx].firstChild.click();
+            el = _id("qiandao_add");
+            el.click();
+          }
+          return;
+        }
+        count++;
+        if (count > 50)
+          clearInterval(iid);
+      }, 1000);
   }
 
   if (isURL("kindleren.com")) {
@@ -103,7 +212,7 @@
         }
         if (count > 50)
           clearInterval(iid);
-      }, 500);
+      }, 1500);
   }
 
   if (isURL("lkong.cn")) {
@@ -417,6 +526,46 @@ xqqiandao: {
         lis[i].click();
         els = _name("signpn");
         els[0].click();
+        window.location.reload(true);
+        return;
+      }
+    }, 500);
+    return;
+  }
+  
+  if (isURL("=yinxingfei_zzza:yinxingfei_zzza_hall")) {
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      el = _id("zzza_go");
+      if (el) {
+        clearInterval(n);
+        el.click();
+      }
+    }, 500);
+    return;
+  }
+
+  if (isURL("=ljdaka:daka")) {
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      els = _class("chk_mood");
+      if (els) {
+        clearInterval(n);
+        let lis = childs(els[0], "tagName", "a");
+        let i = randomNum(lis.length);
+        lis[i].click();
+        el = _id("rn_checkout");
+        el.click();
       }
     }, 500);
     return;
@@ -550,10 +699,107 @@ xqqiandao: {
   }
 
   if (isURL("task?")) {
-    el = _id("profilego");
-    if (el) {
-      el.click();
-    }
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      el = _id("profilego");
+      if (el) {
+        clearInterval(n);
+        el.click();
+        return;
+      }
+    }, 500);
+    return;
+  }
+  
+  if (isURL("ishare.iask.sina.com.cn")) {
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      el = _id("J_btn-sign");
+      if (el) {
+        clearInterval(n);
+        el.click();
+        return;
+      }
+    }, 500);
+    return;
+  }
+
+  if (isURL("/torrents.php")) {
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      els = _class("faqlink");
+      if (els) {
+        clearInterval(n);
+        els[0].click();
+        return;
+      }
+      el = _id("showup");
+      if (el) {
+        clearInterval(n);
+        el.click();
+        return;
+      }
+    }, 500);
+    return;
+  }
+  
+  if (isURL("home.php?mod=task&item=done")) {
+    let cnt = 0;
+    let n = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      let el = _id('um');
+      if (el) {
+        clearInterval(n);
+        let els = _tag('a');
+        if (els) {
+          els = els.filter((e) => e.textContent.includes('打卡签到'));
+          if (els.length > 0) {
+            setTimeout(function() {
+              let cnt1 = 0;
+              let n1 = setInterval(function() {
+                if (cnt1 > 20) {
+                  clearInterval(n1);
+                  return;
+                }
+                cnt1++;
+                let els1 = _class("chk_mood");
+                if (els1) {
+                  clearInterval(n1);
+                  let lis1 = childs(els1[0], "tagName", "A");
+                  let i1 = randomNum(lis1.length);
+                  lis1[i1].click();
+                  let el1 = _id("rn_checkout");
+                  el1.click();
+                }
+              }, 500);
+              return;
+            }, 1000);
+            els[0].click();
+            return;
+          }
+        }
+      }
+    }, 500);
+    return;
   }
 
   if (0) {

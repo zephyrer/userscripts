@@ -1,15 +1,18 @@
 // ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.23
+// @version      1.6.8.43
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
 // @include      http*://*/plugin.php?id=mpage_sign:sign*
+// @include      http*://*/plugin.php?id=ljdaka:daka*
+// @include      http*://*/plugin.php?id=yinxingfei_zzza:yinxingfei_zzza_hall*
 // @include      http*://*/home.php?mod=task&do=view*
 // @include      http*://*/*action=view*
 // @include      http*://*/*action=applied*
 // @include      http*://*/plugin.php?id=dc_signin:sign
+// @include      http*/*/zsj_moneychange*
 // @include      http*://*/forum.php
 // @include      http*://*/u.php*
 // @include      http*://*/*qiandao
@@ -21,6 +24,8 @@
 // @include      http*://www.92jh.cn/*
 // @include      http*://bbs.ntrqq.net/*
 // @include      http*://www.gn00.com/*
+// @include      http://588ku.com/
+// @include      http*://*.58pic.com/*
 // @include      http*://bbs.qidian.com/signeveryday.aspx*
 // @include      http*://book.sfacg.com/signin*
 // @include      http*://wenku.baidu.com/task/browse/daily
@@ -38,7 +43,12 @@
 // @include      http*://*.iskytree.net/*
 // @include      http*://*.gongzicp.com/*
 // @include      http*://kindleren.com/*
+// @include      http*://www.huihui.cn/*
+// @include      http*://*.21ic.com/*
+// @include      http*://*/torrents.php
+// @include      http://in.zasv.net/home.php?mod=task&item=done
 // @include      http://www.horou.com/home.php?mod=task&item=new
+// @include      http://ishare.iask.sina.com.cn/checkin
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
