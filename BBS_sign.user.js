@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.43
+// @version      1.6.8.44
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -110,6 +110,10 @@
           if (els[0].textContent.includes("已签到"))
             return;
           els[0].click();
+          setTimeout(function() {
+            let el = document.querySelector(".signIn-rule .signIn-btn");
+            if (el) el.click();
+          }, 2000);
           return;
         } else {
           count++;
