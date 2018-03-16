@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.44
+// @version      1.6.8.45
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -530,7 +530,7 @@ xqqiandao: {
         lis[i].click();
         els = _name("signpn");
         els[0].click();
-        window.location.reload(true);
+        setTimeout(() => window.location.reload(true), 2000);
         return;
       }
     }, 500);
