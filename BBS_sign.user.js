@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.45
+// @version      1.6.8.48
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -171,13 +171,19 @@
         if (el) {
           clearInterval(iid);
           el.click();
-          let els = document.querySelectorAll("#qiandao_message_menu ul li");
-          if (els.length > 0) {
-            idx = randomNum(els.length);
-            els[idx].firstChild.click();
-            el = _id("qiandao_add");
-            el.click();
-          }
+          setTimeout(() => {
+            let el1 = _id("qiandao_message");
+            el1.click();
+            setTimeout(() => {
+              let els1 = document.querySelectorAll("#qiandao_message_menu ul li");
+              if (els1.length > 0) {
+                idx = randomNum(els1.length);
+                els1[idx].firstChild.click();
+                el1 = _id("qiandao_add");
+                el1.click();
+              }
+            }, 2500);
+          }, 2500);
           return;
         }
         count++;
@@ -536,7 +542,7 @@ xqqiandao: {
     }, 500);
     return;
   }
-  
+
   if (isURL("=yinxingfei_zzza:yinxingfei_zzza_hall")) {
     let cnt = 0;
     let n = setInterval(function() {
@@ -719,7 +725,7 @@ xqqiandao: {
     }, 500);
     return;
   }
-  
+
   if (isURL("ishare.iask.sina.com.cn")) {
     let cnt = 0;
     let n = setInterval(function() {
@@ -761,7 +767,7 @@ xqqiandao: {
     }, 500);
     return;
   }
-  
+
   if (isURL("home.php?mod=task&item=done")) {
     let cnt = 0;
     let n = setInterval(function() {
