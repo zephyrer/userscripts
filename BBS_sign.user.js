@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.49
+// @version      1.6.8.55
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -46,7 +46,7 @@
 // @include      http*://www.huihui.cn/*
 // @include      http*://*.21ic.com/*
 // @include      http*://*/torrents.php
-// @include      http*://*/jobcenter.php?action=finish&jobid=*
+// @include      http*://*/jobcenter.php?action=finish*
 // @include      http://in.zasv.net/home.php?mod=task&item=done
 // @include      http://www.horou.com/home.php?mod=task&item=new
 // @include      http://ishare.iask.sina.com.cn/checkin
@@ -168,33 +168,35 @@
   if (isURL("21ic.com")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = _id("qiandao");
-        if (el) {
-          clearInterval(iid);
-          el.click();
-          let iid1 = setInterval(() => {
-            let el1 = _id("qiandao_message");
-            if (el1) {
-              clearInterval(iid1);
-              el1.click();
-              setTimeout(() => {
-                let els1 = document.querySelectorAll("#qiandao_message_menu ul li");
-                if (els1.length > 0) {
-                  idx = randomNum(els1.length);
-                  els1[idx].firstChild.click();
-                  el1 = _id("qiandao_add");
-                  el1.click();
-                }
-              }, 2500);
-              return;
-            }
-          }, 1000);
+      let el = _id("qiandao");
+      if (el) {
+        clearInterval(iid);
+        el.click();
+        if (unsafeWindow.signState === 1)
           return;
-        }
-        count++;
-        if (count > 50)
-          clearInterval(iid);
-      }, 1000);
+        let iid1 = setInterval(() => {
+          let el1 = _id("qiandao_message");
+          if (el1) {
+            clearInterval(iid1);
+            el1.click();
+            setTimeout(() => {
+              let els1 = document.querySelectorAll("#qiandao_message_menu ul li");
+              if (els1.length > 0) {
+                idx = randomNum(els1.length);
+                els1[idx].firstChild.click();
+                el1 = _id("qiandao_add");
+                el1.click();
+              }
+            }, 2500);
+            return;
+          }
+        }, 1000);
+        return;
+      }
+      count++;
+      if (count > 50)
+        clearInterval(iid);
+    }, 1000);
   }
 
   if (isURL("kindleren.com")) {
@@ -820,6 +822,26 @@ xqqiandao: {
   if (isURL("jobcenter.php?action=finish")) {
     let cnt = 0;
     let n = setInterval(function() {
+      let nodes = document.getElementsByClassName('warp');
+      if (nodes.length === 0)
+        return;
+      let contextNode = nodes[0];
+      let targetNode = document.evaluate( '//div[3]/div[2]/div/table/tbody/tr/td/div/table/tbody/tr[3]/td[2]/div/dl[2]/dd', contextNode, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null );
+      if (!targetNode) {
+        clearInterval(n);
+        return;
+      }
+      let date1 = new Date(targetNode.singleNodeValue.textContent);
+      let date2 = new Date();
+      let timeSpan = Math.floor((date2.getTime() - date1.getTime()) / 3600000);
+      if (Number.isNaN(timeSpan))
+        timeSpan = 0;
+      let threshold = (isURL('soapone.org')) ? 20 : (isURL('5ichecker.com')) ? 12 : 24;
+      GM_log('BBSsign.user.js finished ' + timeSpan + ' hours. Required elapsed time is ' + threshold + ' hours.');
+      if (timeSpan < threshold) {
+        clearInterval(n);
+        return;
+      }
       if (cnt > 50) {
         clearInterval(n);
         return;
@@ -833,7 +855,7 @@ xqqiandao: {
         else {
           el.click();
           setTimeout(() => {
-            window.location = window.location.href.replace(/\?action.*/i, "?action=applied");
+            window.location.href = window.location.href.replace(/\?action.*/i, "?action=applied");
           }, 1500);
         }
         return;
