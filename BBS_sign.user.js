@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.56
+// @version      1.6.8.57
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -538,7 +538,7 @@ xqqiandao: {
       cnt++;
       els = _class("mood_list");
       if (els) {
-        clearInterval(n);
+        clearInterval(iid);
         let lis = childs(els[0], "tagName", "LI");
         let i = randomNum(lis.length);
         lis[i].click();
@@ -561,7 +561,7 @@ xqqiandao: {
       cnt++;
       el = document.querySelector('.qd-words .C a');
       if (el) {
-        clearInterval(n);
+        clearInterval(iid);
         let msg = el ? el.textContent : 'NULL';
         if (msg.includes('点击')) {
           setTimeout(() => window.location.reload(true), 2000);
