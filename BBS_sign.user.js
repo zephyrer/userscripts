@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.55
+// @version      1.6.8.56
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -50,6 +50,7 @@
 // @include      http://in.zasv.net/home.php?mod=task&item=done
 // @include      http://www.horou.com/home.php?mod=task&item=new
 // @include      http://ishare.iask.sina.com.cn/checkin
+// @include      http://www.zimuzu.tv/user/sign
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
@@ -529,9 +530,9 @@ xqqiandao: {
 
   if (isURL("=mpage_sign:sign")) {
     let cnt = 0;
-    let n = setInterval(function() {
+    let iid = setInterval(function() {
       if (cnt > 20) {
-        clearInterval(n);
+        clearInterval(iid);
         return;
       }
       cnt++;
@@ -547,6 +548,28 @@ xqqiandao: {
         return;
       }
     }, 500);
+    return;
+  }
+
+  if (isURL("zimuzu.tv")) {
+    let cnt = 0;
+    let iid = setInterval(function() {
+      if (cnt > 50) {
+        clearInterval(iid);
+        return;
+      }
+      cnt++;
+      el = document.querySelector('.qd-words .C a');
+      if (el) {
+        clearInterval(n);
+        let msg = el ? el.textContent : 'NULL';
+        if (msg.includes('点击')) {
+          setTimeout(() => window.location.reload(true), 2000);
+          return;
+        }
+        return;
+      }
+    }, 1000);
     return;
   }
 
