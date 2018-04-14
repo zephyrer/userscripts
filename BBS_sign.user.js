@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.48
+// @version      1.6.8.59
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -46,9 +46,12 @@
 // @include      http*://www.huihui.cn/*
 // @include      http*://*.21ic.com/*
 // @include      http*://*/torrents.php
+// @include      http*://*/jobcenter.php?action=finish*
 // @include      http://in.zasv.net/home.php?mod=task&item=done
 // @include      http://www.horou.com/home.php?mod=task&item=new
 // @include      http://ishare.iask.sina.com.cn/checkin
+// @include      http://www.zimuzu.tv/user/sign
+// @include      http*://*?id=seotask*
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
@@ -66,6 +69,14 @@
   GM_log("BBSsign.user.js executing...");
 
   let aBtnApply = el = els = imgs = null, idx = 0;
+
+  if (isURL("seotask")) {
+    el = document.querySelector("a[href*='plugin.php?id=seotask&act=reward']");
+    if (el) {
+      el.click();
+      return;
+    }
+  }
 
   if (isURL("gsignin")) {
     let count = 0;
@@ -167,29 +178,40 @@
   if (isURL("21ic.com")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = _id("qiandao");
-        if (el) {
-          clearInterval(iid);
-          el.click();
-          setTimeout(() => {
-            let el1 = _id("qiandao_message");
+      let el = _id("qiandao");
+      if (el) {
+        clearInterval(iid);
+        el.click();
+        let iid1 = setInterval(() => {
+          let el1 = _id('qiandao_menu_message');
+          if (el1 && el1.textContent.includes('已经签到')) {
+            clearInterval(iid1);
+            el1 = document.querySelector('#qiandao_menu a[onclick^="hideMenu"]');
             el1.click();
-            setTimeout(() => {
-              let els1 = document.querySelectorAll("#qiandao_message_menu ul li");
-              if (els1.length > 0) {
-                idx = randomNum(els1.length);
-                els1[idx].firstChild.click();
-                el1 = _id("qiandao_add");
-                el1.click();
-              }
-            }, 2500);
-          }, 2500);
-          return;
-        }
-        count++;
-        if (count > 50)
-          clearInterval(iid);
-      }, 1000);
+            return;
+          } else {
+            el1 = _id("qiandao_message");
+            if (el1) {
+              clearInterval(iid1);
+              el1.click();
+              setTimeout(() => {
+                let els1 = document.querySelectorAll("#qiandao_message_menu ul li");
+                if (els1.length > 0) {
+                  idx = randomNum(els1.length);
+                  els1[idx].firstChild.click();
+                  el1 = _id("qiandao_add");
+                  el1.click();
+                }
+              }, 1000);
+            }
+          }
+        }, 500);
+        return;
+      }
+      count++;
+      if (count > 50)
+        clearInterval(iid);
+    }, 1000);
   }
 
   if (isURL("kindleren.com")) {
@@ -217,9 +239,8 @@
           clearInterval(iid);
           if (el.textContent.indexOf("已") === -1) el.click();
           return;
-        } else {
-          count++;
         }
+        count++;
         if (count > 50)
           clearInterval(iid);
       }, 1500);
@@ -474,8 +495,9 @@ xqqiandao: {
     return;
   }
 
-  if (isURL("cn.club.vmall.com/plugin.php?id=dsu_paulsign:sign")
-    || isURL("cn.club.vmall.com/dsu_paulsign-sign")) {
+  if (isURL("club.vmall.com/plugin.php?id=dsu_paulsign:sign")
+     || isURL("club.vmall.com/dsu_paulsign-sign")
+     || isURL("club.huawei.com/plugin.php?id=dsu_paulsign:sign")) {
       //华为
     document.getElementsByClassName('sign-btn btn_rs')[0].click();
     return;
@@ -522,15 +544,15 @@ xqqiandao: {
 
   if (isURL("=mpage_sign:sign")) {
     let cnt = 0;
-    let n = setInterval(function() {
+    let iid = setInterval(function() {
       if (cnt > 20) {
-        clearInterval(n);
+        clearInterval(iid);
         return;
       }
       cnt++;
       els = _class("mood_list");
       if (els) {
-        clearInterval(n);
+        clearInterval(iid);
         let lis = childs(els[0], "tagName", "LI");
         let i = randomNum(lis.length);
         lis[i].click();
@@ -540,6 +562,28 @@ xqqiandao: {
         return;
       }
     }, 500);
+    return;
+  }
+
+  if (isURL("zimuzu.tv")) {
+    let cnt = 0;
+    let iid = setInterval(function() {
+      if (cnt > 50) {
+        clearInterval(iid);
+        return;
+      }
+      cnt++;
+      el = document.querySelector('.qd-words .C a');
+      if (el) {
+        clearInterval(iid);
+        let msg = el ? el.textContent : 'NULL';
+        if (msg.includes('点击')) {
+          setTimeout(() => window.location.reload(true), 2000);
+          return;
+        }
+        return;
+      }
+    }, 1000);
     return;
   }
 
@@ -807,6 +851,51 @@ xqqiandao: {
             return;
           }
         }
+      }
+    }, 500);
+    return;
+  }
+
+  if (isURL("jobcenter.php?action=finish")) {
+    let cnt = 0;
+    let n = setInterval(function() {
+      let nodes = document.getElementsByClassName('warp');
+      if (nodes.length === 0)
+        return;
+      let contextNode = nodes[0];
+      let targetNode = document.evaluate( '//div[3]/div[2]/div/table/tbody/tr/td/div/table/tbody/tr[3]/td[2]/div/dl[2]/dd', contextNode, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null );
+      if (!targetNode) {
+        clearInterval(n);
+        return;
+      }
+      let date1 = new Date(targetNode.singleNodeValue.textContent);
+      let date2 = new Date();
+      let timeSpan = Math.floor((date2.getTime() - date1.getTime()) / 3600000);
+      if (Number.isNaN(timeSpan))
+        timeSpan = 0;
+      let threshold = (isURL('soapone.org')) ? 20 : (isURL('5ichecker.com')) ? 12 : 24;
+      GM_log('BBSsign.user.js finished ' + timeSpan + ' hours. Required elapsed time is ' + threshold + ' hours.');
+      if (timeSpan < threshold) {
+        clearInterval(n);
+        return;
+      }
+      if (cnt > 50) {
+        clearInterval(n);
+        return;
+      }
+      cnt++;
+      el = _id("apply_5");
+      if (el) {
+        clearInterval(n);
+        if (el.classList.contains("tasks_apply_old"))
+          return;
+        else {
+          el.click();
+          setTimeout(() => {
+            window.location.href = window.location.href.replace(/\?action.*/i, "?action=applied");
+          }, 1500);
+        }
+        return;
       }
     }, 500);
     return;
