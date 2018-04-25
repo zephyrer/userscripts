@@ -6,11 +6,10 @@
 // @version       0.1.2
 // @description   为微博页面添加超话直链
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
+// @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
 // @copyright     2018, Efisio Zephyr
 // @grant         none
 // ==/UserScript==
-// 
-// 
 
 (function(){
   var getDefaultObjectAt = function (array, index) {return array[index] = array[index] || {};};
