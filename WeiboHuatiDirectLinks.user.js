@@ -3,7 +3,7 @@
 // @author        zephyrer
 // @namespace     https://github.com/zephyrer/
 // @match         https://weibo.com/*
-// @version       0.1.2
+// @version       0.1.3
 // @description   为微博页面添加超话直链
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
 // @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
@@ -12,7 +12,23 @@
 // ==/UserScript==
 
 (function(){
-  var getDefaultObjectAt = function (array, index) {return array[index] = array[index] || {};};
+  const getDefaultObjectAt = function (array, index) {return array[index] = array[index] || {};};
+  const isNull = val => val === null;
+  const isEmpty = function (obj) {
+    if (typeof obj === 'undefined')
+      return true;
+    if (obj === void 0)
+      return true;
+    if (obj === undefined)
+      return true;
+    if (obj === null)
+      return true;
+    if (Object.getOwnPropertyNames(obj).length === 0 && Object.getOwnPropertySymbols(obj).length === 0 && obj.constructor === Object)
+      return true;
+    if (!obj)
+      return true;
+    return false;
+  }
   var huatis = [
     {name: '杨孟霖',
      url:  'http://huati.weibo.com/5450398'},
@@ -30,7 +46,7 @@
   div.style = 'position: fixed; left: auto; right: 2px; top: auto; bottom: 100px; border: 2px red solid;';
   var list = document.createElement('ul');
   for (let i=0; i<huatis.length; i++) {
-    if (!huatis[i]) continue;
+    if (null == huatis[i]) continue;
     let link = document.createElement('a');
     link.id = 'direct-link-to-super-topic-' + i;
     link.innerHTML = huatis[i].name;
