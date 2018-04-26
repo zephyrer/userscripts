@@ -46,7 +46,7 @@
   div.style = 'position: fixed; left: auto; right: 2px; top: auto; bottom: 100px; border: 2px red solid;';
   var list = document.createElement('ul');
   for (let i=0; i<huatis.length; i++) {
-    if (null == huatis[i]) continue;
+    if (isEmpty(huatis[i])) continue;
     let link = document.createElement('a');
     link.id = 'direct-link-to-super-topic-' + i;
     link.innerHTML = huatis[i].name;
