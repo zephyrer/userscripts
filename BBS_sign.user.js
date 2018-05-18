@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.60
+// @version      1.6.8.62
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -192,11 +192,11 @@
           } else {
             el1 = _id("qiandao_message");
             if (el1) {
-              clearInterval(iid1);
               el1.click();
               setTimeout(() => {
                 let els1 = document.querySelectorAll("#qiandao_message_menu ul li");
                 if (els1.length > 0) {
+                  clearInterval(iid1);
                   idx = randomNum(els1.length);
                   els1[idx].firstChild.click();
                   el1 = _id("qiandao_add");
@@ -238,6 +238,10 @@
         if (el) {
           clearInterval(iid);
           if (el.textContent.indexOf("已") === -1) el.click();
+          return;
+        } else if (document.querySelectorAll('.card-header > .ivu-btn:not([disabled])').length > 0) {
+          clearInterval(iid);
+          document.querySelectorAll('.card-header > .ivu-btn')[0].click();
           return;
         }
         count++;
@@ -501,6 +505,9 @@ xqqiandao: {
       //华为
     document.getElementsByClassName('sign-btn btn_rs')[0].click();
     return;
+  } else if(isURL("bbs.elecfans.com/plugin.php?id=dsu_paulsign:sign")){
+    document.getElementsByClassName('plugin-btn')[0].click();
+    setTimeout(qd, 5000);
   } else if(location.href.indexOf("plugin.php?id=dsu_paulsign:sign") != -1){
     if (!qd())
       qd2();
@@ -1001,7 +1008,7 @@ xqqiandao: {
         window.find("今天簽到了嗎？請選擇您此刻的心情圖片並寫下今天最想說的話")
        ) {
       //var text = document.getElementById("ch_s");
-      let smileList = _class("qdsmile") ? (_class("qdsmile"))[0] : null;
+      let smileList = _class("qdsmile") ? (_class("qdsmile"))[0] : _class("qdsmilea") ? (_class("qdsmilea"))[0] : null;
       if (smileList) {
         let smiles = childs(smileList, "tagName", "LI");
         let i = randomNum(smiles.length);
