@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name          微博超话快速链接
+// @name          自定义快速链接
 // @author        zephyrer
 // @namespace     https://github.com/zephyrer/
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
-// @version       0.1.5
-// @description   为微博页面添加超话直链
+// @version       0.2.0
+// @description   为微博等站点页面添加各类直链
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
 // @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
 // @copyright     2018, Efisio Zephyr
@@ -32,23 +32,31 @@
       return true;
     return false;
   }
-  var huatis = [
-    {name: '杨孟霖',
-     url:  'http://huati.weibo.com/5450398'},
-    {name: '杨孟霖Nick',
-     url:  'http://huati.weibo.com/5479348'},
-    {name: '施柏宇',
-     url:  'http://huati.weibo.com/5489289'},
-    {name: '宇霖cp',
-     url:  'http://huati.weibo.com/5509572'},
-    {name: '张赫',
-     url:  'http://huati.weibo.com/5132232'},
-    {}// ending placeholder
-  ];
-  
+  const directURLs = {
+    "weibo.com": [
+      {name: '杨孟霖超话',
+       url:  'http://huati.weibo.com/5450398'},
+      {name: '杨孟霖Nick超话',
+       url:  'http://huati.weibo.com/5479348'},
+      {name: '施柏宇超话',
+       url:  'http://huati.weibo.com/5489289'},
+      {name: '宇霖cp超话',
+       url:  'http://huati.weibo.com/5509572'},
+      {name: '张赫超话',
+       url:  'http://huati.weibo.com/5132232'},
+      {name: '杨孟霖Nick',
+       url:  'https://weibo.com/u/3148083033'},
+      {name: '施柏宇patrick',
+       url:  'https://weibo.com/u/5946042311'},
+      {}// ending placeholder
+    ]
+  }
+  var huatis = getDefaultObjectAt(directURLs, location.host);
+  if (isEmpty(huatis)) return;
+
   var div = document.createElement('div');
   div.id = 'direct-links-to-super-topics';
-  div.style = 'position: fixed; left: auto; right: 2px; top: auto; bottom: 100px; border: 2px red solid;';
+  div.style = 'position: fixed; left: auto; right: 2px; top: auto; bottom: 100px; border: 2px red solid; color: orange; mix-blend-mode: difference';
   var list = document.createElement('ul');
   for (let i=0; i<huatis.length; i++) {
     if (isEmpty(huatis[i])) break;// ending placeholder
