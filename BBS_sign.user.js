@@ -1,14 +1,14 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.62
+// @version      1.6.8.65
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
 // @include      http*://*/plugin.php?id=mpage_sign:sign*
 // @include      http*://*/plugin.php?id=ljdaka:daka*
 // @include      http*://*/plugin.php?id=yinxingfei_zzza:yinxingfei_zzza_hall*
-// @include      http*://*/home.php?mod=task&do=view*
+// @include      http*://*/home.php?mod=task&*
 // @include      http*://*/*action=view*
 // @include      http*://*/*action=applied*
 // @include      http*://*/plugin.php?id=dc_signin:sign
@@ -47,8 +47,6 @@
 // @include      http*://*.21ic.com/*
 // @include      http*://*/torrents.php
 // @include      http*://*/jobcenter.php?action=finish*
-// @include      http://in.zasv.net/home.php?mod=task&item=done
-// @include      http://www.horou.com/home.php?mod=task&item=new
 // @include      http://ishare.iask.sina.com.cn/checkin
 // @include      http://www.zimuzu.tv/user/sign
 // @include      http*://*?id=seotask*
@@ -68,7 +66,7 @@
 (function(){
   GM_log("BBSsign.user.js executing...");
 
-  let aBtnApply = el = els = imgs = null, idx = 0;
+  let aBtnApply = null, el = null, els = null, imgs = null, idx = 0;
 
   if (isURL("seotask")) {
     el = document.querySelector("a[href*='plugin.php?id=seotask&act=reward']");
@@ -89,8 +87,9 @@
         } else {
           count++;
         }
-        if (count > 50)
+        if (count > 50) {
           clearInterval(iid);
+        }
       }, 500);
   }
 
@@ -100,15 +99,17 @@
         let els = _class("ft-btn");
         if (els) {
           clearInterval(iid);
-          if (els[0].textContent.includes("已签到"))
+          if (els[0].textContent.includes("已签到")) {
             return;
+          }
           els[0].click();
           return;
         } else {
           count++;
         }
-        if (count > 50)
+        if (count > 50) {
           clearInterval(iid);
+        }
       }, 500);
   }
 
@@ -118,8 +119,9 @@
         let els = _class("already-sign-but");
         if (els) {
           clearInterval(iid);
-          if (els[0].textContent.includes("已签到"))
+          if (els[0].textContent.includes("已签到")) {
             return;
+          }
           els[0].click();
           setTimeout(function() {
             let el = document.querySelector(".signIn-rule .signIn-btn");
@@ -129,8 +131,9 @@
         } else {
           count++;
         }
-        if (count > 50)
+        if (count > 50) {
           clearInterval(iid);
+        }
       }, 500);
   }
 
@@ -140,8 +143,9 @@
         let els = _class("sign-but");
         if (els) {
           clearInterval(iid);
-          if (els[0].textContent.includes("已签到"))
+          if (els[0].textContent.includes("已签到")) {
             return;
+          }
           els[0].click();
           setTimeout(function() {
             let el = document.querySelector(".everySign .integral-btn");
@@ -151,8 +155,9 @@
         } else {
           count++;
         }
-        if (count > 50)
+        if (count > 50) {
           clearInterval(iid);
+        }
       }, 500);
   }
 
@@ -162,16 +167,18 @@
         let els = _class("signup");
         if (els) {
           clearInterval(iid);
-          if (els[0].textContent.includes('已抽奖'))
+          if (els[0].textContent.includes('已抽奖')) {
             return;
+          }
           els[0].click();
           els = document.querySelectorAll(".lottery-btn a");
           if (els.length > 0) els[0].click();
           return;
         }
         count++;
-        if (count > 50)
+        if (count > 50) {
           clearInterval(iid);
+        }
       }, 500);
   }
 
@@ -209,8 +216,9 @@
         return;
       }
       count++;
-      if (count > 50)
+      if (count > 50) {
         clearInterval(iid);
+      }
     }, 1000);
   }
 
@@ -226,8 +234,9 @@
         } else {
           count++;
         }
-        if (count > 50)
+        if (count > 50) {
           clearInterval(iid);
+        }
       }, 500);
   }
 
@@ -245,8 +254,9 @@
           return;
         }
         count++;
-        if (count > 50)
+        if (count > 50) {
           clearInterval(iid);
+        }
       }, 1500);
   }
 
@@ -261,8 +271,9 @@
         } else {
           count++;
         }
-        if (count > 50)
+        if (count > 50) {
           clearInterval(iid);
+        }
       }, 500);
   }
 
@@ -277,8 +288,9 @@
         } else {
           count++;
         }
-        if (count > 10)
+        if (count > 10) {
           clearInterval(iid);
+        }
       }, 500);
   }
 
@@ -293,8 +305,9 @@
         } else {
           count++;
         }
-        if (count > 50)
+        if (count > 50) {
           clearInterval(iid);
+        }
       }, 500);
   }
 
@@ -325,11 +338,13 @@
   if (isURL("=view")) {
     aBtnApply = Array.from(document.links).filter((e) => {return /(&|\?)(action|do)=(apply|draw)&/i.test(e.href)});
     if (aBtnApply.length > 0) {
-      if (aBtnApply[0].classList.contains("task_disallow_btn"))
+      if (aBtnApply[0].classList.contains("task_disallow_btn")) {
         return;
+      }
       imgs = childs(aBtnApply[0], "tagName", "IMG");
-      if (imgs && /rewardless/i.test(imgs[0].src))
+      if (imgs && /rewardless/i.test(imgs[0].src)) {
         return;
+      }
       aBtnApply[0].click();
       return;
     }
@@ -355,8 +370,9 @@ xqqiandao: {
   if (isURL("=xqqiandao")) {
     // 检测是否已经签过到
     els = _class("pd15");
-    if (!els)
+    if (!els) {
       break xqqiandao;
+    }
     el = els[0];
     els = Array.from(el.getElementsByClassName("tac"))
             .filter((x) => {return x.tagName == "TD";})
@@ -364,7 +380,7 @@ xqqiandao: {
     el = els[0];
     if (el.textContent.includes("您已于")) {
       GM_log("BBS_sign.user.js: 您已签到");
-      break xqqiandao;
+      return;
     }
     // 开始签到
     setTimeout(function() {
@@ -499,6 +515,8 @@ xqqiandao: {
     return;
   }
 
+  // --- Processing plugin.php?id=dsu_paulsign-sign* begin ---
+
   if (isURL("club.vmall.com/plugin.php?id=dsu_paulsign:sign")
      || isURL("club.vmall.com/dsu_paulsign-sign")
      || isURL("club.huawei.com/plugin.php?id=dsu_paulsign:sign")) {
@@ -507,14 +525,34 @@ xqqiandao: {
     return;
   } else if(isURL("bbs.elecfans.com/plugin.php?id=dsu_paulsign:sign")){
     document.getElementsByClassName('plugin-btn')[0].click();
-    setTimeout(qd, 5000);
+    let cnt = 0;
+    let iid = setInterval(function() {
+      if (cnt > 20) {
+        clearInterval(iid);
+        return;
+      }
+      cnt++;
+      els = _class("qdsmilea");
+      if (els) {
+        clearInterval(iid);
+        let lis = childs(els[0], "tagName", "LI");
+        let i = randomNum(lis.length);
+        lis[i].click();
+        let radio = document.querySelector("input[type='radio'][name='qdmode'][value='3']");
+        radio.click();
+        let button = document.querySelector(".f_c + .o.pns > button");
+        button.click();
+        return;
+      }
+    }, 1500);
   } else if(location.href.indexOf("plugin.php?id=dsu_paulsign:sign") != -1){
-    if (!qd())
+    if (!qd()) {
       qd2();
+    }
     return;
   }
 
-  if (isURL("http://bbs.gfan.com/")) { //机锋
+  if (isURL("bbs.gfan.com")) { //机锋
       qd();
       if (window.find("签到领奖!")) {
           window.location.href = "http://bbs.gfan.com/plugin.php?id=dsu_paulsign:sign";
@@ -522,21 +560,15 @@ xqqiandao: {
       }
   }
 
-  if (isURL("http://bbs.ntrqq.net/")) { //NTRQQ
-      qd();
-      if (window.find("签到领奖!")) {
-          window.location.href = "http://bbs.ntrqq.net/plugin.php?id=dsu_paulsign:sign";
-          return;
-      }
+  if (isURL("bbs.ntrqq.net")) { //NTRQQ
+    qd();
+    if (window.find("签到领奖!")) {
+      window.location.href = "http://bbs.ntrqq.net/plugin.php?id=dsu_paulsign:sign";
+      return;
+    }
   }
 
-  if (isURL("www.lightnovel.cn/home.php?mod=task")) {
-      //轻国
-      if (window.find("每日任务") && window.find("啪啪啪")) {
-          window.location.href = "http://www.lightnovel.cn/home.php?mod=task&do=apply&id=98";
-          return;
-      }
-  }
+  // --- Processing plugin.php?id=dsu_paulsign-sign* end ---
 
   if (isURL("bbs.qidian.com")) {
     if (_class("BDtop2right2") && _class("BDtop2right2")[0].textContent.includes("心飞扬")) {
@@ -692,9 +724,10 @@ xqqiandao: {
       }
       cnt++;
       el = _id("btnSign");
-      if (el)
+      if (el) {
         clearInterval(n);
         el.click();
+      }
     }, 500);
     return;
   }
@@ -819,7 +852,18 @@ xqqiandao: {
     return;
   }
 
-  if (isURL("home.php?mod=task&item=done")) {
+  // ---- processing home.php?mod=task begin ---
+  // The processing order is IMPORTANT !
+
+  if (isURL("www.lightnovel.cn/home.php?mod=task")) {
+      //轻国
+      if (window.find("每日任务") && window.find("啪啪啪")) {
+          window.location.href = "http://www.lightnovel.cn/home.php?mod=task&do=apply&id=98";
+          return;
+      }
+  }
+
+  if (isURL("in.zasv.net")) {
     let cnt = 0;
     let n = setInterval(function() {
       if (cnt > 20) {
@@ -850,6 +894,7 @@ xqqiandao: {
                   lis1[i1].click();
                   let el1 = _id("rn_checkout");
                   el1.click();
+                  setTimeout(() => window.location.reload(true), 500);
                 }
               }, 500);
               return;
@@ -863,12 +908,32 @@ xqqiandao: {
     return;
   }
 
+  if (isURL("u.8264.com")) {
+    let count = 0;
+    let iid = setInterval(function() {
+        let el = _id("apply_qr");
+        if (el) {
+          clearInterval(iid);
+          el.click();
+          return;
+        } else {
+          count++;
+        }
+        if (count > 50) {
+          clearInterval(iid);
+        }
+      }, 500);
+  }
+
+  // ---- processing home.php?mod=task end ---
+
   if (isURL("jobcenter.php?action=finish")) {
     let cnt = 0;
     let n = setInterval(function() {
       let nodes = document.getElementsByClassName('warp');
-      if (nodes.length === 0)
+      if (nodes.length === 0) {
         return;
+      }
       let contextNode = nodes[0];
       let targetNode = document.evaluate( '//div[3]/div[2]/div/table/tbody/tr/td/div/table/tbody/tr[3]/td[2]/div/dl[2]/dd', contextNode, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null );
       if (!targetNode) {
@@ -878,8 +943,9 @@ xqqiandao: {
       let date1 = new Date(targetNode.singleNodeValue.textContent);
       let date2 = new Date();
       let timeSpan = Math.floor((date2.getTime() - date1.getTime()) / 3600000);
-      if (Number.isNaN(timeSpan))
+      if (Number.isNaN(timeSpan)) {
         timeSpan = 0;
+      }
       let threshold = (isURL('soapone.org')) ? 20 : (isURL('5ichecker.com')) ? 12 : 24;
       GM_log('BBSsign.user.js finished ' + timeSpan + ' hours. Required elapsed time is ' + threshold + ' hours.');
       if (timeSpan < threshold) {
@@ -894,8 +960,9 @@ xqqiandao: {
       el = _id("apply_5");
       if (el) {
         clearInterval(n);
-        if (el.classList.contains("tasks_apply_old"))
+        if (el.classList.contains("tasks_apply_old")) {
           return;
+        }
         else {
           el.click();
           setTimeout(() => {

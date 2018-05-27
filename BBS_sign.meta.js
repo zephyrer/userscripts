@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.62
+// @version      1.6.8.65
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
 // @include      http*://*/plugin.php?id=mpage_sign:sign*
 // @include      http*://*/plugin.php?id=ljdaka:daka*
 // @include      http*://*/plugin.php?id=yinxingfei_zzza:yinxingfei_zzza_hall*
-// @include      http*://*/home.php?mod=task&do=view*
+// @include      http*://*/home.php?mod=task&*
 // @include      http*://*/*action=view*
 // @include      http*://*/*action=applied*
 // @include      http*://*/plugin.php?id=dc_signin:sign
@@ -47,8 +47,6 @@
 // @include      http*://*.21ic.com/*
 // @include      http*://*/torrents.php
 // @include      http*://*/jobcenter.php?action=finish*
-// @include      http://in.zasv.net/home.php?mod=task&item=done
-// @include      http://www.horou.com/home.php?mod=task&item=new
 // @include      http://ishare.iask.sina.com.cn/checkin
 // @include      http://www.zimuzu.tv/user/sign
 // @include      http*://*?id=seotask*
