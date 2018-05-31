@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.68
+// @version      1.6.8.69
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -312,8 +312,12 @@
         let el = _id("fx_checkin_b");
         if (el) {
           clearInterval(iid);
-          el.click();
-          return;
+          if (el.getAttribute('alt') === '已签到') {
+            return;
+          } else {
+            el.click();
+            return;
+          }
         } else {
           count++;
         }
