@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Open External Link in NewTab
-// @version      0.3.3.2
+// @version      0.3.3.3
 // @namespace    https://github.com/zephyrer/
 // @contributor  DandyClubs
 // @description  This script will open any external link in new tab. Support dynamic content. Support subdomain aaa.test.co.kr = bbb.test.co.kr (controlled by bStrict)
@@ -26,6 +26,10 @@ function getAnchor(element) {
 }
 
 function getDomain(url) {
+    if (url.indexOf('://') !== -1) {
+      let n = url.indexOf('://');
+      url = url.substr(url.indexOf('://') + 3);
+    }
     if (url.indexOf('/') !== -1) url = url.split('/')[0];
     url = url.split('.');
     let level = 0;
@@ -64,7 +68,7 @@ document.addEventListener("click", function(e){
 	if (anchor.target || anchor.protocol == "javascript:" || anchor.protocol == "magnet:"|| e.isTrusted === false || !anchor.offsetParent || (e.isTrusted == null && !e.detail)) {
 		return;
 	}
-	
+
 	if (getHost(anchor.hostname) != getHost(location.hostname)) {
 		anchor.target = "_blank";
 	}
