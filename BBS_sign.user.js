@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.69
+// @version      1.6.8.70
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -220,6 +220,7 @@
                   els1[idx].firstChild.click();
                   el1 = _id("qiandao_add");
                   el1.click();
+                  setTimeout(() => window.location.reload(true), 2000);
                 }
               }, 1000);
             }
@@ -927,7 +928,7 @@ xqqiandao: {
   if (isURL("u.8264.com")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = _id("apply_qr");
+        let el = document.querySelector("#apply_qr.lqjl");
         if (el) {
           clearInterval(iid);
           el.click();
