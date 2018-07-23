@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.71
+// @version      1.6.9.1
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -12,7 +12,7 @@
 // @include      http*://*/*action=view*
 // @include      http*://*/*action=applied*
 // @include      http*://*/plugin.php?id=dc_signin:sign
-// @include      http*/*/zsj_moneychange*
+// @include      http*://*/zsj_moneychange*
 // @include      http*://*/forum.php
 // @include      http*://*/u.php*
 // @include      http*://*/*qiandao
@@ -27,7 +27,7 @@
 // @include      http://588ku.com/
 // @include      http*://*.58pic.com/*
 // @include      http*://bbs.qidian.com/signeveryday.aspx*
-// @include      http*://book.sfacg.com/signin*
+// @include      http*://*/signin*
 // @include      http*://wenku.baidu.com/task/browse/daily
 // @include      http*://www.tiexue.net/*
 // @include      http*://bbs.zol.com.cn/*
@@ -37,7 +37,6 @@
 // @include      http*://usr.005.tv/
 // @include      http://www.banyungong.org/daysign.html
 // @include      http://passport.eepw.com.cn/user/index
-// @exclude      http*://bbs.realqwh.cn/*
 // @include      http://*/task?ttype*
 // @include      http://*/mperson/task*
 // @include      http*://lkong.cn/*
@@ -56,10 +55,11 @@
 // @copyright    2014+, jasonshaw
 // @copyright    2016+, wycaca
 // @copyright    2017+, zephyrer
-// @downloadURL   https://github.com/zephyrer/userscripts/raw/master/BBS_sign.user.js
-// @updateURL     https://github.com/zephyrer/userscripts/raw/master/BBS_sign.meta.js
+// @downloadURL  https://github.com/zephyrer/userscripts/raw/master/BBS_sign.user.js
+// @updateURL    https://github.com/zephyrer/userscripts/raw/master/BBS_sign.meta.js
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
 // @grant        GM_log
+// @grant        GM_registerMenuCommand
 // @run-at       document-end
 // ==/UserScript==

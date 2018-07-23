@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.8.71
+// @version      1.6.9.1
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -12,7 +12,7 @@
 // @include      http*://*/*action=view*
 // @include      http*://*/*action=applied*
 // @include      http*://*/plugin.php?id=dc_signin:sign
-// @include      http*/*/zsj_moneychange*
+// @include      http*://*/zsj_moneychange*
 // @include      http*://*/forum.php
 // @include      http*://*/u.php*
 // @include      http*://*/*qiandao
@@ -27,7 +27,7 @@
 // @include      http://588ku.com/
 // @include      http*://*.58pic.com/*
 // @include      http*://bbs.qidian.com/signeveryday.aspx*
-// @include      http*://book.sfacg.com/signin*
+// @include      http*://*/signin*
 // @include      http*://wenku.baidu.com/task/browse/daily
 // @include      http*://www.tiexue.net/*
 // @include      http*://bbs.zol.com.cn/*
@@ -37,7 +37,6 @@
 // @include      http*://usr.005.tv/
 // @include      http://www.banyungong.org/daysign.html
 // @include      http://passport.eepw.com.cn/user/index
-// @exclude      http*://bbs.realqwh.cn/*
 // @include      http://*/task?ttype*
 // @include      http://*/mperson/task*
 // @include      http*://lkong.cn/*
@@ -56,16 +55,31 @@
 // @copyright    2014+, jasonshaw
 // @copyright    2016+, wycaca
 // @copyright    2017+, zephyrer
-// @downloadURL   https://github.com/zephyrer/userscripts/raw/master/BBS_sign.user.js
-// @updateURL     https://github.com/zephyrer/userscripts/raw/master/BBS_sign.meta.js
+// @downloadURL  https://github.com/zephyrer/userscripts/raw/master/BBS_sign.user.js
+// @updateURL    https://github.com/zephyrer/userscripts/raw/master/BBS_sign.meta.js
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
 // @grant        GM_log
+// @grant        GM_registerMenuCommand
 // @run-at       document-end
 // ==/UserScript==
 
 (function(){
   GM_log("BBSsign.user.js executing...");
+
+  GM_registerMenuCommand("BBS 签到", qd);
+
+  if (isURL("bbs.realqwh.cn")) {
+    return false;
+  }
+
+  if (isURL("bbs.zhiyoo.com")) {
+    let snagscreen = _class("tips_screen") ? _class("tips_screen")[0] : null;
+    if (snagscreen) {
+      let btn = snagscreen.querySelector("em");
+      btn.click();
+    }
+  }
 
   let aBtnApply = null, el = null, els = null, imgs = null, idx = 0;
 
@@ -1094,9 +1108,15 @@ xqqiandao: {
       //var text = document.getElementById("ch_s");
       let smileList = _class("qdsmile") ? (_class("qdsmile"))[0] : _class("qdsmilea") ? (_class("qdsmilea"))[0] : null;
       if (smileList) {
-        let smiles = childs(smileList, "tagName", "LI");
-        let i = randomNum(smiles.length);
-        smiles[i].click();
+        let faces = [...smileList.querySelectorAll("*")].filter(e => e.tagName == "INPUT");
+        if (faces.length > 0) {
+          let i = randomNum(faces.length);
+          faces[i].click();
+        } else {
+          let smiles = childs(smileList, "tagName", "LI");
+          let i = randomNum(smiles.length);
+          smiles[i].click();
+        }
       } else {
         return false;
       }
@@ -1117,6 +1137,11 @@ xqqiandao: {
       button = _name("qiandao");
       if (button) {
         button[0].submit();
+        return true;
+      }
+      button = document.querySelector(".t3 > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > div:nth-child(1) > form:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1) > div:nth-child(2) > input:nth-child(1)");
+      if (button) {
+        button.click();
         return true;
       }
       return false;
