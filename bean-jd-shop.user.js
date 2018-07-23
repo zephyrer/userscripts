@@ -7,7 +7,7 @@
 // @include           *//mall.jd.com/*
 // @include           *//*.jd.com/*
 // @include           *//vip.jr.jd.com/
-// @version           0.8.2
+// @version           0.8.3
 // @connect           jd.com
 // @connect-src       jd.com
 // @namespace         https://github.com/zephyrer
@@ -78,7 +78,7 @@
     //关闭弹窗
     setInterval(function(){
       var ele = document.querySelector('.active .active-info .title');
-      if(ele && (ele.textContent.includes("已签到"))){
+      if(ele && (ele.textContent.includes("签到成功") || ele.textContent.includes("已签到"))){
         window.location.href="about:blank";
         window.close();
       }
