@@ -7,7 +7,7 @@
 // @include           *//mall.jd.com/*
 // @include           *//*.jd.com/*
 // @include           *//vip.jr.jd.com/
-// @version           0.8
+// @version           0.8.2
 // @connect           jd.com
 // @connect-src       jd.com
 // @namespace         https://github.com/zephyrer
@@ -28,27 +28,29 @@
     },1000);
     setTimeout(function() {
       window.open("https://vip.jr.jd.com");
-    },2000);
+    },6000);
     setTimeout(function() {
       window.open("https://huan.jd.com");
-    },3000);
+    },11000);
     setTimeout(function() {
       window.open("https://you.jd.com/channel/shouji.html");
-    },4000);
+    },16000);
     // open bean-shop-list
     var count = 0, iid = 0;
     var doit = function () {
       var btns = [...document.getElementsByClassName('s-btn')];
-      console.log("krapnik -- #" + count + ": Found " + btns.length + " targets.");
+      //console.log("krapnik -- #" + count + ": Found " + btns.length + " targets.");
       count++;
       if (count > 20 || btns.length > 0) {
         clearInterval(iid);
       }
       if (btns.length > 0) {
-        btns.forEach((btn, i, arr) => setTimeout(btn.click(), i*3000));
+        btns.forEach((btn, i, arr) => {
+          setTimeout(btn.click(), 20000)
+        });
       }
     };
-    iid = setInterval(doit, 7000);
+    iid = setInterval(doit, 17000);
   }
   //每日店铺抽奖
   if(/\w*\.jd\.com/.test(hostname)&&(hostname!='bean.jd.com')&&(hostname!='vip.jd.com')&&(hostname!='huan.jd.com')&&(hostname!='you.jd.com')){
