@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.9.2
+// @version      1.6.9.5
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -70,8 +70,19 @@
 
   GM_registerMenuCommand("BBS 签到", qd);
 
+  let aBtnApply = null, el = null, els = null, imgs = null, idx = 0;
+
   if (isURL("bbs.realqwh.cn")) {
     return false;
+  }
+
+  if (isURL("feifantxt.com")) {
+    let ele = document.querySelector("#breadCrumb ~ .t3 .t:first-child .tac:nth-child(1)")
+    if (ele.textContent.includes("进行第 1 次签到")) {
+      return false;
+    } else {
+      return qd();
+    }
   }
 
   if (isURL("bbs.zhiyoo.com")) {
@@ -82,23 +93,21 @@
     }
   }
 
-  let aBtnApply = null, el = null, els = null, imgs = null, idx = 0;
-
   if (isURL("seotask")) {
     el = document.querySelector("a[href*='plugin.php?id=seotask&act=reward']");
     if (el && !el.firstChild.src.includes('rewardless')) {
       el.click();
-      return;
+      return true;
     }
   }
 
   // vidown
   if (isURL("gsignin")) {
     if (top !== self) {
-      return;
+      return false;
     }
     if (_id('ls_cookietime')) {
-      return;
+      return false;
     }
     let count = 0;
     let iid = setInterval(function() {
@@ -199,7 +208,9 @@
           }
           els[0].click();
           els = document.querySelectorAll(".lottery-btn a");
-          if (els.length > 0) els[0].click();
+          if (els.length > 0) {
+            els[0].click();
+          }
           return;
         }
         count++;
@@ -257,7 +268,9 @@
         if (el) {
           clearInterval(iid);
           els = el.getElementsByTagName("a");
-          if (els) els[0].click();
+          if (els) {
+            els[0].click();
+          }
           return;
         } else {
           count++;
@@ -274,7 +287,9 @@
         let el = _id("signBtn");
         if (el) {
           clearInterval(iid);
-          if (el.textContent.indexOf("已") === -1) el.click();
+          if (el.textContent.indexOf("已") === -1) {
+            el.click();
+          }
           return;
         } else if (document.querySelectorAll('.card-header > .ivu-btn:not([disabled])').length > 0) {
           clearInterval(iid);
@@ -332,7 +347,9 @@
         let el = _id("fx_checkin_b");
         if (el) {
           clearInterval(iid);
-          if (el.textContent.indexOf("已") !== -1) el.click();
+          if (el.textContent.indexOf("已") !== -1) {
+            el.click();
+          }
           return;
         } else {
           count++;
@@ -1140,7 +1157,13 @@ xqqiandao: {
           smiles[i].click();
         }
       } else {
-        return false;
+        let smiles = _name("qdxq");
+        if (!smiles) {
+          return false;
+        } else {
+          let i = randomNum(smiles.length);
+          smiles[i].click();
+        }
       }
       let text2 = document.getElementById("todaysay");
       /*
@@ -1151,9 +1174,14 @@ xqqiandao: {
       */
       if (text2)
         text2.value = "今天签到来了，各位安好";//全自动签到,就是爽~
-      let button = document.getElementById("qiandao");
+      let button = _id("qiandao");
       if (button) {
         button.submit();
+        return true;
+      }
+      button = _id("fzsx");
+      if (button) {
+        button.firstChild.click();
         return true;
       }
       button = _name("qiandao");
