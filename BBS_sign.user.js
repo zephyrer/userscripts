@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.9.7
+// @version      1.6.9.8
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -48,7 +48,7 @@
 // @include      http*://*/torrents.php
 // @include      http*://*/jobcenter.php?action=finish*
 // @include      http://ishare.iask.sina.com.cn/checkin
-// @include      http://www.zimuzu.tv/user/sign
+// @include      http://www.zimuzu.io/user/sign
 // @include      http://www.galaxyclub.cn/
 // @include      http*://*?id=seotask*
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
@@ -676,7 +676,7 @@ xqqiandao: {
     return;
   }
 
-  if (isURL("zimuzu.tv")) {
+  if (isURL("zimuzu.io")) {
     let cnt = 0;
     let iid = setInterval(function() {
       if (cnt > 50) {
