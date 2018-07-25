@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.9.8
+// @version      1.6.9.9
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -928,11 +928,15 @@ xqqiandao: {
   // The processing order is IMPORTANT !
 
   if (isURL("www.lightnovel.cn/home.php?mod=task")) {
-      //轻国
-      if (window.find("每日任务") && window.find("啪啪啪")) {
-          window.location.href = "http://www.lightnovel.cn/home.php?mod=task&do=apply&id=98";
-          return;
+    //轻国
+    if (window.find("每日任务") && window.find("啪啪啪")) {
+      let ele = document.querySelector(".xg2.mbn");
+      if (ele && ele.textContent.includes("后可以再次申请")) {
+        return false;
       }
+      window.location.href = "http://www.lightnovel.cn/home.php?mod=task&do=apply&id=98";
+      return true;
+    }
   }
 
   if (isURL("in.zasv.net")) {
