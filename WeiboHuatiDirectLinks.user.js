@@ -4,7 +4,7 @@
 // @namespace     https://github.com/zephyrer/
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
-// @version       0.2.5
+// @version       0.2.5.1
 // @description   为微博等站点页面添加各类直链
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
 // @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
@@ -49,7 +49,7 @@
       {name: '施柏宇patrick',
        url:  'https://weibo.com/u/5946042311'},
       {name: '盛一伦',
-       url:  'https://weibo.com/shengyilun1'}
+       url:  'https://weibo.com/shengyilun1'},
       {}// ending placeholder
     ]
   }
