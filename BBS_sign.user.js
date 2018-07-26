@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.9.9
+// @version      1.6.10.0
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -62,6 +62,7 @@
 // @grant        unsafeWindow
 // @grant        GM_log
 // @grant        GM_registerMenuCommand
+// @grant        GM_openInTab
 // @run-at       document-end
 // ==/UserScript==
 
@@ -94,9 +95,29 @@
   }
 
   if (isURL("seotask")) {
-    el = document.querySelector("a[href*='plugin.php?id=seotask&act=reward']");
-    if (el && !el.firstChild.src.includes('rewardless')) {
+    el = document.querySelector("img[alt*='apply']");
+    if (el && !el.src.includes('rewardless')) {
       el.click();
+      return true;
+    }
+    el = document.querySelector(".ptm > a:nth-child(1)");
+    if (el && el.textContent.includes("领取任务请转到进行中的任务")) {
+      el.click();
+      return true;
+    }
+    el = document.querySelector(".xs2 > a:nth-child(1)");
+    if (el && el.textContent.includes("百度")) {
+      el.click();
+      return true;
+    }
+    el = document.querySelector("a.xi2");
+    if (el && el.textContent.includes("点击这里前往完成任务")) {
+      let nt = GM_openInTab(el.href, true);
+      setTimeout(() => {
+        nt.close();
+        let ele = document.querySelector(".mbw a:nth-child(1)");
+        ele ? ele.click() : 0;
+      }, 2000);
       return true;
     }
   }
