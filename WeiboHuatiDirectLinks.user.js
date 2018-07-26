@@ -4,12 +4,12 @@
 // @namespace     https://github.com/zephyrer/
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
-// @version       0.2.1
+// @version       0.2.5
 // @description   为微博等站点页面添加各类直链
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
 // @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
 // @copyright     2018, Efisio Zephyr
-// @grant         none
+// @grant         GM_addStyle
 // ==/UserScript==
 
 (function(){
@@ -48,15 +48,35 @@
        url:  'https://weibo.com/u/3148083033'},
       {name: '施柏宇patrick',
        url:  'https://weibo.com/u/5946042311'},
+      {name: '盛一伦',
+       url:  'https://weibo.com/shengyilun1'}
       {}// ending placeholder
     ]
   }
   var huatis = getDefaultObjectAt(directURLs, location.host);
   if (isEmpty(huatis)) return;
 
+  var css = `
+    #direct-links-to-super-topics {
+      z-index: 99999;
+      position: fixed;
+      left: auto;
+      right: 2px;
+      top: auto;
+      bottom: 100px;
+      border: 2px red solid;
+      color: orange;
+      mix-blend-mode: difference;
+    }
+    a[id^='direct-link-to-super-topic-'] {
+      font-size: 28px;
+    }
+  `;
+  GM_addStyle(css);
+
   var div = document.createElement('div');
   div.id = 'direct-links-to-super-topics';
-  div.style = 'z-index: 99999; position: fixed; left: auto; right: 2px; top: auto; bottom: 100px; border: 2px red solid; color: orange; mix-blend-mode: difference';
+  //div.style = 'z-index: 99999; position: fixed; left: auto; right: 2px; top: auto; bottom: 100px; border: 2px red solid; color: orange; mix-blend-mode: difference';
   var list = document.createElement('ul');
   for (let i=0; i<huatis.length; i++) {
     if (isEmpty(huatis[i])) break;// ending placeholder
