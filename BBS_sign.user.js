@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.10.0
+// @version      1.6.10.1
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -950,6 +950,27 @@ xqqiandao: {
 
   if (isURL("www.lightnovel.cn/home.php?mod=task")) {
     //轻国
+    if (isURL("item=done")) {
+      let els = _class("xs2 xi2");
+      if (els) {
+        let elt = els.filter(e => e.textContent.includes("每日任务"));
+        if (elt) {
+          let el = elt[0].parentNode.nextSibling.nextSibling.nextSibling.nextSibling;
+          let matches = el.textContent.match(/\d{4,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}/g);
+          if (!matches) {
+            window.location.href = "http://www.lightnovel.cn/home.php?mod=task&do=apply&id=98";
+            return true;
+          }
+          let dat1 = new Date(matches[1]);
+          let dat2 = new Date();
+          if ((dat2 - dat1) >= 0) {
+            window.location.href = "http://www.lightnovel.cn/home.php?mod=task&do=apply&id=98";
+            return true;
+          }
+        }
+      }
+      return false;
+    }
     if (window.find("每日任务") && window.find("啪啪啪")) {
       let ele = document.querySelector(".xg2.mbn");
       if (ele && ele.textContent.includes("后可以再次申请")) {
@@ -958,6 +979,7 @@ xqqiandao: {
       window.location.href = "http://www.lightnovel.cn/home.php?mod=task&do=apply&id=98";
       return true;
     }
+    return false;
   }
 
   if (isURL("in.zasv.net")) {
