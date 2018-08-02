@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.10.1
+// @version      1.6.10.2
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -135,12 +135,12 @@
       let els = _class("right");
       if (els) {
         clearInterval(iid);
-	      if (els[0].textContent.includes('已签到')) {
-	        return;
-	      } else {
-	        els[0].click();
-	        return;
-	      }
+        if (els[0].textContent.includes('已签到')) {
+          return;
+        } else {
+          els[0].click();
+          return;
+        }
       } else {
         count++;
       }
@@ -1196,7 +1196,8 @@ xqqiandao: {
       //var text = document.getElementById("ch_s");
       let smileList = _class("qdsmile") ? (_class("qdsmile"))[0] : _class("qdsmilea") ? (_class("qdsmilea"))[0] : null;
       if (smileList) {
-        let faces = [...smileList.querySelectorAll("*")].filter(e => e.tagName == "INPUT");
+        //let faces = [...smileList.querySelectorAll("*")].filter(e => e.tagName == "INPUT");
+        let faces = [...smileList.querySelectorAll("input[type='radio']")];
         if (faces.length > 0) {
           let i = randomNum(faces.length);
           faces[i].click();
