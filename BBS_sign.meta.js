@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.10.2
+// @version      1.6.10.3
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -24,7 +24,7 @@
 // @include      http*://www.92jh.cn/*
 // @include      http*://bbs.ntrqq.net/*
 // @include      http*://www.gn00.com/*
-// @include      http://588ku.com/
+// @include      http*://588ku.com/
 // @include      http*://*.58pic.com/*
 // @include      http*://bbs.qidian.com/signeveryday.aspx*
 // @include      http*://*/signin*
@@ -35,10 +35,10 @@
 // @include      http*://*.51cto.com/*
 // @include      http*://*/*tab=credit
 // @include      http*://usr.005.tv/
-// @include      http://www.banyungong.org/daysign.html
-// @include      http://passport.eepw.com.cn/user/index
-// @include      http://*/task?ttype*
-// @include      http://*/mperson/task*
+// @include      http*://www.banyungong.org/daysign.html
+// @include      http*://passport.eepw.com.cn/user/index
+// @include      http*://*/task?ttype*
+// @include      http*://*/mperson/task*
 // @include      http*://lkong.cn/*
 // @include      http*://*.iskytree.net/*
 // @include      http*://*.gongzicp.com/*
@@ -47,9 +47,9 @@
 // @include      http*://*.21ic.com/*
 // @include      http*://*/torrents.php
 // @include      http*://*/jobcenter.php?action=finish*
-// @include      http://ishare.iask.sina.com.cn/checkin
-// @include      http://www.zimuzu.io/user/sign
-// @include      http://www.galaxyclub.cn/
+// @include      http*://ishare.iask.sina.com.cn/checkin
+// @include      http*://www.zimuzu.io/user/sign
+// @include      http*://www.galaxyclub.cn/
 // @include      http*://*?id=seotask*
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
