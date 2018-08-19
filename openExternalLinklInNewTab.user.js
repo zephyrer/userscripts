@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Open External Link in NewTab
-// @version      0.3.4.0
+// @version      0.3.5.0
 // @namespace    https://github.com/zephyrer/
 // @contributor  DandyClubs
 // @description  This script will open any external link in new tab. Support dynamic content. Support subdomain aaa.test.co.kr = bbb.test.co.kr (controlled by bStrict)
@@ -20,7 +20,11 @@ var getHost = function(url) {return url;};
 var protocolsMustNewTab = ["ftp:", "ftps:", "ws:", "wss:"];
 var protocolsToHandle = ["http:", "https:"];
 var protocolsToIgnore = ["javascript:", "magnet:", "git:"];
-var urlsMustNewTab = [/https:\/\/www\.amazon\.cn\/(d|g)p\//];
+var urlsMustNewTab = [
+  {patterns: [/https:\/\/www\.amazon\.cn\/(d|g)p\//i],
+   includes: null,
+   excludes: [/https:\/\/www.amazon.cn\/gp\/your-account\//i]}
+];
 
 function getAnchor(element) {
   while (element && element.nodeName != "A") {
@@ -70,7 +74,15 @@ document.addEventListener("click", function(e){
   var anchor = getAnchor(e.target);
   if (!anchor) return;
   if (protocolsMustNewTab.includes(anchor.protocol) ||
-      urlsMustNewTab.some(e => e.test(anchor.href))
+      urlsMustNewTab.some(e => {
+        if (e.includes && e.includes.every(i => !i.test(anchor.href))) {
+          return false;
+        }
+        if (e.excludes && e.excludes.some(i => i.test(anchor.href))) {
+          return false;
+        }
+        return e.patterns.some(i => i.test(anchor.href));
+      })
      ) {
     anchor.target = "_blank";
     return;
