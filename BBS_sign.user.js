@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.10.3
+// @version      1.6.10.5
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -943,6 +943,19 @@ xqqiandao: {
       }
     }, 500);
     return;
+  }
+
+  // id=dc_signin&...
+  if (document.querySelector("a[href='dc_signin-sign.html']")) {
+    let e = document.querySelector("a[href='dc_signin-sign.html']");
+    e.click();
+    setTimeout(function() {
+      let smileList = _class("dcsignin_list") ? (_class("dcsignin_list"))[0] : null;
+      let smiles = childs(smileList, "tagName", "LI");
+      let i = randomNum(smiles.length);
+      smiles[i].click();
+      document.getElementById("signform").submit();
+    }, 2000);
   }
 
   // ---- processing home.php?mod=task begin ---
