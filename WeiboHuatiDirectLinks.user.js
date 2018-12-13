@@ -4,7 +4,7 @@
 // @namespace     https://github.com/zephyrer/
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
-// @version       0.2.5.2
+// @version       0.2.6.0
 // @description   为微博等站点页面添加各类直链
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
 // @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
@@ -32,12 +32,14 @@
       return true;
     return false;
   }
+/*
+      {name: '杨孟霖Nick超话',
+       url:  'http://huati.weibo.com/5479348'},
+ */
   const directURLs = {
     "weibo.com": [
       {name: '杨孟霖超话',
        url:  'http://huati.weibo.com/5450398'},
-      {name: '杨孟霖Nick超话',
-       url:  'http://huati.weibo.com/5479348'},
       {name: '施柏宇超话',
        url:  'http://huati.weibo.com/5489289'},
       {name: '宇霖cp超话',
@@ -48,6 +50,24 @@
        url:  'https://weibo.com/u/3148083033'},
       {name: '施柏宇patrick',
        url:  'https://weibo.com/u/5946042311'},
+      {name: 'MarkGun超话',
+       url:  'http://huati.weibo.com/5614825'},
+      {name: 'Gunnapatn超话',
+       url:  'http://huati.weibo.com/5579596'},
+      {name: 'Gunnapatn',
+       url:  'https://weibo.com/u/6528529056'},
+      {name: 'Marksiwat超话',
+       url:  'http://huati.weibo.com/5196173'},
+      {name: 'Marksiwat',
+       url:  'https://weibo.com/u/6528517553'},//https://weibo.com/n/Mark-Siwat
+      {name: '陈智霆超话',
+       url:  'http://huati.weibo.com/k/%E9%99%88%E6%99%BA%E9%9C%86'},
+      {name: '陈瑞书超话',
+       url:  'http://huati.weibo.com/5638897'},
+      {name: '甜橙夫夫超话',
+       url:  'http://huati.weibo.com/5617881'},
+      {name: '张赫超话',
+       url:  'http://huati.weibo.com/5132232'},
       {name: '盛一伦',
        url:  'https://weibo.com/shengyilun1'},
       {name: '高瀚宇KD',
@@ -69,9 +89,18 @@
       border: 2px red solid;
       color: orange;
       mix-blend-mode: difference;
+      max-height: 300px;
+      width: 120px;
+      overflow: auto;
+      scrollbar-color: rebeccapurple green;
     }
     a[id^='direct-link-to-super-topic-'] {
-      font-size: 28px;
+      font-size: 14px;
+    }
+    @media (min-width: 1800px) {
+      a[id^='direct-link-to-super-topic-'] {
+        font-size: 18px;
+      }
     }
   `;
   GM_addStyle(css);
