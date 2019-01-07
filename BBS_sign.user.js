@@ -1,14 +1,16 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.10.6
+// @version      1.6.11.0
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
 // @include      http*://*/plugin.php?id=mpage_sign:sign*
 // @include      http*://*/plugin.php?id=ljdaka:daka*
+// @include      http*://*/plugin.php?id=luckypacket*
 // @include      http*://*/plugin.php?id=yinxingfei_zzza:yinxingfei_zzza_hall*
 // @include      http*://*/home.php?mod=task&*
+// @include      http*://*.qafone.co/plugin.*
 // @include      http*://*/*action=view*
 // @include      http*://*/*action=applied*
 // @include      http*://*/plugin.php?id=dc_signin:sign
@@ -17,6 +19,8 @@
 // @include      http*://*/u.php*
 // @include      http*://*/*qiandao
 // @include      http*://*/*qiandao&
+// @include      http*://*/*signin
+// @include      http*://www.178hui.com/
 // @include      http*://bbs.kafan.cn/*
 // @include      http*://bbs.wstx.com/*
 // @include      http*://bbs.gfan.com/*
@@ -51,6 +55,7 @@
 // @include      http*://www.zimuzu.io/user/sign
 // @include      http*://www.galaxyclub.cn/
 // @include      http*://*?id=seotask*
+// @include      https://ssr2.murmurcn.com/user
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
@@ -74,6 +79,78 @@
   let aBtnApply = null, el = null, els = null, imgs = null, idx = 0;
 
   if (isURL("bbs.realqwh.cn")) {
+    return false;
+  }
+  
+  if (isURL("murmurcn.com")) {
+    let el = _id("checkin");
+    if (el) {
+      el.click();
+      return true;
+    }
+    return false;
+  }
+  
+  if (isURL("cnscg.com") && isURL("luckypacket")) {
+    let els = _tag("button");
+    if (els) {
+      for (let i=0;i<els.length;i++) {
+        if (els[i].textContent == "领取") {
+          els[i].click();
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
+  if (isURL("178hui.com")) {
+    let els = _class("qiandao");
+    if (els && !els[0].textContent.includes("今日已签到")) {
+		$.ajax({
+			type: 'POST',
+			url:pageConfig.SITEURL+'?mod=ajax&act=sign&time='+Date.parse(new Date())/1000,
+			dataType:'json',
+			success: function(data){
+				if(data.code==100){
+					$('.qiandao').find('span').html('今日已签到');
+					layer.open({content: data.message,btn: '确定'});	
+				}else if(data.code==101){
+					layer.open({
+						content: data.message
+						,yes: function(){
+					 		jump(pageConfig.SITEURL+'?mod=user&act=login');
+						}
+					});
+				}else{
+					layer.alert(data.message);	
+				}
+			},error: function(){//错误
+				layer.open({content: '服务器休假去了，技术正常召回！',btn: '确定'});
+			}
+		});
+      return true;
+    }
+    return false;
+  }
+  
+  if (isURL("fontke.com")) {
+    let els = _class("today");
+    if (els && els.length == 1) {
+      let el = els[0];
+      if (!el.classList.contains("signed")) el.click();
+      return true;
+    }
+    return false;
+  }
+
+  if (isURL("qafone.co")) {
+    let els = _class("memberinfo_forum");
+    if (els && els.length == 1 && els[0].textContent.includes("您还可以领取1个")) {
+      let el = document.querySelector("button.button[name='money_get']");
+      el.click();
+      return true;
+    }
     return false;
   }
 
