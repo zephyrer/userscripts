@@ -1,14 +1,16 @@
 // ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.10.6
+// @version      1.6.11.0
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
 // @include      http*://*/plugin.php?id=mpage_sign:sign*
 // @include      http*://*/plugin.php?id=ljdaka:daka*
+// @include      http*://*/plugin.php?id=luckypacket*
 // @include      http*://*/plugin.php?id=yinxingfei_zzza:yinxingfei_zzza_hall*
 // @include      http*://*/home.php?mod=task&*
+// @include      http*://*.qafone.co/plugin.*
 // @include      http*://*/*action=view*
 // @include      http*://*/*action=applied*
 // @include      http*://*/plugin.php?id=dc_signin:sign
@@ -17,6 +19,8 @@
 // @include      http*://*/u.php*
 // @include      http*://*/*qiandao
 // @include      http*://*/*qiandao&
+// @include      http*://*/*signin
+// @include      http*://www.178hui.com/
 // @include      http*://bbs.kafan.cn/*
 // @include      http*://bbs.wstx.com/*
 // @include      http*://bbs.gfan.com/*
@@ -51,6 +55,7 @@
 // @include      http*://www.zimuzu.io/user/sign
 // @include      http*://www.galaxyclub.cn/
 // @include      http*://*?id=seotask*
+// @include      https://ssr2.murmurcn.com/user
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
