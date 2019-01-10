@@ -1,7 +1,7 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.11.0
+// @version      1.6.11.5
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -53,6 +53,7 @@
 // @include      http*://*/jobcenter.php?action=finish*
 // @include      http*://ishare.iask.sina.com.cn/checkin
 // @include      http*://www.zimuzu.io/user/sign
+// @include      http*://www.zimuzu.tv/user/sign
 // @include      http*://www.galaxyclub.cn/
 // @include      http*://*?id=seotask*
 // @include      https://ssr2.murmurcn.com/user
@@ -68,6 +69,8 @@
 // @grant        GM_log
 // @grant        GM_registerMenuCommand
 // @grant        GM_openInTab
+// @grant        GM_setValue
+// @grant        GM_getValue
 // @run-at       document-end
 // ==/UserScript==
 
@@ -78,20 +81,54 @@
 
   let aBtnApply = null, el = null, els = null, imgs = null, idx = 0;
 
+  function isVisitedToday(host) {
+    let siteTrackingInfo = JSON.parse(GM_getValue("siteTrackingInfo", {"www.cnscg.com":"2019/0/9"}));
+    let timeStamp = siteTrackingInfo[host];
+    let d = new Date();
+    let ct = [d.getFullYear(), d.getMonth(), d.getDate()].join('/');
+    if (timeStamp && ct == timeStamp) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  function visitToday(host) {
+    let siteTrackingInfo = JSON.parse(GM_getValue("siteTrackingInfo", {"www.cnscg.com":"2019/0/9"}));
+    let d = new Date();
+    let ct = [d.getFullYear(), d.getMonth(), d.getDate()].join('/');
+    siteTrackingInfo[host] = ct;
+    GM_setValue("siteTrackingInfo", JSON.stringify(siteTrackingInfo));
+  }
+
   if (isURL("bbs.realqwh.cn")) {
     return false;
   }
-  
+
   if (isURL("murmurcn.com")) {
     let el = _id("checkin");
-    if (el) {
-      el.click();
+    if (el && el.textContent.includes('点我签到')) {
+      GM_xmlhttpRequest({
+        method: "POST",
+        url: location.protocol+'//'+location.host+"/user/checkin",
+        dataType: "json",
+        onload: function (res) {
+          let data = JSON.parse(res.responseText);
+          document.getElementById("checkin-msg").innerHTML = data.msg;
+          document.getElementById("checkin-btn").style.display = 'none';
+          //document.getElementById("result").style.display = 'block';
+          //document.getElementById("msg").innerHTML = data.msg;
+        },
+        onerror: function (jqXHR) {
+          alert("发生错误：" + jqXHR.status);
+        }
+          });
       return true;
     }
     return false;
   }
-  
-  if (isURL("cnscg.com") && isURL("luckypacket")) {
+
+  if (isURL("cnscg.com") && isURL("luckypacket") && !isVisitedToday(location.host)) {
+    visitToday(location.host);
     let els = _tag("button");
     if (els) {
       for (let i=0;i<els.length;i++) {
@@ -103,37 +140,37 @@
     }
     return false;
   }
-  
+
   if (isURL("178hui.com")) {
     let els = _class("qiandao");
     if (els && !els[0].textContent.includes("今日已签到")) {
-		$.ajax({
-			type: 'POST',
-			url:pageConfig.SITEURL+'?mod=ajax&act=sign&time='+Date.parse(new Date())/1000,
-			dataType:'json',
-			success: function(data){
-				if(data.code==100){
-					$('.qiandao').find('span').html('今日已签到');
-					layer.open({content: data.message,btn: '确定'});	
-				}else if(data.code==101){
-					layer.open({
-						content: data.message
-						,yes: function(){
-					 		jump(pageConfig.SITEURL+'?mod=user&act=login');
-						}
-					});
-				}else{
-					layer.alert(data.message);	
-				}
-			},error: function(){//错误
-				layer.open({content: '服务器休假去了，技术正常召回！',btn: '确定'});
-			}
-		});
+      $.ajax({
+        type: 'POST',
+        url:pageConfig.SITEURL+'?mod=ajax&act=sign&time='+Date.parse(new Date())/1000,
+        dataType:'json',
+        success: function(data){
+          if(data.code==100){
+            $('.qiandao').find('span').html('今日已签到');
+            layer.open({content: data.message,btn: '确定'});
+          }else if(data.code==101){
+            layer.open({
+              content: data.message
+              ,yes: function(){
+                jump(pageConfig.SITEURL+'?mod=user&act=login');
+              }
+            });
+          }else{
+            layer.alert(data.message);
+          }
+        },error: function(){//错误
+            layer.open({content: '服务器休假去了，技术正常召回！',btn: '确定'});
+        }
+      });
       return true;
     }
     return false;
   }
-  
+
   if (isURL("fontke.com")) {
     let els = _class("today");
     if (els && els.length == 1) {
@@ -567,7 +604,7 @@ xqqiandao: {
 }
 
   // 保险处理
-  el = document.getElementById("todaysay");
+  el = _id("todaysay");
   if (el) {
     el.value = "今天签到来了，各位安好";
   }
@@ -637,9 +674,9 @@ xqqiandao: {
 
   if (isURL("bbs.kafan.cn")) {
       //卡饭论坛
-      imgs = document.getElementById("pper_a").getElementsByTagName("IMG");
+      imgs = _id("pper_a").getElementsByTagName("IMG");
       if (imgs[0].src.indexOf("wb.png") == -1) {
-          let a = document.getElementById("pper_a");;
+          let a = _id("pper_a");;
           a.click();
           return;
       }
@@ -647,7 +684,7 @@ xqqiandao: {
 
   if (isURL("www.horou.com")) {
     //河洛
-    imgs = document.getElementById("fx_checkin_b");
+    imgs = _id("fx_checkin_b");
       if (imgs.src.indexOf("mini2") == -1) {
           imgs.click();
           return;
@@ -775,7 +812,7 @@ xqqiandao: {
     return;
   }
 
-  if (isURL("zimuzu.io")) {
+  if (isURL("zimuzu.io") || isURL("zimuzu.tv")) {
     let cnt = 0;
     let iid = setInterval(function() {
       if (cnt > 50) {
@@ -1032,7 +1069,7 @@ xqqiandao: {
       let smiles = childs(smileList, "tagName", "LI");
       let i = randomNum(smiles.length);
       smiles[i].click();
-      document.getElementById("signform").submit();
+      _id("signform").submit();
     }, 2000);
   }
 
@@ -1341,7 +1378,7 @@ xqqiandao: {
   }
 
   function qd2() {
-    if (!document.getElementById("kx"))
+    if (!_id("kx"))
       return false;
     document.getElementById("kx").click();
     unsafeWindow.showWindow('qwindow', 'qiandao', 'post', '0');

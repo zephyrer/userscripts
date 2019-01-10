@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.11.0
+// @version      1.6.11.5
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -53,6 +53,7 @@
 // @include      http*://*/jobcenter.php?action=finish*
 // @include      http*://ishare.iask.sina.com.cn/checkin
 // @include      http*://www.zimuzu.io/user/sign
+// @include      http*://www.zimuzu.tv/user/sign
 // @include      http*://www.galaxyclub.cn/
 // @include      http*://*?id=seotask*
 // @include      https://ssr2.murmurcn.com/user
@@ -68,5 +69,7 @@
 // @grant        GM_log
 // @grant        GM_registerMenuCommand
 // @grant        GM_openInTab
+// @grant        GM_setValue
+// @grant        GM_getValue
 // @run-at       document-end
 // ==/UserScript==
