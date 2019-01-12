@@ -1,7 +1,7 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.11.5
+// @version      1.6.11.10
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -28,7 +28,7 @@
 // @include      http*://www.92jh.cn/*
 // @include      http*://bbs.ntrqq.net/*
 // @include      http*://www.gn00.com/*
-// @include      http*://588ku.com/
+// @include      http*://588ku.com/*
 // @include      http*://*.58pic.com/*
 // @include      http*://bbs.qidian.com/signeveryday.aspx*
 // @include      http*://*/signin*
@@ -57,6 +57,9 @@
 // @include      http*://www.galaxyclub.cn/
 // @include      http*://*?id=seotask*
 // @include      https://ssr2.murmurcn.com/user
+// @include      http://u.yinyuetai.com/setting.html
+// @include      http://www.iqiyi.com/u/
+// @include      https://6so.so/plugin.php*
 // @note         论坛签到工具,整合自卡饭Coolkids论坛自动签到和jasonshaw网页自动化系列点击,做了一点微小的修改
 // @copyright    2013+, Coolkid
 // @copyright    2014+, jasonshaw
@@ -76,6 +79,7 @@
 
 (function(){
   GM_log("BBSsign.user.js executing...");
+  //if($) GM_log("On " + location.host + ", $ is " + $) else GM_log(location.host + "DON'T defined $ or userJS COULDN'T access PAGE environment.");
 
   GM_registerMenuCommand("BBS 签到", qd);
 
@@ -92,6 +96,7 @@
       return false;
     }
   }
+  
   function visitToday(host) {
     let siteTrackingInfo = JSON.parse(GM_getValue("siteTrackingInfo", {"www.cnscg.com":"2019/0/9"}));
     let d = new Date();
@@ -104,6 +109,47 @@
     return false;
   }
 
+  if (isURL("6so.so")) {
+    let els = _class("qdxq");
+    if (els && els.length == 1) {
+      let el = els[0];
+      els = el.getElementsByTagName("input");
+      if (els.length > 0) {
+        idx = randomNum(els.length);
+        els[idx].click();
+      }
+      el = _id("postform");
+      el.submit();
+      return true;
+    }
+    return false;
+  }
+  
+  if (isURL("zhisheji.com")) {
+    let el = $(".btn-red");
+    if (el) {
+      Signin();
+      return true;
+    }
+    return false;
+  }
+
+  if (isURL("iqiyi.com")) {
+    let count = 0;
+    let iid = setInterval(function() {
+      let el = document.querySelector('a.vt-btn.vt-goldBtn');
+      if (el) {
+        clearInterval(iid);
+        el.click();
+        return true;
+      }
+      if (count > 50) {
+        clearInterval(iid);
+      }
+    }, 500);
+    return false;
+  }
+  
   if (isURL("murmurcn.com")) {
     let el = _id("checkin");
     if (el && el.textContent.includes('点我签到')) {
@@ -168,6 +214,22 @@
       });
       return true;
     }
+    return false;
+  }
+
+  if (isURL("yinyuetai.com")) {
+    let count = 0;
+    let iid = setInterval(function() {
+      let el = _id("SignBtn");
+      if (el && el.getAttribute("data-sign") =="false") {
+        clearInterval(iid);
+        el.click();
+        return true;
+      }
+      if (count > 50) {
+        clearInterval(iid);
+      }
+    }, 500);
     return false;
   }
 
@@ -284,23 +346,31 @@
       }, 500);
   }
 
+  if (isURL("588ku.com/activity") && !isVisitedToday(location.host)) {
+    visitToday(location.host);
+    let count = 0;
+    let iid = setInterval(function() {
+        let el = document.querySelector(".btn-go.lottery-btn");
+        if (el) {
+          clearInterval(iid);
+          el.click();
+          return true;
+        }
+        if (count > 50) {
+          clearInterval(iid);
+        }
+      }, 500);
+  }
+
   if (isURL("588ku.com")) {
     let count = 0;
     let iid = setInterval(function() {
-        let els = _class("already-sign-but");
-        if (els) {
+        let el = document.querySelector(".in-sign");
+        if (el) {
           clearInterval(iid);
-          if (els[0].textContent.includes("已签到")) {
-            return;
-          }
-          els[0].click();
-          setTimeout(function() {
-            let el = document.querySelector(".signIn-rule .signIn-btn");
-            if (el) el.click();
-          }, 2000);
-          return;
-        } else {
-          count++;
+          el.click();
+          GM_openInTab("http://588ku.com/activity/1.html", true);
+          return true;
         }
         if (count > 50) {
           clearInterval(iid);
@@ -311,20 +381,11 @@
   if (isURL("58pic.com")) {
     let count = 0;
     let iid = setInterval(function() {
-        let els = _class("sign-but");
-        if (els) {
+        let el = document.querySelector(".btn-green-linear.signInCon-btn");
+        if (el) {
           clearInterval(iid);
-          if (els[0].textContent.includes("已签到")) {
-            return;
-          }
-          els[0].click();
-          setTimeout(function() {
-            let el = document.querySelector(".everySign .integral-btn");
-            if (el) el.click();
-          }, 2000);
-          return;
-        } else {
-          count++;
+          el.click();
+          return true;
         }
         if (count > 50) {
           clearInterval(iid);
@@ -1315,6 +1376,14 @@ xqqiandao: {
       }
   }
 
+  /*
+                    (function() {
+                        var hm = document.createElement("script");
+                        hm.src = "//hm.baidu.com/hm.js?c3752a8ec92c45ad34656f71b1cb45c7";
+                        var s = document.getElementsByTagName("script")[0];
+                        s.parentNode.insertBefore(hm, s);
+                    })();
+  */
   function qd() {
     if ((window.find("今天签到了吗") &&
         (window.find("请选择您此刻的心情图片") || //请选择您此刻的心情图片并写下今天最想说的话
