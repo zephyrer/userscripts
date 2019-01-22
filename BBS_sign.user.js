@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛签到工具
 // @namespace    https://github.com/zephyrer/
-// @version      1.6.11.10
+// @version      1.6.11.25
 // @description  用于各种论坛自动签到，自用！！
 // @include      http*://*/plugin.php?id=*sign*
 // @include      http*://*/dsu_paulsign-sign*
@@ -79,15 +79,27 @@
 
 (function(){
   GM_log("BBSsign.user.js executing...");
-  //if($) GM_log("On " + location.host + ", $ is " + $) else GM_log(location.host + "DON'T defined $ or userJS COULDN'T access PAGE environment.");
+  try {
+    GM_log("On " + location.host + ", $ is " + $);
+  } catch(e) {
+    GM_log(location.host + " DON'T defined $ or userJS COULDN'T access the PAGE environment.");
+  }
 
   GM_registerMenuCommand("BBS 签到", qd);
+  GM_registerMenuCommand("重置今日访问记录", resetVisitedToday);
 
   let aBtnApply = null, el = null, els = null, imgs = null, idx = 0;
+  let url_path = location.protocol + '//' + location.host + location.pathname;
 
-  function isVisitedToday(host) {
-    let siteTrackingInfo = JSON.parse(GM_getValue("siteTrackingInfo", {"www.cnscg.com":"2019/0/9"}));
-    let timeStamp = siteTrackingInfo[host];
+  function resetVisitedToday() {
+    GM_setValue("siteTrackingInfo", '{"http://www.cnscg.com/":"2010/0/1"}');
+    alert((GM_getValue("siteTrackingInfo",'{"www.cnscg.com":"2011/0/1"}')))
+    return true;
+  }
+
+  function isVisitedToday(url) {
+    let siteTrackingInfo = JSON.parse(GM_getValue("siteTrackingInfo", '{"http://www.cnscg.com/":"2010/0/1"}'));
+    let timeStamp = siteTrackingInfo[url];
     let d = new Date();
     let ct = [d.getFullYear(), d.getMonth(), d.getDate()].join('/');
     if (timeStamp && ct == timeStamp) {
@@ -96,12 +108,12 @@
       return false;
     }
   }
-  
-  function visitToday(host) {
-    let siteTrackingInfo = JSON.parse(GM_getValue("siteTrackingInfo", {"www.cnscg.com":"2019/0/9"}));
+
+  function visitToday(url) {
+    let siteTrackingInfo = JSON.parse(GM_getValue("siteTrackingInfo", '{"http://www.cnscg.com/":"2019/0/9"}'));
     let d = new Date();
     let ct = [d.getFullYear(), d.getMonth(), d.getDate()].join('/');
-    siteTrackingInfo[host] = ct;
+    siteTrackingInfo[url] = ct;
     GM_setValue("siteTrackingInfo", JSON.stringify(siteTrackingInfo));
   }
 
@@ -110,9 +122,9 @@
   }
 
   if (isURL("6so.so")) {
-    let els = _class("qdxq");
+    els = _class("qdxq");
     if (els && els.length == 1) {
-      let el = els[0];
+      el = els[0];
       els = el.getElementsByTagName("input");
       if (els.length > 0) {
         idx = randomNum(els.length);
@@ -124,9 +136,9 @@
     }
     return false;
   }
-  
+
   if (isURL("zhisheji.com")) {
-    let el = $(".btn-red");
+    el = $(".btn-red");
     if (el) {
       Signin();
       return true;
@@ -137,7 +149,7 @@
   if (isURL("iqiyi.com")) {
     let count = 0;
     let iid = setInterval(function() {
-      let el = document.querySelector('a.vt-btn.vt-goldBtn');
+      el = _sel('a.vt-btn.vt-goldBtn');
       if (el) {
         clearInterval(iid);
         el.click();
@@ -149,9 +161,9 @@
     }, 500);
     return false;
   }
-  
+
   if (isURL("murmurcn.com")) {
-    let el = _id("checkin");
+    el = _id("checkin");
     if (el && el.textContent.includes('点我签到')) {
       GM_xmlhttpRequest({
         method: "POST",
@@ -173,9 +185,9 @@
     return false;
   }
 
-  if (isURL("cnscg.com") && isURL("luckypacket") && !isVisitedToday(location.host)) {
-    visitToday(location.host);
-    let els = _tag("button");
+  if (isURL("cnscg.com") && isURL("luckypacket") && !isVisitedToday(url_path)) {
+    visitToday(url_path);
+    els = _tag("button");
     if (els) {
       for (let i=0;i<els.length;i++) {
         if (els[i].textContent == "领取") {
@@ -188,7 +200,7 @@
   }
 
   if (isURL("178hui.com")) {
-    let els = _class("qiandao");
+    els = _class("qiandao");
     if (els && !els[0].textContent.includes("今日已签到")) {
       $.ajax({
         type: 'POST',
@@ -220,8 +232,9 @@
   if (isURL("yinyuetai.com")) {
     let count = 0;
     let iid = setInterval(function() {
-      let el = _id("SignBtn");
-      if (el && el.getAttribute("data-sign") =="false") {
+      el = _sel("#SignBtn[data-sign='false']");
+      GM_log("#SignBtn[data-sign='false']:" + el.tagName)
+      if (el) {
         clearInterval(iid);
         el.click();
         return true;
@@ -229,14 +242,14 @@
       if (count > 50) {
         clearInterval(iid);
       }
-    }, 500);
+    }, 1000);
     return false;
   }
 
   if (isURL("fontke.com")) {
-    let els = _class("today");
+    els = _class("today");
     if (els && els.length == 1) {
-      let el = els[0];
+      el = els[0];
       if (!el.classList.contains("signed")) el.click();
       return true;
     }
@@ -244,17 +257,19 @@
   }
 
   if (isURL("qafone.co")) {
-    let els = _class("memberinfo_forum");
+    els = _class("memberinfo_forum");
     if (els && els.length == 1 && els[0].textContent.includes("您还可以领取1个")) {
-      let el = document.querySelector("button.button[name='money_get']");
+      el = _sel("button.button[name='money_get']");
       el.click();
       return true;
+    } else {
+      setTimeout(() => window.location.reload(true), 10*60*1000);
+      return false;
     }
-    return false;
   }
 
   if (isURL("feifantxt.com")) {
-    let ele = document.querySelector("#breadCrumb ~ .t3 .t:first-child .tac:nth-child(1)")
+    let ele = _sel("#breadCrumb ~ .t3 .t:first-child .tac:nth-child(1)")
     if (ele.textContent.includes("进行第 1 次签到")) {
       return false;
     } else {
@@ -271,27 +286,27 @@
   }
 
   if (isURL("seotask")) {
-    el = document.querySelector("img[alt*='apply']");
+    el = _sel("img[alt*='apply']");
     if (el && !el.src.includes('rewardless')) {
       el.click();
       return true;
     }
-    el = document.querySelector(".ptm > a:nth-child(1)");
+    el = _sel(".ptm > a:nth-child(1)");
     if (el && el.textContent.includes("领取任务请转到进行中的任务")) {
       el.click();
       return true;
     }
-    el = document.querySelector(".xs2 > a:nth-child(1)");
+    el = _sel(".xs2 > a:nth-child(1)");
     if (el && el.textContent.includes("百度")) {
       el.click();
       return true;
     }
-    el = document.querySelector("a.xi2");
+    el = _sel("a.xi2");
     if (el && el.textContent.includes("点击这里前往完成任务")) {
       let nt = GM_openInTab(el.href, true);
       setTimeout(() => {
         nt.close();
-        let ele = document.querySelector(".mbw a:nth-child(1)");
+        let ele = _sel(".mbw a:nth-child(1)");
         ele ? ele.click() : 0;
       }, 2000);
       return true;
@@ -308,7 +323,7 @@
     }
     let count = 0;
     let iid = setInterval(function() {
-      let els = _class("right");
+      els = _class("right");
       if (els) {
         clearInterval(iid);
         if (els[0].textContent.includes('已签到')) {
@@ -329,7 +344,7 @@
   if (isURL("zsj_moneychange")) {
     let count = 0;
     let iid = setInterval(function() {
-        let els = _class("ft-btn");
+        els = _class("ft-btn");
         if (els) {
           clearInterval(iid);
           if (els[0].textContent.includes("已签到")) {
@@ -346,26 +361,34 @@
       }, 500);
   }
 
-  if (isURL("588ku.com/activity") && !isVisitedToday(location.host)) {
-    visitToday(location.host);
-    let count = 0;
-    let iid = setInterval(function() {
-        let el = document.querySelector(".btn-go.lottery-btn");
-        if (el) {
-          clearInterval(iid);
-          el.click();
-          return true;
-        }
-        if (count > 50) {
-          clearInterval(iid);
-        }
-      }, 500);
-  }
-
   if (isURL("588ku.com")) {
+    // 判断是否登录
+    let btn = _sel(".loginBtn");
+    if (btn && getComputedStyle(btn, null).display != "none") {
+      //alert("Need Logging!")
+      return false;
+    }
+
+    // 转盘
+    if (isURL("588ku.com/activity") && !isVisitedToday(url_path)) {
+      visitToday(url_path);
+      let count = 0;
+      let iid = setInterval(function() {
+          el = _sel(".btn-go.lottery-btn");
+          if (el) {
+            clearInterval(iid);
+            el.click();
+            return true;
+          }
+          if (count > 50) {
+            clearInterval(iid);
+          }
+        }, 500);
+    } else {
+    // 签到
     let count = 0;
     let iid = setInterval(function() {
-        let el = document.querySelector(".in-sign");
+        el = _sel(".in-sign");
         if (el) {
           clearInterval(iid);
           el.click();
@@ -376,12 +399,14 @@
           clearInterval(iid);
         }
       }, 500);
+    }
+    return false;
   }
 
   if (isURL("58pic.com")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = document.querySelector(".btn-green-linear.signInCon-btn");
+        el = _sel(".btn-green-linear.signInCon-btn");
         if (el) {
           clearInterval(iid);
           el.click();
@@ -396,14 +421,14 @@
   if (isURL("huihui.cn")) {
     let count = 0;
     let iid = setInterval(function() {
-        let els = _class("signup");
+        els = _class("signup");
         if (els) {
           clearInterval(iid);
           if (els[0].textContent.includes('已抽奖')) {
             return;
           }
           els[0].click();
-          els = document.querySelectorAll(".lottery-btn a");
+          els = _selall(".lottery-btn a");
           if (els.length > 0) {
             els[0].click();
           }
@@ -419,7 +444,7 @@
   if (isURL("21ic.com")) {
     let count = 0;
     let iid = setInterval(function() {
-      let el = _id("qiandao");
+      el = _id("qiandao");
       if (el) {
         clearInterval(iid);
         el.click();
@@ -427,7 +452,7 @@
           let el1 = _id('qiandao_menu_message');
           if (el1 && el1.textContent.includes('已经签到')) {
             clearInterval(iid1);
-            el1 = document.querySelector('#qiandao_menu a[onclick^="hideMenu"]');
+            el1 = _sel('#qiandao_menu a[onclick^="hideMenu"]');
             el1.click();
             return;
           } else {
@@ -435,7 +460,7 @@
             if (el1) {
               el1.click();
               setTimeout(() => {
-                let els1 = document.querySelectorAll("#qiandao_message_menu ul li");
+                let els1 = _selall("#qiandao_message_menu ul li");
                 if (els1.length > 0) {
                   clearInterval(iid1);
                   idx = randomNum(els1.length);
@@ -460,7 +485,7 @@
   if (isURL("kindleren.com")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = _id("k_misign_topb");
+        el = _id("k_misign_topb");
         if (el) {
           clearInterval(iid);
           els = el.getElementsByTagName("a");
@@ -480,16 +505,16 @@
   if (isURL("gongzicp.com")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = _id("signBtn");
+        el = _id("signBtn");
         if (el) {
           clearInterval(iid);
           if (el.textContent.indexOf("已") === -1) {
             el.click();
           }
           return;
-        } else if (document.querySelectorAll('.card-header > .ivu-btn:not([disabled])').length > 0) {
+        } else if (_selall('.card-header > .ivu-btn:not([disabled])').length > 0) {
           clearInterval(iid);
-          document.querySelectorAll('.card-header > .ivu-btn')[0].click();
+          _selall('.card-header > .ivu-btn')[0].click();
           return;
         }
         count++;
@@ -502,7 +527,7 @@
   if (isURL("lkong.cn")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = _id("punch");
+        el = _id("punch");
         if (el) {
           clearInterval(iid);
           el.click();
@@ -517,13 +542,13 @@
   }
 
   if (isURL("galaxyclub.cn")) {
-    let el = _id("login");
+    el = _id("login");
     if (el && el.style.display != "none") {
       return false;
     }
     let count = 0;
     let iid = setInterval(function() {
-        let els = _class("bt-check");
+        els = _class("bt-check");
         if (els) {
           clearInterval(iid);
           els[0].click();
@@ -540,7 +565,7 @@
   if (isURL("horou.com")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = _id("fx_checkin_b");
+        el = _id("fx_checkin_b");
         if (el) {
           clearInterval(iid);
           if (el.textContent.indexOf("已") !== -1) {
@@ -559,7 +584,7 @@
   if (isURL("iskytree.net")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = _id("fx_checkin_b");
+        el = _id("fx_checkin_b");
         if (el) {
           clearInterval(iid);
           if (el.getAttribute('alt') === '已签到') {
@@ -580,7 +605,7 @@
   if (isURL("lkong.cn")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = _id("punch");
+        el = _id("punch");
         if (el) {
           clearInterval(iid);
           el.click();
@@ -620,7 +645,7 @@
   if (isURL("=applied")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = _id("gain_5");
+        el = _id("gain_5");
         if (el) {
           clearInterval(iid);
           el.click();
@@ -807,9 +832,9 @@ xqqiandao: {
         let lis = childs(els[0], "tagName", "LI");
         let i = randomNum(lis.length);
         lis[i].click();
-        let radio = document.querySelector("input[type='radio'][name='qdmode'][value='3']");
+        let radio = _sel("input[type='radio'][name='qdmode'][value='3']");
         radio.click();
-        let button = document.querySelector(".f_c + .o.pns > button");
+        let button = _sel(".f_c + .o.pns > button");
         button.click();
         return;
       }
@@ -881,7 +906,7 @@ xqqiandao: {
         return;
       }
       cnt++;
-      el = document.querySelector('.qd-words .C a');
+      el = _sel('.qd-words .C a');
       if (el) {
         clearInterval(iid);
         let msg = el ? el.textContent : 'NULL';
@@ -1122,8 +1147,8 @@ xqqiandao: {
   }
 
   // id=dc_signin&...
-  if (document.querySelector("a[href='dc_signin-sign.html']")) {
-    let e = document.querySelector("a[href='dc_signin-sign.html']");
+  if (_sel("a[href='dc_signin-sign.html']")) {
+    let e = _sel("a[href='dc_signin-sign.html']");
     e.click();
     setTimeout(function() {
       let smileList = _class("dcsignin_list") ? (_class("dcsignin_list"))[0] : null;
@@ -1140,11 +1165,11 @@ xqqiandao: {
   if (isURL("www.lightnovel.cn/home.php?mod=task")) {
     //轻国
     if (isURL("item=done")) {
-      let els = _class("xs2 xi2");
+      els = _class("xs2 xi2");
       if (els) {
         let elt = els.filter(e => e.textContent.includes("每日任务"));
         if (elt) {
-          let el = elt[0].parentNode.nextSibling.nextSibling.nextSibling.nextSibling;
+          el = elt[0].parentNode.nextSibling.nextSibling.nextSibling.nextSibling;
           let matches = el.textContent.match(/\d{4,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}/g);
           if (!matches) {
             window.location.href = "http://www.lightnovel.cn/home.php?mod=task&do=apply&id=98";
@@ -1161,7 +1186,7 @@ xqqiandao: {
       return false;
     }
     if (window.find("每日任务") && window.find("啪啪啪")) {
-      let ele = document.querySelector(".xg2.mbn");
+      let ele = _sel(".xg2.mbn");
       if (ele && ele.textContent.includes("后可以再次申请")) {
         return false;
       }
@@ -1179,10 +1204,10 @@ xqqiandao: {
         return;
       }
       cnt++;
-      let el = _id('um');
+      el = _id('um');
       if (el) {
         clearInterval(n);
-        let els = _tag('a');
+        els = _tag('a');
         if (els) {
           els = els.filter((e) => e.textContent.includes('打卡签到'));
           if (els.length > 0) {
@@ -1219,7 +1244,7 @@ xqqiandao: {
   if (isURL("u.8264.com")) {
     let count = 0;
     let iid = setInterval(function() {
-        let el = document.querySelector("#apply_qr.lqjl");
+        el = _sel("#apply_qr.lqjl");
         if (el) {
           clearInterval(iid);
           el.click();
@@ -1295,11 +1320,19 @@ xqqiandao: {
   }
 
   function isEmpty(x) {
-    if (undefined == x || null == x || "" == x)
+    try {
+      x;
+    } catch(e) {
       return true;
+    }
 
-    if (Array.isArray(x) && x.length == 0)
+    if (undefined == x || null == x || "" == x) {
       return true;
+    }
+
+    if (Array.isArray(x) && x.length == 0) {
+      return true;
+    }
 
     return false;
   }
@@ -1312,12 +1345,20 @@ xqqiandao: {
       return ret;
   }
 
+  function _selall(selr) {
+    return document.querySelectorAll(selr);
+  }
+
+  function _sel(selr) {
+    return document.querySelector(selr);
+  }
+
   function _id(selr) {
     return document.getElementById(selr);
   }
 
   function _class(selr, attr, value) {
-    let els = document.getElementsByClassName(selr);
+    els = document.getElementsByClassName(selr);
     if (els.length === 0) return null;
     els = Array.from(els);
     switch(arguments.length) {
@@ -1332,7 +1373,7 @@ xqqiandao: {
   }
 
   function _name(selr, attr, value) {
-    let els = document.getElementsByName(selr);
+    els = document.getElementsByName(selr);
     if (els.length === 0) return null;
     els = Array.from(els);
     switch(arguments.length) {
@@ -1347,7 +1388,7 @@ xqqiandao: {
   }
 
   function _tag(selr, attr, value) {
-    let els = document.getElementsByTagName(selr);
+    els = document.getElementsByTagName(selr);
     if (els.length === 0) return null;
     els = Array.from(els);
     switch(arguments.length) {
@@ -1436,7 +1477,7 @@ xqqiandao: {
         button[0].submit();
         return true;
       }
-      button = document.querySelector(".t3 > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > div:nth-child(1) > form:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1) > div:nth-child(2) > input:nth-child(1)");
+      button = _sel(".t3 > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > div:nth-child(1) > form:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1) > div:nth-child(2) > input:nth-child(1)");
       if (button) {
         button.click();
         return true;
@@ -1464,7 +1505,7 @@ xqqiandao: {
                   var els = p.elements();
               }
               while (els[i]) {
-                  var obj = (p.elements instanceof Array) ? document.querySelector(els[i]) : els[i];
+                  var obj = (p.elements instanceof Array) ? _sel(els[i]) : els[i];
                   if (obj == null) return;
                   if (obj.tagName == "A" && obj.href.indexOf("javascript") < 0 && obj.onclick == "undefined") GM_openInTab(obj.href);
                   else obj.click();
