@@ -7,7 +7,7 @@
 // @include           *//mall.jd.com/*
 // @include           *//*.jd.com/*
 // @include           *//vip.jr.jd.com/
-// @version           0.8.4
+// @version           0.8.5
 // @connect           jd.com
 // @connect-src       jd.com
 // @namespace         https://github.com/zephyrer
@@ -26,9 +26,11 @@
     setTimeout(function() {
       window.open("https://vip.jd.com/sign/index");
     },1000);
+    /*
     setTimeout(function() {
       window.open("https://vip.jr.jd.com");
     },6000);
+    */
     setTimeout(function() {
       window.open("https://huan.jd.com");
     },11000);
@@ -46,7 +48,7 @@
       }
       if (btns.length > 0) {
         btns.forEach((btn, i, arr) => {
-          setTimeout(btn.click(), 20000)
+          setTimeout(btn.click(), 20000+5000*i)
         });
       }
     };
