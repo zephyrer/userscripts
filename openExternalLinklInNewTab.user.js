@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Open External Link in NewTab
-// @version      0.3.5.0
+// @version      0.3.5.1
 // @namespace    https://github.com/zephyrer/
 // @contributor  DandyClubs
 // @description  This script will open any external link in new tab. Support dynamic content. Support subdomain aaa.test.co.kr = bbb.test.co.kr (controlled by bStrict)
@@ -23,7 +23,10 @@ var protocolsToIgnore = ["javascript:", "magnet:", "git:"];
 var urlsMustNewTab = [
   {patterns: [/https:\/\/www\.amazon\.cn\/(d|g)p\//i],
    includes: null,
-   excludes: [/https:\/\/www.amazon.cn\/gp\/your-account\//i]}
+   excludes: [/https:\/\/www.amazon.cn\/gp\/your-account\//i]},
+  {patterns: [/https:\/\/www\.douban\.com\/group\/topic\//i],
+   includes: null,
+   excludes: null}
 ];
 
 function getAnchor(element) {
