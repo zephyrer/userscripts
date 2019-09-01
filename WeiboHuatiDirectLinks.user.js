@@ -4,7 +4,7 @@
 // @namespace     https://github.com/zephyrer/
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
-// @version       0.2.6.0
+// @version       0.2.6.1
 // @description   为微博等站点页面添加各类直链
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
 // @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
@@ -38,6 +38,18 @@
  */
   const directURLs = {
     "weibo.com": [
+      {name: '肖战',
+       url:  'https://weibo.com/xiaozhan1'},
+      {name: '肖战超话',
+       url:  'https://huati.weibo.com/4079642'},
+      {name: '王一博',
+       url:  'https://weibo.com/u/5492443184'},
+      {name: '博君一肖超话',
+       url:  'http://huati.weibo.com/5541819'},
+      {name: '战山为王超话',
+       url:  'http://huati.weibo.com/5596840'},
+      {name: '杨孟霖Nick',
+       url:  'https://weibo.com/u/3148083033'},
       {name: '杨孟霖超话',
        url:  'http://huati.weibo.com/5450398'},
       {name: '施柏宇超话',
@@ -46,8 +58,6 @@
        url:  'http://huati.weibo.com/5509572'},
       {name: '张赫超话',
        url:  'http://huati.weibo.com/5132232'},
-      {name: '杨孟霖Nick',
-       url:  'https://weibo.com/u/3148083033'},
       {name: '施柏宇patrick',
        url:  'https://weibo.com/u/5946042311'},
       {name: 'MarkGun超话',
@@ -56,10 +66,6 @@
        url:  'http://huati.weibo.com/5579596'},
       {name: 'Gunnapatn',
        url:  'https://weibo.com/u/6528529056'},
-      {name: 'Marksiwat超话',
-       url:  'http://huati.weibo.com/5196173'},
-      {name: 'Marksiwat',
-       url:  'https://weibo.com/u/6528517553'},//https://weibo.com/n/Mark-Siwat
       {name: '陈智霆超话',
        url:  'http://huati.weibo.com/k/%E9%99%88%E6%99%BA%E9%9C%86'},
       {name: '陈瑞书超话',
@@ -72,6 +78,10 @@
        url:  'https://weibo.com/shengyilun1'},
       {name: '高瀚宇KD',
        url:  'https://weibo.com/u/1308391574'},
+      {name: 'Marksiwat超话',
+       url:  'http://huati.weibo.com/5196173'},
+      {name: 'Marksiwat',
+       url:  'https://weibo.com/u/6528517553'},//https://weibo.com/n/Mark-Siwat
       {}// ending placeholder
     ]
   }
