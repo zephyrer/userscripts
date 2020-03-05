@@ -3,7 +3,7 @@
 // @author       zephyrer
 // @namespace    https://github.com/zephyrer/
 // @description  Add ArrowLeft and ArrowRight for generic next/previous page. It will click the last found link whose text starts/ends with e.g. "Next", "Prev", or "Previous".
-// @version      2.0.20.8
+// @version      2.0.20.10
 // @match        *://*/*
 // @downloadURL  https://github.com/zephyrer/userscripts/raw/master/Pagerkeys.user.js
 // @updateURL    https://github.com/zephyrer/userscripts/raw/master/Pagerkeys.meta.js
@@ -12,12 +12,12 @@
 // ==/UserScript==
 (function(){
   const PREV = 'prev';
-  const PREV_KEYWORDS = ['^prev(ious)?\\b', '\\bprev(ious)?$', '上一(页|章|节)', '<', '<<', '«'];
+  const PREV_KEYWORDS = ['^prev(ious)?\\b', '\\bprev(ious)?$', '上一(页|章|节)', '<', '<<', '«', '\uf191'];
   const NEXT = 'next';
-  const NEXT_KEYWORDS = ['^next(\\b|$)', '下一(页|章|节)', '>', '>>', '»'];
+  const NEXT_KEYWORDS = ['^next(\\b|$)', '下一(页|章|节)', '>', '>>', '»', '\uf152'];
   const CONTENT_KEYWORDS = ['content', '^目录$', '返回目录', 'index'];
   const INVALID_URL = /^(javascript|ftp|x-github-client|ed2k|magnet):/i;
-  const EXCLUDSION_KEYWORDS = /<img/i;
+  const EXCLUDSION_KEYWORDS = /<[^>]+>/i;
 
   function loadURI(url){
 GM_log("Pager keys LOADing " + url);
@@ -68,12 +68,24 @@ GM_log("Pager keys *** class prev ***, TO LOAD [" + links[0].textContent + "] ( 
         loadURI(links[0].href);
         return true;
       }
+      links = Array.from(doc.getElementsByTagName('a')).filter((x) => x.parentNode && x.parentNode.parentNode && x.parentNode.parentNode.classList.contains('level-left'));
+      if (links.length > 0) {
+GM_log("Pager keys *** class level-left ***, TO LOAD [" + links[0].textContent + "] ( " + links[0].href + " )");
+        loadURI(links[0].href);
+        return true;
+      }
     }
 
     if (PREV_NEXT && PREV_NEXT === 'next') {
       links = Array.from(doc.getElementsByTagName('a')).filter((x) => (x.classList.contains('next') || x.classList.contains('nxt')));
       if (links.length > 0) {
 GM_log("Pager keys *** class next ***, TO LOAD [" + links[0].textContent + "] ( " + links[0].href + " )");
+        loadURI(links[0].href);
+        return true;
+      }
+      links = Array.from(doc.getElementsByTagName('a')).filter((x) => x.parentNode && x.parentNode.parentNode && x.parentNode.parentNode.classList.contains('level-right'));
+      if (links.length > 0) {
+GM_log("Pager keys *** class level-right ***, TO LOAD [" + links[0].textContent + "] ( " + links[0].href + " )");
         loadURI(links[0].href);
         return true;
       }
