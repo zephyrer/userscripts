@@ -3,7 +3,7 @@
 // @author       zephyrer
 // @namespace    https://github.com/zephyrer/
 // @description  Add ArrowLeft and ArrowRight for generic next/previous page. It will click the last found link whose text starts/ends with e.g. "Next", "Prev", or "Previous".
-// @version      2.0.20.10
+// @version      2.0.21.00
 // @match        *://*/*
 // @downloadURL  https://github.com/zephyrer/userscripts/raw/master/Pagerkeys.user.js
 // @updateURL    https://github.com/zephyrer/userscripts/raw/master/Pagerkeys.meta.js
@@ -12,9 +12,9 @@
 // ==/UserScript==
 (function(){
   const PREV = 'prev';
-  const PREV_KEYWORDS = ['^prev(ious)?\\b', '\\bprev(ious)?$', '上一(页|章|节)', '<', '<<', '«', '\uf191'];
+  const PREV_KEYWORDS = ['^prev(ious)?\\b', '\\bprev(ious)?$', '上一(页|章|节)', '<', '<<', '«', '\uf191', '\uf060'];
   const NEXT = 'next';
-  const NEXT_KEYWORDS = ['^next(\\b|$)', '下一(页|章|节)', '>', '>>', '»', '\uf152'];
+  const NEXT_KEYWORDS = ['^next(\\b|$)', '下一(页|章|节)', '>', '>>', '»', '\uf152', '\uf061'];
   const CONTENT_KEYWORDS = ['content', '^目录$', '返回目录', 'index'];
   const INVALID_URL = /^(javascript|ftp|x-github-client|ed2k|magnet):/i;
   const EXCLUDSION_KEYWORDS = /<[^>]+>/i;
@@ -52,9 +52,20 @@ GM_log("Pager keys *** increment ***, TO LOAD " + url);
     var doc = document;
     var links = doc.getElementsByTagName('link');
     if (PREV_NEXT && PREV_NEXT !== '') {
-      for (var i = 0; i < links.length; i++) {
+      for (let i = 0; i < links.length; i++) {
         if (links[i].href && links[i].hasAttribute('rel') && links[i].getAttribute('rel').toLowerCase().indexOf(PREV_NEXT) == 0) {
 GM_log("Pager keys *** link rel ***, TO LOAD [" + links[i].textContent + "] ( " + links[i].href + " )");
+          loadURI(links[i].href);
+          return true;
+        }
+      }
+    }
+
+    links = doc.getElementsByTagName('a');
+    if (PREV_NEXT && PREV_NEXT !== '') {
+      for (let i = 0; i < links.length; i++) {
+        if (links[i].href && links[i].hasAttribute('rel') && links[i].getAttribute('rel').toLowerCase().indexOf(PREV_NEXT) == 0) {
+GM_log("Pager keys *** a rel ***, TO LOAD [" + links[i].textContent + "] ( " + links[i].href + " )");
           loadURI(links[i].href);
           return true;
         }
@@ -94,7 +105,7 @@ GM_log("Pager keys *** class level-right ***, TO LOAD [" + links[0].textContent 
     var regexp = new RegExp('(' + KEYWORDS.join('|') + ')', 'i');
 GM_log("Pager keys *** regexp ***, REGEXP " + regexp);
     links = Array.from(doc.links).filter((x) => x.href && !INVALID_URL.test(x.href));
-    for (i = 0; i < links.length; i++) {
+    for (let i = 0; i < links.length; i++) {
       if (links[i].href && links[i].textContent && !EXCLUDSION_KEYWORDS.test(links[i].textContent) && links[i].textContent.trim().match(regexp)) {
 GM_log("Pager keys *** regexp ***, TO LOAD [" + links[i].textContent + "] ( " + links[i].href + " )");
         loadURI(links[i].href);
