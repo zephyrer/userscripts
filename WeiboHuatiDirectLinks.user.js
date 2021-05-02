@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.2.7.1
+// @version       0.2.8.0
 // @description   为微博等站点页面添加各类直链
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
 // @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
@@ -47,9 +47,9 @@
        url:  'https://huati.weibo.com/4079642'},
       {name: '零柒年浮影',
        url:  'https://weibo.com/u/1733102053'},
-      {name: '天府',
+      {name: '天府（剧集发布）',
        url:  'https://weibo.com/u/7351772787'},
-      {name: '喜翻',
+      {name: '喜翻（发布剧集）',
        url:  'https://weibo.com/u/7361457829'},
       {name: '宅基地',
        url:  'https://weibo.com/u/6489598481'},
@@ -75,6 +75,10 @@
        url:  'https://weibo.com/u/6679183776'},
       {name: 'SEVENXHs',
        url:  'https://weibo.com/u/2951375584'},
+      {name: '喜翻（互动交流）',
+       url:  'https://weibo.com/u/6319447640'},
+      {name: '天府（交流互动）',
+       url:  'https://weibo.com/u/2117871375'},
       {name: '肖战 on 豆瓣',
        url:  'https://www.douban.com/group/search?start=0&cat=1013&sort=time&q=%E8%82%96%E6%88%98'},
       {name: '星球放映室',
