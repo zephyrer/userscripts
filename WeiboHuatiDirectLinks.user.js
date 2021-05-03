@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.2.8.0
+// @version       0.2.9.0
 // @description   为微博等站点页面添加各类直链
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
 // @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
@@ -144,7 +144,9 @@
     #direct-links-to-super-topics ul {
       list-style-type: none;
       list-style-image: none;
-      margin-left: 0px;
+      margin-block-start: 0em;
+      margin-block-end: 0em;
+      padding-inline-start: 10px;
     }
     a[id^='direct-link-to-super-topic-'] {
       font-size: 14px;
