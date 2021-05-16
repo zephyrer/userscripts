@@ -5,11 +5,11 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.2.9.0
+// @version       0.2.9.1
 // @description   为微博等站点页面添加各类直链
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
 // @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
-// @copyright     2018, Efisio Zephyr
+// @copyright     2018-2021, Efisio Zephyr
 // @grant         GM_addStyle
 // ==/UserScript==
 
@@ -57,10 +57,10 @@
        url:  'https://weibo.com/u/7319883354'},
       {name: '顶风',
        url:  'https://weibo.com/u/6892479995'},
-      {name: '幻月',
-       url:  'https://weibo.com/u/5389683779'},
       {name: '晨光曦',
        url:  'https://weibo.com/u/7070113048'},
+      {name: '幻月',
+       url:  'https://weibo.com/u/5389683779'},
       {name: '南木言',
        url:  'https://weibo.com/u/5719868787'},
       {name: '鱼子酱',
