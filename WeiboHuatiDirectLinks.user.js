@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.0.22
+// @version       0.3.0.23
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -144,6 +144,10 @@
        url:  'https://weibo.com/u/1734921680'},
       {name: 'No777漆號',
        url:  'https://weibo.com/u/7218224046'},
+      {name: 'Yiresen',
+       url:  'https://weibo.com/u/2186536873'},
+      {name: '',
+       url:  ''},
 /*    {name: '杨孟霖Nick',
        url:  'https://weibo.com/u/3148083033'},
       {name: '杨孟霖超话',
