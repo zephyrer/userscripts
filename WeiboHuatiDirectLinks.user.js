@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.0.21
+// @version       0.3.0.22
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -138,8 +138,12 @@
        url:  'https://weibo.com/u/1822780553'},
       {name: '暖Boy推剧',
        url:  'https://weibo.com/u/5995866909'},
-      {name: '',
-       url:  ''},
+      {name: '流浪的tora',
+       url:  'https://weibo.com/u/5613202495'},
+      {name: '丛宙',
+       url:  'https://weibo.com/u/1734921680'},
+      {name: 'No777漆號',
+       url:  'https://weibo.com/u/7218224046'},
 /*    {name: '杨孟霖Nick',
        url:  'https://weibo.com/u/3148083033'},
       {name: '杨孟霖超话',
