@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.0.27
+// @version       0.3.1.00
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -15,23 +15,30 @@
 // ==/UserScript==
 
 (function(){
-  if (window.top !== window.self)
+  if (window.top !== window.self) {
     return;
+  }
   const getDefaultObjectAt = function (array, index) {return array[index] || {};};
   const isNull = val => val === null;
   const isEmpty = function (obj) {
-    if (typeof obj === 'undefined')
+    if (typeof obj === 'undefined') {
       return true;
-    if (obj === void 0)
+    }
+    if (obj === void 0) {
       return true;
-    if (obj === undefined)
+    }
+    if (obj === undefined) {
       return true;
-    if (obj === null)
+    }
+    if (obj === null) {
       return true;
-    if (Object.getOwnPropertyNames(obj).length === 0 && Object.getOwnPropertySymbols(obj).length === 0 && obj.constructor === Object)
+    }
+    if (Object.getOwnPropertyNames(obj).length === 0 && Object.getOwnPropertySymbols(obj).length === 0 && obj.constructor === Object) {
       return true;
-    if (!obj)
+    }
+    if (!obj) {
       return true;
+    }
     return false;
   }
 /*
@@ -195,7 +202,7 @@
       {}// ending placeholder
     ]
   }
-  var huatis = getDefaultObjectAt(directURLs, location.host.replace(/^www\./i, ""));
+  var huatis = getDefaultObjectAt(directURLs, location.host.replace(/^\w+\.weibo/i, "weibo"));
   if (isEmpty(huatis)) return;
 
   var css = `
