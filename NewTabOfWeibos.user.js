@@ -69,7 +69,7 @@
         }*/
         // 检查插入的元素是否为目标元素
         if (node.matches(careSelector)) {
-          makeExternalLink(elem);
+          makeExternalLink(node);
         }
       }
     }
