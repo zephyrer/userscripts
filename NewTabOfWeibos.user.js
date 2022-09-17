@@ -2,7 +2,7 @@
 // @name               New Tab of Weibos
 // @name:zh-CN         新标签页打开微博
 // @namespace          https://github.com/zephyrer/userscripts/
-// @version            0.0.13
+// @version            0.0.14
 // @description        click specific links to open the weibo in a new tab
 // @description:zh-CN  新标签页打开微博
 // @author             zephyrer
@@ -15,7 +15,7 @@
 (function() {
   'use strict';
 
-  const careContainer = 'div[class*="vue-recycle-scroller__item-view"]';
+  //const careContainer = ':is(div[class*="vue-recycle-scroller__item-view"], div[class^="Feed_body"]';
   const careSelector = 'a[class^="head-info_time"]:not([user-inserted])';
 
   const handler = {
@@ -35,7 +35,7 @@
 
   let count = 0;
   function makeExternalLink(a) {
-    console.log("External from: " + a.href + '(' + count++ +')');
+    //console.log("External from: " + a.href + '(' + count++ +')');
     let aNew = document.createElement('a');
     aNew.classList.add(...a.classList);
     aNew.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/128/6705/6705383.png" width="12px" />';
@@ -60,11 +60,16 @@
       for(let node of mutation.addedNodes) {
         // 我们只跟踪元素，跳过其他节点（例如文本节点）
         if (!(node instanceof HTMLElement)) continue;
-        // 检查插入的元素是否为微博块
+        /*
+        // // 检查插入的元素是否为微博块
         if (node.matches(careContainer)) {
           for(let elem of node.querySelectorAll(careSelector)) {
             makeExternalLink(elem);
           }
+        }*/
+        // 检查插入的元素是否为目标元素
+        if (node.matches(careSelector)) {
+          makeExternalLink(elem);
         }
       }
     }
