@@ -2,7 +2,7 @@
 // @name               New Tab of Weibos
 // @name:zh-CN         新标签页打开微博
 // @namespace          https://github.com/zephyrer/userscripts/
-// @version            0.0.14
+// @version            0.0.14.1
 // @description        click specific links to open the weibo in a new tab
 // @description:zh-CN  新标签页打开微博
 // @author             zephyrer
