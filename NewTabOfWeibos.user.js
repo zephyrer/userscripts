@@ -2,7 +2,7 @@
 // @name               New Tab of Weibos
 // @name:zh-CN         新标签页打开微博
 // @namespace          https://github.com/zephyrer/userscripts/
-// @version            0.0.14.1
+// @version            0.0.14.2
 // @description        click specific links to open the weibo in a new tab
 // @description:zh-CN  新标签页打开微博
 // @author             zephyrer
@@ -15,8 +15,12 @@
 (function() {
   'use strict';
 
-  //const careContainer = ':is(div[class*="vue-recycle-scroller__item-view"], div[class^="Feed_body"]';
-  const careSelector = 'a[class^="head-info_time"]:not([user-inserted])';
+  const rootSelector = '.vue-recycle-scroller__item-wrapper';
+  const altRootSel = 'article[class*="Feed_wrap"]';
+  const careContainer = 'div[class*="vue-recycle-scroller__item-view"]';
+  const altContainer = 'div[class^="Feed_body"]';
+  //const careSelector = 'a[class^="head-info_time"]:not([user-inserted])';
+  const careSelector = 'a[class^="head-info_time"]';
 
   const handler = {
     handleEvent: function(e) {
@@ -51,7 +55,15 @@
     }
   }
 
-  let demoElem = document.body;
+  let demoElem = document.querySelector(rootSelector);
+  let container = careContainer;
+  if (demoElem === null) {
+    demoElem = document.querySelector(altRootSel);
+    container = altContainer;
+  }
+  if (demoElem === null) return;
+  console.log('container is ' + container);
+  demoElem = document.body;
   loopDescendants(demoElem, careSelector, makeExternalLink);
 
   let observer = new MutationObserver(mutations => {
@@ -62,7 +74,7 @@
         if (!(node instanceof HTMLElement)) continue;
         /*
         // // 检查插入的元素是否为微博块
-        if (node.matches(careContainer)) {
+        if (node.matches(container)) {
           for(let elem of node.querySelectorAll(careSelector)) {
             makeExternalLink(elem);
           }
@@ -70,6 +82,10 @@
         // 检查插入的元素是否为目标元素
         if (node.matches(careSelector)) {
           makeExternalLink(node);
+        } else {
+          for(let elem of node.querySelectorAll(careSelector)) {
+            makeExternalLink(elem);
+          }
         }
       }
     }
