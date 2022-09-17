@@ -2,7 +2,7 @@
 // @name               New Tab of Weibos
 // @name:zh-CN         新标签页打开微博
 // @namespace          https://github.com/zephyrer/userscripts/
-// @version            0.0.14.2
+// @version            0.0.14.5
 // @description        click specific links to open the weibo in a new tab
 // @description:zh-CN  新标签页打开微博
 // @author             zephyrer
@@ -17,10 +17,10 @@
 
   const rootSelector = '.vue-recycle-scroller__item-wrapper';
   const altRootSel = 'article[class*="Feed_wrap"]';
-  const careContainer = 'div[class*="vue-recycle-scroller__item-view"]';
+  const careContainer = ':is(div[class*="vue-recycle-scroller__item-view"],div[class*="Feed_retweet_"])';
   const altContainer = 'div[class^="Feed_body"]';
-  //const careSelector = 'a[class^="head-info_time"]:not([user-inserted])';
-  const careSelector = 'a[class^="head-info_time"]';
+  const careSelector = 'a[class^="head-info_time"]:not([user-inserted])';
+  //const careSelector = 'a[class^="head-info_time_"]';
 
   const handler = {
     handleEvent: function(e) {
@@ -82,7 +82,7 @@
         // 检查插入的元素是否为目标元素
         if (node.matches(careSelector)) {
           makeExternalLink(node);
-        } else {
+        } else if (node.matches(container)) {
           for(let elem of node.querySelectorAll(careSelector)) {
             makeExternalLink(elem);
           }
