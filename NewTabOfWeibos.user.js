@@ -2,7 +2,7 @@
 // @name               New Tab of Weibos
 // @name:zh-CN         新标签页打开微博
 // @namespace          https://github.com/zephyrer/userscripts/
-// @version            0.0.14.5
+// @version            0.0.15
 // @description        click specific links to open the weibo in a new tab
 // @description:zh-CN  新标签页打开微博
 // @author             zephyrer
@@ -15,12 +15,11 @@
 (function() {
   'use strict';
 
-  const rootSelector = '.vue-recycle-scroller__item-wrapper';
-  const altRootSel = 'article[class*="Feed_wrap"]';
-  const careContainer = ':is(div[class*="vue-recycle-scroller__item-view"],div[class*="Feed_retweet_"])';
-  const altContainer = 'div[class^="Feed_body"]';
+  const careContainer = ':is(div[class*="vue-recycle-scroller__item-view"], \
+                             div[class*="Feed_retweet_"], \
+                             article[class*="Feed_wrap_"], \
+                             div[class^="Feed_body_"])';
   const careSelector = 'a[class^="head-info_time"]:not([user-inserted])';
-  //const careSelector = 'a[class^="head-info_time_"]';
 
   const handler = {
     handleEvent: function(e) {
@@ -37,9 +36,7 @@
     }
   };
 
-  let count = 0;
   function makeExternalLink(a) {
-    //console.log("External from: " + a.href + '(' + count++ +')');
     let aNew = document.createElement('a');
     aNew.classList.add(...a.classList);
     aNew.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/128/6705/6705383.png" width="12px" />';
@@ -55,39 +52,41 @@
     }
   }
 
-  let demoElem = document.querySelector(rootSelector);
-  let container = careContainer;
-  if (demoElem === null) {
-    demoElem = document.querySelector(altRootSel);
-    container = altContainer;
-  }
-  if (demoElem === null) return;
-  console.log('container is ' + container);
-  demoElem = document.body;
+  let demoElem = document.body;
   loopDescendants(demoElem, careSelector, makeExternalLink);
 
   let observer = new MutationObserver(mutations => {
+    /*
+    let counter = {
+      anchors: 0,
+      containers: 0,
+      reset: function() {
+        this.anchors = this.containers = 0;
+      },
+      textStyle: 'color: yellow; background-color: blue; font-weight: 500',
+      strongStyle: 'color: yellow; background-color: blue; font-weight: 700',
+      log: function() {
+        console.log('%cIn this mutation, we\'ve gotten %c%d anchors%c and %c%d feeds%c.', this.textStyle,
+                    this.strongStyle, this.anchors, this.textStyle, this.strongStyle, this.containers, this.textStyle);
+      }
+    };
+    */
     for(let mutation of mutations) {
       // 检查新节点，有什么需要特殊处理的吗？
+      //let msg = 'new nodes are: \r\n';
       for(let node of mutation.addedNodes) {
+        //let classes = node.classList;
+        //msg += `${node.nodeName}[class="${classes}"]\r\n`;
         // 我们只跟踪元素，跳过其他节点（例如文本节点）
         if (!(node instanceof HTMLElement)) continue;
-        /*
-        // // 检查插入的元素是否为微博块
-        if (node.matches(container)) {
-          for(let elem of node.querySelectorAll(careSelector)) {
-            makeExternalLink(elem);
-          }
-        }*/
         // 检查插入的元素是否为目标元素
-        if (node.matches(careSelector)) {
-          makeExternalLink(node);
-        } else if (node.matches(container)) {
+        if (node.matches(careContainer)) {
           for(let elem of node.querySelectorAll(careSelector)) {
             makeExternalLink(elem);
           }
         }
       }
+      //console.log(msg);
     }
   });
 
