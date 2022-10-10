@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.01
+// @version       0.3.1.02
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -87,6 +87,8 @@
        url:  'https://weibo.com/u/2951375584'},
       {name: 'Sidoimujeng',
        url:  'https://weibo.com/u/5752710610'},
+      {name: 'MovieFans Club',
+       url:  'https://weibo.com/u/5750864727'},
       {name: '喜翻（发布剧集）',
        url:  'https://weibo.com/u/7361457829'},
       {name: '天府（剧集发布）',
