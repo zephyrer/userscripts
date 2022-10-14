@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.02
+// @version       0.3.1.03
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -63,12 +63,16 @@
        url:  'https://weibo.com/u/6319447640'},
       {name: '顶风官博',
        url:  'https://weibo.com/u/1857713171'},
-      {name: '幻月官博',
-       url:  'https://weibo.com/u/5389683779'},
+      {name: '幻月官网',
+       url:  'https://www.huanyuezmz.site/'},
       {name: '宅基地',
        url:  'https://weibo.com/u/6489598481'},
       {name: '晨光曦',
        url:  'https://weibo.com/u/7070113048'},
+      {name: 'Sidoimujeng',
+       url:  'https://weibo.com/u/5752710610'},
+      {name: '韩影迷冰哥',
+       url:  'https://weibo.com/5661289494'},
       {name: '远鉴字幕组',
        url:  'https://weibo.com/u/1732580774'},
       {name: '星球放映室',
@@ -85,8 +89,6 @@
        url:  'https://weibo.com/u/6679183776'},
       {name: 'SEVENXHs',
        url:  'https://weibo.com/u/2951375584'},
-      {name: 'Sidoimujeng',
-       url:  'https://weibo.com/u/5752710610'},
       {name: 'MovieFans Club',
        url:  'https://weibo.com/u/5750864727'},
       {name: '喜翻（发布剧集）',
@@ -161,8 +163,8 @@
        url:  'https://weibo.com/u/7441029048'},
       {name: '炸鱼薯条字幕组',
        url:  'https://weibo.com/u/7733106747'},
-      {name: '幻月官网',
-       url:  'https://www.huanyuezmz.site/'},
+      {name: '幻月官博',
+       url:  'https://weibo.com/u/5389683779'},
       {name: '',
        url:  ''},
 /*    {name: '杨孟霖Nick',
