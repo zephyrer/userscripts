@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.03
+// @version       0.3.1.04
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -51,6 +51,10 @@
        url:  'https://weibo.com/n/X%E7%8E%96%E5%B0%91%E5%B9%B4%E5%9B%A2%E8%82%96%E6%88%98DAYTOY'},
       {name: '李建秋的世界',
        url:  'https://weibo.com/u/1687813073'},
+      {name: '王虎的舰桥',
+       url:  'https://weibo.com/u/6545577536'},
+      {name: '包容万物恒河水',
+       url:  'https://weibo.com/u/1671109627'},
       {name: '杨光张',
        url:  'https://weibo.com/u/1441971481'},
       {name: '肖战工作室',
