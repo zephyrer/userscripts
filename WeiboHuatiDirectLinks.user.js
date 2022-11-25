@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.05
+// @version       0.3.1.06
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -106,7 +106,7 @@
       {name: '顶风世腐',
        url:  'https://weibo.com/u/6260688005'},
       {name: '顶风官网',
-       url:  'http://dingfengyzz.com/'},
+       url:  'http://nb.dingfengyzz.com/'},
       {name: '追剧天团',
        url:  'https://weibo.com/u/7319883354'},
       {name: '追剧天团官网',
