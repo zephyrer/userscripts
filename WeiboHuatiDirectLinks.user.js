@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.07
+// @version       0.3.1.08
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -85,8 +85,12 @@
        url:  'https://weibo.com/u/6451931503'},
       {name: '在太阳阳下开花',
        url:  'https://weibo.com/u/6198528359'},
+      {name: '俩男子',
+       url:  'https://weibo.com/u/7441029048'},
       {name: '同影三千',
        url:  'https://weibo.com/u/5784069948'},
+      {name: 'Sumiress',
+       url:  'https://weibo.com/u/1888662541'},
       {name: '霸王龙压制组',
        url:  'https://weibo.com/u/7498642767'},
       {name: '小寒追剧',
@@ -169,8 +173,6 @@
        url:  'https://weibo.com/u/7218224046'},
       {name: 'Yiresen',
        url:  'https://weibo.com/u/2186536873'},
-      {name: '俩男子',
-       url:  'https://weibo.com/u/7441029048'},
       {name: '炸鱼薯条字幕组',
        url:  'https://weibo.com/u/7733106747'},
       {name: '幻月官博',
