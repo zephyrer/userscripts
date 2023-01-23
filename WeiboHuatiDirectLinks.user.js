@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.09
+// @version       0.3.1.10
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -49,6 +49,10 @@
     "weibo.com": [
       {name: '肖战',
        url:  'https://weibo.com/n/X%E7%8E%96%E5%B0%91%E5%B9%B4%E5%9B%A2%E8%82%96%E6%88%98DAYTOY'},
+      {name: '肖战工作室',
+       url:  'https://weibo.com/u/6643123988'},
+      {name: '肖战超话',
+       url:  'https://huati.weibo.com/4079642'},
       {name: '李建秋的世界',
        url:  'https://weibo.com/u/1687813073'},
       {name: '王虎的舰桥',
@@ -57,28 +61,28 @@
        url:  'https://weibo.com/u/1671109627'},
       {name: '杨光张',
        url:  'https://weibo.com/u/1441971481'},
-      {name: '肖战工作室',
-       url:  'https://weibo.com/u/6643123988'},
-      {name: '肖战超话',
-       url:  'https://huati.weibo.com/4079642'},
       {name: '天府（交流互动）',
        url:  'https://weibo.com/u/2117871375'},
       {name: '喜翻（互动交流）',
        url:  'https://weibo.com/u/6319447640'},
       {name: '顶风官博',
        url:  'https://weibo.com/u/1857713171'},
-      {name: '幻月官网',
-       url:  'https://www.huanyuezmz.site/'},
-      {name: '宅基地',
-       url:  'https://weibo.com/u/6489598481'},
-      {name: '晨光曦',
-       url:  'https://weibo.com/u/7070113048'},
       {name: 'Sidoimujeng',
        url:  'https://weibo.com/u/5752710610'},
+      {name: '萌主推剧',
+       url:  'https://weibo.com/u/5598200333'},
       {name: '韩影迷冰哥',
        url:  'https://weibo.com/5661289494'},
       {name: 'tv综合吧',
        url:  'https://weibo.com/tvzonghe'},
+      {name: '幻月官网',
+       url:  'https://www.huanyuezmz.site/'},
+      {name: '宅基地',
+       url:  'https://weibo.com/u/6489598481'},
+      {name: '追剧天团',
+       url:  'https://weibo.com/u/7319883354'},
+      {name: '晨光曦',
+       url:  'https://weibo.com/u/7070113048'},
       {name: '同影三千',
        url:  'https://weibo.com/u/5784069948'},
       {name: 'Sumiress',
@@ -115,8 +119,6 @@
        url:  'https://weibo.com/u/6260688005'},
       {name: '顶风官网',
        url:  'http://nb.dingfengyzz.com/'},
-      {name: '追剧天团',
-       url:  'https://weibo.com/u/7319883354'},
       {name: '追剧天团官网',
        url:  'http://zhuijutiantuan.com/'},
       {name: 'SuperM字幕组',
