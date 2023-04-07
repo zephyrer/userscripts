@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.13a
+// @version       0.3.1.14
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -109,6 +109,8 @@
        url:  'https://weibo.com/u/5613202495'},
       {name: '电影Movie',
        url:  'https://weibo.com/u/5944563626'},
+      {name: '被抛弃字幕组',
+       url:  'https://weibo.com/u/3949785854'},
       {name: '在太阳阳下开花',
        url:  'https://weibo.com/u/6198528359'},
       {name: '小寒追剧',
@@ -129,6 +131,8 @@
        url:  'http://nb.dingfengyzz.com/'},
       {name: '追剧天团官网',
        url:  'http://zhuijutiantuan.com/'},
+      {name: 'FST字幕组',
+       url:  'https://weibo.com/u/5882966616'},
       {name: 'SuperM字幕组',
        url:  'https://weibo.com/u/3912229558'},
       {name: '凤凰天使',
@@ -189,6 +193,8 @@
        url:  'https://weibo.com/u/7733106747'},
       {name: '幻月官博',
        url:  'https://weibo.com/u/5389683779'},
+      {name: '鱼羹字幕组',
+       url:  'https://weibo.com/u/7794677873'},
       {name: '',
        url:  ''},
 /*    {name: '杨孟霖Nick',
