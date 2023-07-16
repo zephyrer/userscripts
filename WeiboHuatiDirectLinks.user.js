@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.14
+// @version       0.3.1.15
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -195,6 +195,8 @@
        url:  'https://weibo.com/u/5389683779'},
       {name: '鱼羹字幕组',
        url:  'https://weibo.com/u/7794677873'},
+      {name: '萌小win',
+       url:  'https://weibo.com/u/7436994368'},
       {name: '',
        url:  ''},
 /*    {name: '杨孟霖Nick',
