@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.15
+// @version       0.3.1.16
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -69,18 +69,22 @@
        url:  'https://weibo.com/u/1857713171'},
       {name: 'Sidoimujeng',
        url:  'https://weibo.com/u/5752710610'},
-      {name: '萌主推剧',
-       url:  'https://weibo.com/u/5598200333'},
-      {name: '幻月官网',
-       url:  'https://www.huanyuezmz.site/'},
       {name: '宅基地',
        url:  'https://weibo.com/u/6489598481'},
       {name: '追剧天团',
        url:  'https://weibo.com/u/7319883354'},
       {name: '晨光曦',
        url:  'https://weibo.com/u/7070113048'},
+      {name: '萌小win',
+       url:  'https://weibo.com/u/7436994368'},
+      {name: '萌主推剧',
+       url:  'https://weibo.com/u/5598200333'},
       {name: '同影三千',
        url:  'https://weibo.com/u/5784069948'},
+      {name: '攒到一百万退休',
+       url:  'https://weibo.com/u/7820591843'},
+      {name: '幻月官网',
+       url:  'https://www.huanyuezmz.site/'},
       {name: 'Sumiress',
        url:  'https://weibo.com/u/1888662541'},
       {name: '俩男子',
@@ -195,8 +199,8 @@
        url:  'https://weibo.com/u/5389683779'},
       {name: '鱼羹字幕组',
        url:  'https://weibo.com/u/7794677873'},
-      {name: '萌小win',
-       url:  'https://weibo.com/u/7436994368'},
+      {name: '老汪侃剧',
+       url:  'https://weibo.com/u/7800864480'},
       {name: '',
        url:  ''},
 /*    {name: '杨孟霖Nick',
