@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.16
+// @version       0.3.1.17
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -53,6 +53,8 @@
        url:  'https://weibo.com/u/6643123988'},
       {name: '肖战超话',
        url:  'https://huati.weibo.com/4079642'},
+      {name: '嚒嚒冲浪日记',
+       url:  'https://weibo.com/u/7737163200'},
       {name: '李建秋的世界',
        url:  'https://weibo.com/u/1687813073'},
       {name: '王虎的舰桥',
