@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.17
+// @version       0.3.1.18
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -93,6 +93,8 @@
        url:  'https://weibo.com/u/7441029048'},
       {name: '男友人',
        url:  'https://weibo.com/u/6665983190'},
+      {name: '怪兽汉化',
+       url:  'https://weibo.com/u/7512778090'},
       {name: '远鉴字幕组',
        url:  'https://weibo.com/u/1732580774'},
       {name: '星球放映室',
