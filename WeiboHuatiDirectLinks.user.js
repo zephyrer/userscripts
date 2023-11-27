@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.19
+// @version       0.3.1.20
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -207,6 +207,8 @@
        url:  'https://weibo.com/u/7794677873'},
       {name: '老汪侃剧',
        url:  'https://weibo.com/u/7800864480'},
+      {name: '小脑腐剧透',
+       url:  'https://weibo.com/u/7332155228'},
       {name: '',
        url:  ''},
 /*    {name: '杨孟霖Nick',
