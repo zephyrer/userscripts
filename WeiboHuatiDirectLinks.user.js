@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.22
+// @version       0.3.1.23
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -89,6 +89,8 @@
        url:  'https://weibo.com/u/5574861710'},
       {name: '小玩剧字幕组',
        url:  'https://weibo.com/u/5721630404'},
+      {name: '丝丝影音',
+       url:  'https://weibo.com/u/2265460284'},
       {name: '星球放映室',
        url:  'https://weibo.com/u/7142114548'},
       {name: 'MC-MoCuishle (MovieFans Club)',
