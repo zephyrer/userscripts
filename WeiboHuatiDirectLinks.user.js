@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.24
+// @version       0.3.1.25
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -78,7 +78,7 @@
       {name: '新球放映室',
        url:  'https://weibo.com/u/6738078896'},
       {name: '霸王龙压制组',
-       url:  'https://weibo.com/u/7498642767'},
+       url:  'https://weibo.com/u/7907134033'},
       {name: '香城蘑菇字幕組',
        url:  'https://weibo.com/5661289494'},
       {name: 'tv综合吧',
