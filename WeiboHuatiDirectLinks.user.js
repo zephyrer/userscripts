@@ -5,12 +5,12 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.25
+// @version       0.3.1.26
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
 // @updateURL     https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.meta.js
-// @copyright     2018-2022, Efisio Zephyr
+// @copyright     2018-2024, Efisio Zephyr
 // @grant         GM_addStyle
 // ==/UserScript==
 
@@ -74,7 +74,7 @@
       {name: '同影资源舍',
        url:  'https://weibo.com/u/5784069948'},
       {name: '幻月官网',
-       url:  'https://www.huanyuezmz.site/'},
+       url:  'https://www.huanyuezmz.xyz/'},
       {name: '新球放映室',
        url:  'https://weibo.com/u/6738078896'},
       {name: '霸王龙压制组',
