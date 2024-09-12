@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.26
+// @version       0.3.1.27
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -73,8 +73,8 @@
        url:  'https://weibo.com/u/5752710610'},
       {name: '同影资源舍',
        url:  'https://weibo.com/u/5784069948'},
-      {name: '幻月官网',
-       url:  'https://www.huanyuezmz.xyz/'},
+      {name: '幻月官博',
+       url:  'https://weibo.com/u/5389683779'},
       {name: '新球放映室',
        url:  'https://weibo.com/u/6738078896'},
       {name: '霸王龙压制组',
@@ -213,8 +213,6 @@
        url:  'https://weibo.com/u/2186536873'},
       {name: '炸鱼薯条字幕组',
        url:  'https://weibo.com/u/7733106747'},
-      {name: '幻月官博',
-       url:  'https://weibo.com/u/5389683779'},
       {name: '鱼羹字幕组',
        url:  'https://weibo.com/u/7794677873'},
       {name: '小脑腐剧透',
