@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.27
+// @version       0.3.1.28
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -53,16 +53,10 @@
        url:  'https://weibo.com/u/6643123988'},
       {name: '肖战超话',
        url:  'https://huati.weibo.com/4079642'},
-      {name: '李建秋的世界',
-       url:  'https://weibo.com/u/1687813073'},
-      {name: '王虎的舰桥',
-       url:  'https://weibo.com/u/6545577536'},
-      {name: '包容万物恒河水',
-       url:  'https://weibo.com/u/1671109627'},
-      {name: '杨光张',
-       url:  'https://weibo.com/u/1441971481'},
       {name: '不知名压制小人',
        url:  'https://weibo.com/u/7800864480'},
+      {name: '绅士Go',
+       url:  'https://weibo.com/3156062620'},
       {name: '天府（交流互动）',
        url:  'https://weibo.com/u/2117871375'},
       {name: '喜翻（互动交流）',
@@ -73,8 +67,14 @@
        url:  'https://weibo.com/u/5752710610'},
       {name: '同影资源舍',
        url:  'https://weibo.com/u/5784069948'},
-      {name: '幻月官博',
-       url:  'https://weibo.com/u/5389683779'},
+      {name: '李建秋的世界',
+       url:  'https://weibo.com/u/1687813073'},
+      {name: '王虎的舰桥',
+       url:  'https://weibo.com/u/6545577536'},
+      {name: '包容万物恒河水',
+       url:  'https://weibo.com/u/1671109627'},
+      {name: '杨光张',
+       url:  'https://weibo.com/u/1441971481'},
       {name: '新球放映室',
        url:  'https://weibo.com/u/6738078896'},
       {name: '霸王龙压制组',
@@ -217,6 +217,8 @@
        url:  'https://weibo.com/u/7794677873'},
       {name: '小脑腐剧透',
        url:  'https://weibo.com/u/7332155228'},
+      {name: '幻月官博',
+       url:  'https://weibo.com/u/5389683779'},
       {name: '',
        url:  ''},
 /*    {name: '杨孟霖Nick',
