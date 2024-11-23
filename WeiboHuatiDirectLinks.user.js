@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.28
+// @version       0.3.1.29
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -55,8 +55,6 @@
        url:  'https://huati.weibo.com/4079642'},
       {name: '不知名压制小人',
        url:  'https://weibo.com/u/7800864480'},
-      {name: '绅士Go',
-       url:  'https://weibo.com/3156062620'},
       {name: '天府（交流互动）',
        url:  'https://weibo.com/u/2117871375'},
       {name: '喜翻（互动交流）',
@@ -67,6 +65,14 @@
        url:  'https://weibo.com/u/5752710610'},
       {name: '同影资源舍',
        url:  'https://weibo.com/u/5784069948'},
+      {name: '萌主推剧',
+       url:  'https://weibo.com/u/5598200333'},
+      {name: '绅士Go',
+       url:  'https://weibo.com/u/3156062620'},
+      {name: '饼干茶字幕组',
+       url:  'https://weibo.com/u/7962905182'},
+      {name: '秃炮怪字幕组',
+       url:  'https://weibo.com/u/5525415815'},
       {name: '李建秋的世界',
        url:  'https://weibo.com/u/1687813073'},
       {name: '王虎的舰桥',
@@ -75,8 +81,12 @@
        url:  'https://weibo.com/u/1671109627'},
       {name: '杨光张',
        url:  'https://weibo.com/u/1441971481'},
-      {name: '新球放映室',
+      {name: '星球放映室',
        url:  'https://weibo.com/u/6738078896'},
+      {name: '渡鸦传书',
+       url:  'https://weibo.com/u/5909975989'},
+      {name: '衣柜字幕组',
+       url:  'https://weibo.com/u/3009184157'},
       {name: '霸王龙压制组',
        url:  'https://weibo.com/u/7907134033'},
       {name: '香城蘑菇字幕組',
@@ -93,7 +103,7 @@
        url:  'https://weibo.com/u/5721630404'},
       {name: '丝丝影音',
        url:  'https://weibo.com/u/2265460284'},
-      {name: '星球放映室',
+      {name: '星球放映室4K压制组',
        url:  'https://weibo.com/u/7142114548'},
       {name: 'MC-MoCuishle (MovieFans Club)',
        url:  'https://weibo.com/u/5750864727'},
@@ -107,8 +117,8 @@
        url:  'https://weibo.com/u/7070113048'},
       {name: '萌小win',
        url:  'https://weibo.com/u/7436994368'},
-      {name: '萌主推剧',
-       url:  'https://weibo.com/u/5598200333'},
+      {name: '豆角拌饭',
+       url:  'https://weibo.com/u/7770502764'},
       {name: '攒到一百万退休',
        url:  'https://weibo.com/u/7820591843'},
       {name: 'Sumiress',
