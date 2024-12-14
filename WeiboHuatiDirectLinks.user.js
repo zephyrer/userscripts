@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.29
+// @version       0.3.1.30
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -73,6 +73,8 @@
        url:  'https://weibo.com/u/7962905182'},
       {name: '秃炮怪字幕组',
        url:  'https://weibo.com/u/5525415815'},
+      {name: '才高八斗电影推荐官',
+       url:  'https://weibo.com/u/6767696520'},
       {name: '李建秋的世界',
        url:  'https://weibo.com/u/1687813073'},
       {name: '王虎的舰桥',
