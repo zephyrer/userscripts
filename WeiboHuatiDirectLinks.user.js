@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.30
+// @version       0.3.1.31
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -69,6 +69,8 @@
        url:  'https://weibo.com/u/5598200333'},
       {name: '绅士Go',
        url:  'https://weibo.com/u/3156062620'},
+      {name: '昨日闲谈梦落花',
+       url:  'https://weibo.com/u/1678144821'},
       {name: '饼干茶字幕组',
        url:  'https://weibo.com/u/7962905182'},
       {name: '秃炮怪字幕组',
