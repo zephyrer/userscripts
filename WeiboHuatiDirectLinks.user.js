@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.31
+// @version       0.3.1.32
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -85,6 +85,8 @@
        url:  'https://weibo.com/u/1671109627'},
       {name: '杨光张',
        url:  'https://weibo.com/u/1441971481'},
+      {name: '華堅馮力士',
+       url:  'https://weibo.com/u/7316388300'},
       {name: '星球放映室',
        url:  'https://weibo.com/u/6738078896'},
       {name: '渡鸦传书',
