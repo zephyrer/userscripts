@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.32
+// @version       0.3.1.33
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -97,6 +97,8 @@
        url:  'https://weibo.com/u/7907134033'},
       {name: '香城蘑菇字幕組',
        url:  'https://weibo.com/5661289494'},
+      {name: 'Korea-Video',
+       url:  'https://weibo.com/1360837625'},
       {name: 'tv综合吧',
        url:  'https://weibo.com/tvzonghe'},
       {name: '亿万同人字幕组',
