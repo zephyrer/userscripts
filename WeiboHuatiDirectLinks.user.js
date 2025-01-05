@@ -5,7 +5,7 @@
 // @match         https://weibo.com/*
 // @match         https://*.weibo.com/*
 // @exclude-match https://weibo.com/ttarticle/*
-// @version       0.3.1.33
+// @version       0.3.1.34
 // @description   为微博等站点页面添加各类直链
 // @icon          https://weibo.com/favicon.ico
 // @downloadURL   https://github.com/zephyrer/userscripts/raw/master/WeiboHuatiDirectLinks.user.js
@@ -105,6 +105,8 @@
        url:  'https://weibo.com/u/5998891553'},
       {name: '癫疯剧场',
        url:  'https://weibo.com/u/7906315836'},
+      {name: '幻月璃',
+       url:  'https://weibo.com/u/5389683779'},
       {name: '随译字幕组',
        url:  'https://weibo.com/u/5574861710'},
       {name: '小玩剧字幕组',
@@ -193,8 +195,6 @@
        url:  'https://weibo.com/u/7734233887'},
       {name: '零柒年浮影',
        url:  'https://weibo.com/u/1733102053'},
-      {name: '肖战 on 豆瓣',
-       url:  'https://www.douban.com/group/search?start=0&cat=1013&sort=time&q=%E8%82%96%E6%88%98'},
       {name: '七s彩虹姐妹',
        url:  'https://weibo.com/u/7358743372'},
       {name: '系红领巾的猴子',
@@ -235,6 +235,8 @@
        url:  'https://weibo.com/u/7794677873'},
       {name: '小脑腐剧透',
        url:  'https://weibo.com/u/7332155228'},
+      {name: '肖战 on 豆瓣',
+       url:  'https://www.douban.com/group/search?start=0&cat=1013&sort=time&q=%E8%82%96%E6%88%98'},
       {name: '幻月官博',
        url:  'https://weibo.com/u/5389683779'},
       {name: '',
